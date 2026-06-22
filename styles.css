@@ -100,7 +100,7 @@ body::after {
 .container {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 var(--spacing-md);
+    padding: 0 clamp(1rem, 3vw, 2.25rem);
 }
 
 /* Navigation */
@@ -491,27 +491,27 @@ body::after {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--color-primary) 0%, #ef5350 100%);
+    background: var(--color-primary);
     color: var(--color-white);
-    box-shadow: 0 14px 28px rgba(211, 47, 47, 0.28);
+    box-shadow: 0 4px 14px rgba(211, 47, 47, 0.32);
 }
 
 .btn-primary:hover {
-    background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);
-    transform: translateY(-3px) scale(1.01);
-    box-shadow: var(--shadow-lg);
+    background: var(--color-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(211, 47, 47, 0.35);
 }
 
 .btn-secondary {
-    background: rgba(24, 33, 51, 0.84);
+    background: transparent;
     color: var(--color-white);
-    border: 1px solid rgba(255, 255, 255, 0.35);
+    border: 2px solid rgba(255, 255, 255, 0.75);
 }
 
 .btn-secondary:hover {
-    background: rgba(17, 24, 39, 0.94);
+    background: rgba(255, 255, 255, 0.15);
+    border-color: var(--color-white);
     transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
 }
 
 .btn-large {
@@ -586,7 +586,7 @@ body::after {
 
 .hero-overlay .hero-title {
     max-width: 1080px;
-    font-size: clamp(1.6rem, 3.2vw, 3rem);
+    font-size: clamp(1.8rem, 3.8vw, 4rem);
     line-height: 1.2;
     color: var(--color-white);
     margin-bottom: var(--spacing-sm);
@@ -1148,7 +1148,7 @@ section {
 
 .section-title {
     font-family: var(--font-family-display);
-    font-size: 3.5rem;
+    font-size: clamp(1.9rem, 3.5vw, 3rem);
     font-weight: 700;
     text-align: center;
     margin-bottom: var(--spacing-2xl);
@@ -1251,7 +1251,7 @@ section {
 }
 
 .booking-header h2 {
-    font-size: 3.5rem;
+    font-size: clamp(1.9rem, 3.5vw, 3rem);
     font-weight: 700;
     margin-bottom: var(--spacing-sm);
     color: var(--color-dark);
@@ -1284,8 +1284,10 @@ section {
 .form-group label {
     display: block;
     font-weight: 600;
-    font-size: 1.1rem;
-    margin-bottom: var(--spacing-xs);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.4rem;
     color: var(--color-dark);
 }
 
@@ -1293,13 +1295,14 @@ section {
 .form-group select,
 .form-group textarea {
     width: 100%;
-    padding: var(--spacing-sm);
-    border: 2px solid var(--color-border);
-    border-radius: var(--border-radius);
-    font-size: 1.1rem;
+    padding: 0.75rem 1rem;
+    border: 1.5px solid #d1d5db;
+    border-radius: 10px;
+    font-size: 1rem;
     font-family: var(--font-family);
     transition: var(--transition);
     background: var(--color-white);
+    color: var(--color-dark);
 }
 
 .form-group input:focus,
@@ -1307,7 +1310,7 @@ section {
 .form-group textarea:focus {
     outline: none;
     border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.2);
+    box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.12);
 }
 
 .form-group textarea {
@@ -1489,7 +1492,7 @@ section {
 
     .hero-visual-card,
     .hero-visual-card img {
-        min-height: 840px;
+        min-height: min(840px, 65vh);
     }
 
     .hero-visual-card {
@@ -1624,7 +1627,7 @@ section {
     }
     
     .booking-header h2 {
-        font-size: 2rem;
+        font-size: clamp(1.5rem, 3vw, 2rem);
     }
     
     .form-row {
@@ -1658,7 +1661,7 @@ section {
 
     .hero-visual-card,
     .hero-visual-card img {
-        min-height: 900px;
+        min-height: min(640px, 62vh);
     }
 
     .hero-visual-card {
