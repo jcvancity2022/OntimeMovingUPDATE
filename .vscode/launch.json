@@ -2,26 +2,17 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Run Flask Server (OnTime Moving)",
+            "name": "OnTime Moving (Flask + Chrome)",
             "type": "debugpy",
             "request": "launch",
             "program": "${workspaceFolder}/server.py",
             "console": "integratedTerminal",
-            "env": { "FLASK_ENV": "development" }
-        },
-        {
-            "type": "chrome",
-            "request": "launch",
-            "name": "Open Site in Chrome",
-            "url": "http://localhost:5000",
-            "webRoot": "${workspaceFolder}"
-        }
-    ],
-    "compounds": [
-        {
-            "name": "OnTime Moving (Flask + Chrome)",
-            "configurations": ["Run Flask Server (OnTime Moving)", "Open Site in Chrome"],
-            "stopAll": true
+            "env": { "FLASK_ENV": "development" },
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "Running on (http://localhost:\\d+)",
+                "uriFormat": "%s"
+            }
         }
     ]
 }
