@@ -1,0 +1,5 @@
+{
+    "simpleBrowser.focusLockIndicator.enabled": false,
+    "server.openBrowser": false,
+    "livePreview.openPreviewTarget": "External Browser"
+}
