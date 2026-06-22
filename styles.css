@@ -1,6 +1,6 @@
 /* Modern OnTime Moving Styles */
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 /* CSS Variables */
 :root {
@@ -12,25 +12,25 @@
     --color-dark: #182133;
     --color-dark-light: #2a3550;
     --color-gray: #5f6b82;
-    --color-light: #f6f8ff;
+    --color-light: #f8f8f8;
     --color-white: #ffffff;
     --color-border: #d9e0f0;
     --color-success: #4caf50;
-    --color-error: #d32f2f;
-    --color-surface-strong: #eef3ff;
-    
+    --color-error: #dc2626;
+    --color-surface-strong: #fdf3f3;
+
     --font-family: 'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif;
-    --font-family-display: 'Sora', 'Segoe UI', Arial, sans-serif;
-    --font-size-base: 20px;
-    --line-height-base: 1.7;
-    
+    --font-family-display: 'Inter', 'Segoe UI', Arial, sans-serif;
+    --font-size-base: 17px;
+    --line-height-base: 1.65;
+
     --spacing-xs: 0.75rem;
     --spacing-sm: 1.5rem;
     --spacing-md: 2.25rem;
     --spacing-lg: 3rem;
     --spacing-xl: 4.5rem;
-    --spacing-2xl: 6rem;
-    --spacing-3xl: 8rem;
+    --spacing-2xl: 4rem;
+    --spacing-3xl: 5.5rem;
     
     --border-radius: 16px;
     --border-radius-lg: 24px;
