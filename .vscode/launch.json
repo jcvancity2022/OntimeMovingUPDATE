@@ -16,5 +16,12 @@
             "url": "http://localhost:5000",
             "webRoot": "${workspaceFolder}"
         }
+    ],
+    "compounds": [
+        {
+            "name": "OnTime Moving (Flask + Chrome)",
+            "configurations": ["Run Flask Server (OnTime Moving)", "Open Site in Chrome"],
+            "stopAll": true
+        }
     ]
 }
