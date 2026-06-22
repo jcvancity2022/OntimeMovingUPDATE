@@ -1,0 +1,378 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - OnTime Moving & Storage</title>
+    <!-- Modern Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #FF416C;
+            --primary-gradient: linear-gradient(135deg, #FF416C 0%, #FF4B2B 100%);
+            --dark: #0F172A;
+            --light-bg: #F8FAFC;
+            --card-bg: rgba(255, 255, 255, 0.7);
+            --text-main: #1E293B;
+            --text-muted: #64748B;
+            --radius-lg: 24px;
+            --radius-pill: 999px;
+            --shadow-soft: 0 10px 40px -10px rgba(0,0,0,0.08);
+            --shadow-hover: 0 20px 40px -10px rgba(255, 65, 108, 0.25);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            background: var(--light-bg);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Modern Hero with Mesh Gradient feel */
+        .hero {
+            padding: 160px 20px 80px;
+            text-align: center;
+            background: radial-gradient(circle at top left, #FFE5E5 0%, transparent 40%),
+                        radial-gradient(circle at bottom right, #E0E7FF 0%, transparent 40%);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            color: var(--dark);
+        }
+
+        .hero h1 span {
+            background: var(--primary-gradient);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 500;
+        }
+
+        .content-section {
+            padding: 60px 20px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--dark);
+            letter-spacing: -0.5px;
+        }
+
+        /* Bento Box Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .service-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255,255,255,0.8);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-soft);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(255, 65, 108, 0.3);
+        }
+
+        .icon-wrapper {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #FFE5E5 0%, #FFF0F0 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 24px;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--dark);
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            font-weight: 500;
+        }
+
+        .service-features {
+            list-style: none;
+        }
+
+        .service-features li {
+            padding: 8px 0;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+        }
+
+        .service-features li::before {
+            content: "*";
+            margin-right: 12px;
+            font-size: 1.1rem;
+        }
+
+        /* Vibrant CTA */
+        .cta-section {
+            margin: 80px 20px;
+            background: var(--primary-gradient);
+            border-radius: var(--radius-lg);
+            padding: 80px 20px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 20px 40px rgba(255, 65, 108, 0.3);
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 32px;
+            font-weight: 500;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #fff;
+            color: var(--primary);
+            padding: 16px 40px;
+            border-radius: var(--radius-pill);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        /* Clean Footer */
+        footer {
+            background: #fff;
+            padding: 60px 20px 30px;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li { margin-bottom: 12px; }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover { color: var(--primary); }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .hero { padding-top: 120px; }
+            .cta-section { padding: 60px 20px; margin: 40px 10px; }
+        }
+    </style>
+    <link rel="stylesheet" href="consistency.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <a href="index.html" class="logo">OnTime Moving and Storage</a>
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html" class="active">Services</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="reviews.html">Reviews</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="booknow.html" class="nav-highlight">Book Now</a></li>
+                    <li><a href="login.html">Admin Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Moving made <span>effortless.</span></h1>
+            <p>From packing to unpacking, we handle the heavy lifting so you don't have to.</p>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Core Services</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="icon-wrapper">Home</div>
+                    <h3>Residential Moving</h3>
+                    <p>Complete home moving services with white-glove delivery to your new space.</p>
+                    <ul class="service-features">
+                        <li>Full packing & unpacking</li>
+                        <li>Furniture assembly</li>
+                        <li>Fragile item care</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="icon-wrapper">Office</div>
+                    <h3>Commercial Relocation</h3>
+                    <p>Zero downtime for your business with our efficient office moving solutions.</p>
+                    <ul class="service-features">
+                        <li>After-hours scheduling</li>
+                        <li>IT equipment handling</li>
+                        <li>Project management</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="icon-wrapper">Storage</div>
+                    <h3>Smart Storage</h3>
+                    <p>Secure, climate-controlled storage for short or long-term flexibility.</p>
+                    <ul class="service-features">
+                        <li>Climate-controlled</li>
+                        <li>24/7 security</li>
+                        <li>Flexible terms</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="icon-wrapper">Truck</div>
+                    <h3>Long-Distance</h3>
+                    <p>Across the province or across the country. Tracked, insured, and reliable.</p>
+                    <ul class="service-features">
+                        <li>Real-time tracking</li>
+                        <li>Dedicated coordinator</li>
+                        <li>Guaranteed dates</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to make moves?</h2>
+            <p>Get a transparent, instant quote. No hidden fees, no stress.</p>
+            <a href="contact.html" class="cta-button">Start My Free Quote</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>OnTime Moving</h3>
+                    <p>BBB A+ Accredited. Serving families across Lower Mainland with quality, service and reliability.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p><a href="tel:6045050026" style="color:inherit;text-decoration:none;">Call (604) 505-0026</a></p>
+                    <p>Email: info@ontime-moving.com</p>
+                    <p>104-1525 Broadway St., Port Coquitlam, BC V3C 6P6</p>
+                    <p>Open 7 Days</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Service Areas</h4>
+                    <p>Lower Mainland, BC Interior, Vancouver Island, and surrounding islands</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 OnTime Moving Corp. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="chatbot.css">
+    <script src="chatbot.js"></script>
+</body>
+</html>
+
+
