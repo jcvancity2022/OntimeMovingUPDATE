@@ -1,0 +1,233 @@
+/* Shared consistency layer across all pages. Keep overrides shallow to preserve page-specific content layout. */
+
+:root {
+    --brand-primary: #d32f2f;
+    --brand-primary-dark: #b71c1c;
+    --brand-ink: #182133;
+    --brand-muted: #5f6b82;
+    --brand-surface: #ffffff;
+    --brand-border: #d9e0f0;
+    --brand-tint-soft: rgba(211, 47, 47, 0.06);
+    --brand-tint-strong: rgba(211, 47, 47, 0.14);
+    --shared-radius: 16px;
+    --shared-radius-pill: 9999px;
+    --shared-shadow: 0 12px 28px rgba(26, 33, 51, 0.1);
+    --shared-transition: all 0.3s ease;
+    --nav-shell-width: min(96%, 1400px);
+    --nav-shell-max-width: 1400px;
+    --nav-gap: 1.5rem;
+    --nav-link-pad-y: 0.45rem;
+    --nav-link-pad-x: 0.85rem;
+    --nav-logo-size: 1.7rem;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif;
+    color: var(--brand-ink);
+    background:
+        radial-gradient(circle at 12% 8%, var(--brand-tint-strong) 0%, rgba(211, 47, 47, 0) 34%),
+        radial-gradient(circle at 88% 14%, var(--brand-tint-soft) 0%, rgba(211, 47, 47, 0) 38%),
+        linear-gradient(180deg, #fff9f9 0%, #fffdfd 48%, #ffffff 100%);
+}
+
+.container {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.navbar,
+.top-bar {
+    width: var(--nav-shell-width) !important;
+    max-width: var(--nav-shell-max-width) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    background: linear-gradient(130deg, rgba(255, 255, 255, 0.92), rgba(255, 245, 245, 0.9));
+    border: 1px solid rgba(211, 47, 47, 0.12);
+    border-radius: var(--shared-radius-pill);
+    box-shadow: 0 8px 24px rgba(24, 33, 51, 0.09);
+}
+
+.navbar .container,
+.top-bar .container {
+    max-width: var(--nav-shell-max-width) !important;
+    width: 100% !important;
+    padding-left: var(--spacing-md, 2.25rem) !important;
+    padding-right: var(--spacing-md, 2.25rem) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/* Exact navbar spacing spec used across all pages */
+.nav-content,
+.top-bar-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--nav-gap);
+}
+
+.logo {
+    margin: 0;
+    font-size: var(--nav-logo-size);
+    line-height: 1.1;
+}
+
+.nav-links,
+.top-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--nav-gap);
+    margin: 0;
+    padding: 0;
+}
+
+.hero-visual-card,
+.service-card,
+.review-card,
+.contact-info,
+.contact-form,
+.value-card,
+.login-container,
+.booking-content,
+.chat-widget,
+.hours-card {
+    background: linear-gradient(170deg, rgba(255, 255, 255, 0.97), rgba(255, 248, 248, 0.95));
+    border: 1px solid rgba(211, 47, 47, 0.08);
+}
+
+.nav-links a,
+.top-nav a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--nav-link-pad-y) var(--nav-link-pad-x);
+    line-height: 1;
+    margin: 0;
+    transition: var(--shared-transition);
+}
+
+.nav-links a:hover,
+.top-nav a:hover {
+    color: var(--brand-primary-dark);
+}
+
+.nav-links a.active,
+.top-nav a.active {
+    background: rgba(211, 47, 47, 0.11);
+    color: var(--brand-primary-dark);
+}
+
+.nav-highlight,
+.nav-cta,
+.btn-book {
+    border-radius: var(--shared-radius-pill);
+}
+
+.btn,
+button,
+.submit-btn,
+.cta-button {
+    border-radius: var(--shared-radius);
+}
+
+.btn-primary,
+.nav-highlight,
+.nav-cta,
+.btn-book,
+.submit-btn,
+.cta-button {
+    box-shadow: 0 10px 22px rgba(211, 47, 47, 0.18);
+}
+
+input,
+select,
+textarea {
+    border-radius: 10px;
+}
+
+.section-title,
+h1,
+h2,
+h3 {
+    letter-spacing: -0.01em;
+}
+
+.footer,
+footer.footer,
+body .footer,
+body footer.footer {
+    background:
+        radial-gradient(circle at 85% 22%, rgba(211, 47, 47, 0.2), transparent 34%),
+        linear-gradient(160deg, #151c2a, #1f2a42 55%, #1f3050 100%);
+    color: #ffffff;
+    padding: 48px 0 24px;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.footer .container,
+footer.footer .container,
+body .footer .container,
+body footer.footer .container {
+    max-width: 1400px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.footer-content,
+body .footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 32px;
+    margin-bottom: 32px;
+}
+
+.footer-section h3,
+body .footer-section h3 {
+    color: #ffd0c2;
+    margin-bottom: 12px;
+}
+
+.footer-section h4,
+body .footer-section h4 {
+    color: #ffd9d9;
+    margin-bottom: 12px;
+    font-size: 1rem;
+}
+
+.footer-section p,
+body .footer-section p {
+    color: #c7d0df;
+    margin-bottom: 6px;
+}
+
+.footer a,
+footer.footer a,
+body .footer a,
+body footer.footer a {
+    color: inherit;
+    text-decoration: none;
+    transition: var(--shared-transition);
+}
+
+.footer-bottom,
+body .footer-bottom {
+    text-align: center;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    color: #adbad1;
+}
+
+@media (max-width: 768px) {
+    .nav-links,
+    .top-nav {
+        gap: var(--spacing-sm, 1rem);
+    }
+}

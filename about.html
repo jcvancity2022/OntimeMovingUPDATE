@@ -1,0 +1,311 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - OnTime Moving & Storage</title>
+    <!-- Modern Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #FF416C;
+            --primary-gradient: linear-gradient(135deg, #FF416C 0%, #FF4B2B 100%);
+            --dark: #0F172A;
+            --light-bg: #F8FAFC;
+            --text-main: #1E293B;
+            --text-muted: #64748B;
+            --radius-lg: 24px;
+            --radius-pill: 999px;
+            --shadow: 0 10px 40px -10px rgba(0,0,0,0.08);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--light-bg);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Modern Split Hero */
+        .hero {
+            padding: 140px 20px 80px;
+        }
+        
+        .hero-visual-card {
+            background: #fff;
+            border-radius: 32px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-visual-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: var(--radius-lg);
+            min-height: 400px;
+        }
+
+        .hero-kicker {
+            color: var(--primary);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+        }
+
+        .hero-title {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            color: var(--dark);
+            letter-spacing: -1px;
+        }
+
+        .hero-description {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 32px;
+            font-weight: 500;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        /* Story Grid Setup */
+        .story-section { padding: 80px 0; }
+        .section-title { text-align: center; font-size: 2.5rem; font-weight: 800; color: var(--dark); margin-bottom: 60px; letter-spacing: -1px; }
+
+        .story-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 80px;
+        }
+
+        .story-row-reverse { direction: rtl; }
+        .story-row-reverse > * { direction: ltr; }
+
+        .story-image img {
+            width: 100%;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+        }
+
+        .story-copy h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: var(--dark);
+        }
+        
+        .story-copy p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Values Grid */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+        }
+
+        .value-card {
+            background: #fff;
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .value-card:hover { transform: translateY(-5px); }
+        .value-icon { font-size: 2rem; margin-bottom: 20px; }
+        .value-card h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 10px; color: var(--dark); }
+        .value-card p { color: var(--text-muted); font-size: 0.95rem; font-weight: 500; }
+
+        @media (max-width: 900px) {
+            .hero-visual-card, .story-row { grid-template-columns: 1fr; gap: 30px; }
+            .hero-visual-card { padding: 24px; }
+        }
+    </style>
+    <link rel="stylesheet" href="consistency.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <a href="index.html" class="logo">OnTime Moving and Storage</a>
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="about.html" class="active">About</a></li>
+                    <li><a href="reviews.html">Reviews</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="booknow.html" class="nav-highlight">Book Now</a></li>
+                    <li><a href="login.html">Admin Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-visual-card">
+                <div class="hero-overlay">
+                    <p class="hero-kicker">About Us</p>
+                    <h1 class="hero-title">Redefining moving for the modern era.</h1>
+                    <p class="hero-description">
+                        We ditched the outdated moving stereotypes. Since day one, we've focused on transparent pricing, top-tier tech, and crews that actually care about your stuff.
+                    </p>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <div class="stat-number">22+</div>
+                            <div class="stat-label">Years Strong</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">11k+</div>
+                            <div class="stat-label">Moves Crushed</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">A+</div>
+                            <div class="stat-label">BBB Rating</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">100%</div>
+                            <div class="stat-label">Fully Insured</div>
+                        </div>
+                    </div>
+                </div>
+                <img src="images/aboutpage/teamphoto.png" alt="OnTime Moving team" onerror="this.src='https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000&auto=format&fit=crop'">
+            </div>
+        </div>
+    </section>
+
+    <section class="story-section">
+        <div class="container">
+            <h2 class="section-title">How we do things differently</h2>
+            <div class="story-list">
+                <article class="story-row">
+                    <figure class="story-image">
+                        <img src="images/aboutpage/movingontimeimage.png" alt="Crew moving" onerror="this.src='https://images.unsplash.com/photo-1587293852726-70cdb56c2866?q=80&w=1000&auto=format&fit=crop'">
+                    </figure>
+                    <div class="story-copy">
+                        <h3>Tech-Driven Process</h3>
+                        <p>No more paper quotes and guessing games. From instant online booking to digital inventory tracking, our modern approach strips the anxiety right out of moving day.</p>
+                    </div>
+                </article>
+
+                <article class="story-row story-row-reverse">
+                    <figure class="story-image">
+                        <img src="images/homepage/onTimeWarehouseinside.png" alt="Storage" onerror="this.src='https://images.unsplash.com/photo-1586528116311-ad8ed7c152a5?q=80&w=1000&auto=format&fit=crop'">
+                    </figure>
+                    <div class="story-copy">
+                        <h3>Flawless Handling</h3>
+                        <p>We treat your flatscreen and your favorite plant with the exact same respect. Our crews are fully licensed, rigorously trained, and equipped to protect your space.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="story-section" style="background: #fff; padding-top: 60px;">
+        <div class="container">
+            <h2 class="section-title">The Blueprint</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">Care</div>
+                    <h3>Customer Obsessed</h3>
+                    <p>Everything is tailored around your timeline and your rules. You're the boss.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">Fast</div>
+                    <h3>Insanely Reliable</h3>
+                    <p>We don't do "windows of time." We show up when we say we will. Period.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">Clear</div>
+                    <h3>Zero BS Pricing</h3>
+                    <p>Clear estimates, text updates, and absolutely no hidden fees on the final bill.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>OnTime Moving</h3>
+                    <p>BBB A+ Accredited. Serving families across Lower Mainland with quality, service and reliability.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p><a href="tel:6045050026" style="color:inherit;text-decoration:none;">Call (604) 505-0026</a></p>
+                    <p>Email: info@ontime-moving.com</p>
+                    <p>104-1525 Broadway St., Port Coquitlam, BC V3C 6P6</p>
+                    <p>Open 7 Days</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Service Areas</h4>
+                    <p>Lower Mainland, BC Interior, Vancouver Island, and surrounding islands</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 OnTime Moving Corp. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="chatbot.css">
+    <script src="chatbot.js"></script>
+</body>
+</html>
+
+
