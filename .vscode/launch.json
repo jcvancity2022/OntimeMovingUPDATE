@@ -9,9 +9,10 @@
             "console": "integratedTerminal",
             "env": { "FLASK_ENV": "development" },
             "serverReadyAction": {
-                "action": "openExternally",
-                "pattern": "Running on (http://localhost:\\d+)",
-                "uriFormat": "%s"
+                "action": "runCommand",
+                "command": "workbench.action.tasks.runTask",
+                "commandArgument": "Open in Chrome",
+                "pattern": "Running on (http://localhost:\\d+)"
             }
         }
     ]
