@@ -499,7 +499,7 @@ body {
 
 .hero-visual-card {
     position: relative;
-    min-height: clamp(760px, 86vh, 1040px);
+    min-height: clamp(600px, 78vh, 860px);
     margin-top: 1.5rem;
     margin-bottom: 0;
     overflow: hidden;
@@ -538,11 +538,11 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    padding: clamp(3rem, 6vw, 5rem) clamp(2rem, 4.5vw, 4rem) clamp(3rem, 4vw, 4rem);
+    padding: clamp(2.5rem, 5vw, 4rem) clamp(2rem, 4.5vw, 4rem) clamp(2rem, 3vw, 3rem);
     background: linear-gradient(90deg, rgba(24, 33, 51, 0.62) 0%, rgba(24, 33, 51, 0.4) 62%, rgba(24, 33, 51, 0.16) 100%);
     text-align: left;
     z-index: 2;
-    gap: 0.5rem;
+    gap: 0.4rem;
 }
 
 .hero-kicker {
@@ -582,7 +582,7 @@ body {
 .hero-overlay .hero-stats {
     justify-content: flex-start;
     gap: var(--spacing-lg);
-    margin-top: auto;
+    margin-top: 1.5rem;
 }
 
 .hero-overlay .stat-number,
