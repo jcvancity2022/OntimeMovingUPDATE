@@ -596,6 +596,9 @@ def internal_error(error):
 
 # Run server
 if __name__ == '__main__':
+    import threading
+    import webbrowser
+
     print("\n" + "="*50)
     print("🚚 OnTime Moving - Modern Booking System 🚚")
     print("="*50)
@@ -603,17 +606,13 @@ if __name__ == '__main__':
     print(f"🌐 Website:     http://localhost:5000")
     print(f"🔌 API:         http://localhost:5000/api")
     print(f"💚 Health:      http://localhost:5000/api/health")
-    print("\n📝 Available Endpoints:")
-    print("   POST   /api/booking              - Create booking")
-    print("   GET    /api/bookings             - Get all bookings")
-    print("   GET    /api/booking/<id>         - Get specific booking")
-    print("   PATCH  /api/booking/<id>/status  - Update status")
-    print("   DELETE /api/booking/<id>         - Delete booking")
-    print("   GET    /api/bookings/upcoming    - Get upcoming bookings")
-    print("   GET    /api/statistics           - Get statistics")
     print("\n✅ Press Ctrl+C to stop the server\n")
     print("="*50 + "\n")
-    
+
+    # Open browser once after Flask has had time to bind
+    if os.environ.get('WERKZEUG_RUN_MAIN') != 'true':
+        threading.Timer(1.2, lambda: webbrowser.open('http://localhost:5000')).start()
+
     app.run(
         host='0.0.0.0',
         port=5000,
