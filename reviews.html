@@ -7,197 +7,256 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="consistency.css">
     <style>
+        /* ── Hero ── */
         .reviews-page-hero {
-            padding: 7rem 0 3.5rem;
+            background: linear-gradient(135deg, #b71c1c 0%, #d32f2f 60%, #e53935 100%);
+            padding: 6rem 0 4rem;
             text-align: center;
+            color: #fff;
+        }
+        .reviews-page-hero h1 {
+            font-family: var(--font-family-display, 'Inter', sans-serif);
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: #fff;
+            margin-bottom: 0.75rem;
+        }
+        .reviews-page-hero p {
+            font-size: clamp(1rem, 1.8vw, 1.2rem);
+            color: rgba(255,255,255,0.88);
+            max-width: 52ch;
+            margin: 0 auto 1.5rem;
+            line-height: 1.65;
+        }
+        .reviews-hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.35);
+            border-radius: 9999px;
+            padding: 0.4rem 1rem;
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: 600;
+            backdrop-filter: blur(4px);
         }
 
-        .reviews-page-hero .hero-title {
-            max-width: 16ch;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .reviews-page-hero .hero-description {
-            max-width: 56ch;
-        }
-
+        /* ── Stats bar ── */
         .reviews-page-stats {
-            margin-top: -1rem;
-            padding-bottom: 2rem;
+            background: #fff;
+            border-bottom: 1px solid #e8e8e8;
+            padding: 2rem 0;
         }
-
         .reviews-page-stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: var(--spacing-md);
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
         }
-
         .reviews-page-stat {
-            background: linear-gradient(160deg, #ffffff, var(--color-surface-strong));
-            border: 1px solid rgba(123, 146, 187, 0.2);
-            border-radius: var(--border-radius-lg);
-            padding: var(--spacing-lg);
             text-align: center;
-            box-shadow: var(--shadow);
+            padding: 1.25rem 1rem;
+            border-right: 1px solid #e8e8e8;
         }
-
+        .reviews-page-stat:last-child { border-right: none; }
         .reviews-page-stat .stars {
             display: block;
-            margin-bottom: 0.65rem;
-            color: #ffbf47;
+            color: #f59e0b;
+            font-size: 1.1rem;
             letter-spacing: 2px;
-            font-size: 1.25rem;
+            margin-bottom: 0.3rem;
         }
-
         .reviews-page-stat .stat-number {
-            font-size: 3rem;
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: #182133;
             line-height: 1;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.3rem;
+        }
+        .reviews-page-stat .stat-label {
+            font-size: 0.8rem;
+            color: #5f6b82;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
+        /* ── Filter pills ── */
         .reviews-page-filters {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.75rem;
-            margin-bottom: var(--spacing-xl);
+            gap: 0.6rem;
+            margin-bottom: 2rem;
         }
-
         .reviews-page-filter-btn {
             font: inherit;
+            font-size: 0.85rem;
             font-weight: 600;
-            color: var(--color-dark-light);
+            color: #5f6b82;
             background: #fff;
-            border: 1px solid var(--color-border);
-            border-radius: var(--border-radius-full);
-            padding: 0.6rem 1rem;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 9999px;
+            padding: 0.45rem 1rem;
             cursor: pointer;
-            transition: var(--transition);
+            transition: all 0.2s ease;
         }
-
         .reviews-page-filter-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-sm);
+            border-color: #d32f2f;
+            color: #d32f2f;
         }
-
         .reviews-page-filter-btn.active {
-            color: var(--color-white);
-            background: var(--color-dark);
-            border-color: var(--color-dark);
+            background: #182133;
+            color: #fff;
+            border-color: #182133;
         }
 
+        /* ── Reviews grid ── */
+        .reviews-section-wrap {
+            padding: 3rem 0 0;
+            background: #f8f8f8;
+        }
         #reviewsContainer.loading {
             text-align: center;
-            color: var(--color-gray);
-            padding: var(--spacing-xl) 0;
+            color: #5f6b82;
+            padding: 3rem 0;
             font-weight: 600;
         }
-
-        .review-card {
-            background: #fff;
-            border: 1px solid rgba(123, 146, 187, 0.2);
-            border-radius: var(--border-radius-lg);
-            box-shadow: var(--shadow);
-            padding: var(--spacing-lg);
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.25rem;
         }
 
+        /* ── Review card ── */
+        .review-card {
+            background: #fff;
+            border: 1px solid #e8e8e8;
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            transition: box-shadow 0.2s ease, transform 0.2s ease;
+        }
+        .review-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(24,33,51,0.10);
+        }
         .review-header {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
+            gap: 0.85rem;
         }
-
         .avatar {
-            width: 50px;
-            height: 50px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             flex-shrink: 0;
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            font-size: 1rem;
             font-weight: 800;
             color: #fff;
-            box-shadow: var(--shadow-sm);
         }
-
         .reviewer-info h3 {
-            margin: 0;
-            color: var(--color-dark);
-            font-size: 1.05rem;
+            margin: 0 0 0.1rem;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #182133;
         }
-
         .review-date {
-            color: var(--color-gray);
-            font-size: 0.85rem;
+            font-size: 0.78rem;
+            color: #5f6b82;
         }
-
+        .review-source {
+            margin-left: auto;
+            flex-shrink: 0;
+        }
+        .review-source svg { display: block; }
         .rating {
-            color: #ffbf47;
+            color: #f59e0b;
+            font-size: 1rem;
             letter-spacing: 1px;
-            margin-bottom: 0.75rem;
         }
-
         .review-text {
-            color: var(--color-dark-light);
-            line-height: 1.75;
+            font-size: 0.92rem;
+            color: #374151;
+            line-height: 1.7;
+            flex: 1;
         }
-
         .verified-badge {
             display: inline-flex;
-            margin-top: 1rem;
-            padding: 0.35rem 0.65rem;
-            border-radius: var(--border-radius-full);
-            background: #ecfdf5;
-            color: #0f766e;
-            border: 1px solid #a7f3d0;
-            font-size: 0.8rem;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.28rem 0.6rem;
+            border-radius: 9999px;
+            background: #f0fdf4;
+            color: #15803d;
+            border: 1px solid #bbf7d0;
+            font-size: 0.75rem;
             font-weight: 700;
+            width: fit-content;
         }
+        .review-response {
+            font-size: 0.82rem;
+            color: #5f6b82;
+            background: #f8f8f8;
+            border-left: 3px solid #d32f2f;
+            border-radius: 0 8px 8px 0;
+            padding: 0.6rem 0.85rem;
+            line-height: 1.6;
+        }
+        .review-response strong { color: #182133; }
 
+        /* ── CTA banner ── */
         .reviews-page-cta {
-            margin-top: var(--spacing-2xl);
-            margin-bottom: var(--spacing-2xl);
-            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
-            border-radius: var(--border-radius-lg);
+            margin-top: 3rem;
+            background: linear-gradient(135deg, #182133 0%, #2a3550 100%);
+            border-radius: 16px;
             color: #fff;
             text-align: center;
-            padding: var(--spacing-2xl) var(--spacing-md);
-            box-shadow: var(--shadow-lg);
+            padding: 3rem 2rem;
         }
-
         .reviews-page-cta h2 {
-            margin-bottom: 0.75rem;
-            font-size: clamp(1.8rem, 3vw, 2.5rem);
-            font-family: var(--font-family-display);
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 800;
+            margin-bottom: 0.6rem;
+            letter-spacing: -0.02em;
         }
-
         .reviews-page-cta p {
-            margin-bottom: 1.2rem;
-            color: rgba(255, 255, 255, 0.9);
+            color: rgba(255,255,255,0.78);
+            margin-bottom: 1.4rem;
+            font-size: 1rem;
         }
-
         .reviews-page-cta .btn {
-            background: #fff;
-            color: var(--color-primary-dark);
+            background: #d32f2f;
+            color: #fff;
+            border-radius: 9999px;
+            padding: 0.85rem 2rem;
+            font-weight: 700;
+            font-size: 0.95rem;
         }
-
         .reviews-page-cta .btn:hover {
-            background: #fff;
-            color: var(--color-primary);
+            background: #b71c1c;
         }
-
         .error-message {
             color: #b91c1c;
             background: #fee2e2;
             border: 1px solid #fecaca;
-            border-radius: var(--border-radius);
+            border-radius: 12px;
             padding: 1rem;
             text-align: center;
         }
+
+        @media (max-width: 600px) {
+            .reviews-page-stats-grid { grid-template-columns: 1fr; }
+            .reviews-page-stat { border-right: none; border-bottom: 1px solid #e8e8e8; }
+            .reviews-page-stat:last-child { border-bottom: none; }
+            .reviews-grid { grid-template-columns: 1fr; }
+        }
     </style>
-    <link rel="stylesheet" href="consistency.css">
 </head>
 <body>
     <nav class="navbar">
@@ -216,16 +275,16 @@
                     <li><a href="reviews.html" class="active">Reviews</a></li>
                     <li><a href="contact.html">Contact</a></li>
                     <li><a href="booknow.html" class="nav-highlight">Book Now</a></li>
-                    <li><a href="login.html">Admin Login</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <section class="hero reviews-page-hero">
+    <section class="reviews-page-hero">
         <div class="container">
-            <h1 class="hero-title">Straight from the Source</h1>
-            <p class="hero-description">See what customers are saying about moving with OnTime, from first quote to final delivery.</p>
+            <div class="reviews-hero-badge">⭐ Verified Google Reviews · Lower Mainland, BC</div>
+            <h1>What Our Customers Say</h1>
+            <p>Real reviews from real moves — from first call to final box, straight from Google.</p>
         </div>
     </section>
 
@@ -233,36 +292,35 @@
         <div class="container">
             <div class="reviews-page-stats-grid">
                 <div class="reviews-page-stat">
-                    <span class="stars">*****</span>
-                    <div class="stat-number" id="avgRating">5.0</div>
-                    <div class="stat-label">Average Rating</div>
+                    <span class="stars">★★★★☆</span>
+                    <div class="stat-number">4.2</div>
+                    <div class="stat-label">Google Rating</div>
                 </div>
                 <div class="reviews-page-stat">
-                    <div class="stat-number" id="totalReviews">0</div>
-                    <div class="stat-label">Total Reviews</div>
+                    <div class="stat-number">52</div>
+                    <div class="stat-label">Google Reviews</div>
                 </div>
                 <div class="reviews-page-stat">
-                    <div class="stat-number" id="fiveStarPercent">98%</div>
-                    <div class="stat-label">5-Star Satisfaction</div>
+                    <div class="stat-number">22+</div>
+                    <div class="stat-label">Years in Business</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="reviews">
+    <section class="reviews-section-wrap">
         <div class="container">
             <div class="reviews-page-filters">
                 <button class="reviews-page-filter-btn active" data-filter="all">All Reviews</button>
-                <button class="reviews-page-filter-btn" data-filter="5">5 Stars</button>
-                <button class="reviews-page-filter-btn" data-filter="4">4 Stars</button>
-                <button class="reviews-page-filter-btn" data-filter="verified">Verified Only</button>
+                <button class="reviews-page-filter-btn" data-filter="5">⭐ 5 Stars</button>
+                <button class="reviews-page-filter-btn" data-filter="verified">✓ Verified</button>
             </div>
-            <div id="reviewsContainer" class="loading">Loading community reviews...</div>
+            <div id="reviewsContainer" class="loading">Loading reviews…</div>
 
             <div class="reviews-page-cta">
-                <h2>Share Your Experience</h2>
-                <p>Did our team make your move easier? We would love your feedback.</p>
-                <a href="#" class="btn btn-large" onclick="openGoogleReview(); return false;">Leave a Google Review</a>
+                <h2>Happy with your move?</h2>
+                <p>Share your experience on Google and help other families find a mover they can trust.</p>
+                <a href="#" class="btn" onclick="openGoogleReview(); return false;">Leave a Google Review</a>
             </div>
         </div>
     </section>
@@ -346,95 +404,82 @@
             window.open(googleReviewsUrl, '_blank');
         }
 
+        const GOOGLE_SVG = `<svg width="18" height="18" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>`;
+
+        const FALLBACK_REVIEWS = [
+            { author_name: 'Nicolas Poh', rating: 5, review_text: 'Highly recommended as the No. 1 choice of movers! OnTime Movers most efficiently executed a smooth, though very difficult move for us from a detached house to a townhouse unit. Professional, careful, and efficient from start to finish.', review_date: '2026-05-01', verified: true, response_text: 'Hi Nicolas and families, it is such a pleasure working with you. I and my crew enjoyed the entire project from the initial view two months ago until the final date of your move. Thank you so much!' },
+            { author_name: 'Jodie McNeice', rating: 5, review_text: 'Can\'t say enough great things about OnTime moving. As we sold our home they moved items out and back in during the staging process. Then moved us to our new home with care and efficiency. Ronald met with us several times to go over the details — truly exceptional service.', review_date: '2026-02-01', verified: true, response_text: 'Dear Jodie, thank you for your feedback. It has been a wonderful experience moving you in and out over the past year. Enjoy your new home!' },
+            { author_name: 'Thomas Leonard', rating: 5, review_text: 'This has been the best moving experience I have ever had. Ronald personally came to my apartment and viewed and took pictures of all my furniture. He told me the size of the moving truck and how many crew members he would need. Everything went perfectly on move day.', review_date: '2026-02-01', verified: true, response_text: 'Hello Tom, thank you for sharing your experience working with us. I and all my crew are totally thrilled and completely honoured!' },
+            { author_name: 'Mark Richardson', rating: 5, review_text: 'OnTime moved my elderly parents. They worked hard for the entire move — I almost can\'t believe the pace they maintained. Even though they were busy, one of them found me an allen key when I asked, and whenever my parents needed something, one of them would stop and help. Great service and hard workers.', review_date: '2026-02-01', verified: true, response_text: 'Hello Mark, thank you for your feedback. It is a complete pleasure serving loving families like yours.' },
+            { author_name: 'Reg Freebody', rating: 5, review_text: 'We just completed our second move with OnTime Movers and I\'m not sure how much more I could say about how responsible and dependable they are — we called them again, because we were sure our belongings would get to our new home safely and OnTime.', review_date: '2025-12-01', verified: true, response_text: '' },
+            { author_name: 'Cindy Lukey', rating: 5, review_text: 'Ronald (owner) is very personable and professional. His staff were very hard working, careful, polite and personable. I would highly recommend this moving company.', review_date: '2025-06-01', verified: true, response_text: 'Dear Cindy, thanks for your feedback. I and my crew are very happy serving you. It\'s been a wonderful experience from beginning to the end!' },
+            { author_name: 'Ellen Silvergieter', rating: 5, review_text: 'I\'ve never had a better moving crew. The men were professional, very courteous and so helpful. I have no hesitation in recommending On Time Moving and Storage.', review_date: '2025-06-01', verified: true, response_text: 'Dear Ellen, Fred and Kara, thank you for sharing your experience. We are very happy you are all satisfied.' },
+            { author_name: 'Candace', rating: 5, review_text: 'Went over and above the call of duty!', review_date: '2025-06-01', verified: false, response_text: 'Dear Candace, such a pleasure working with you. Thank you so much for your kind words!' }
+        ];
+
         async function loadReviews() {
             try {
-                const response = await fetch('http://localhost:5000/api/reviews').catch(() => null);
-
+                const response = await fetch('/api/reviews').catch(() => null);
                 if (response && response.ok) {
                     const data = await response.json();
                     if (data.success && Array.isArray(data.reviews) && data.reviews.length > 0) {
                         allReviews = data.reviews;
                     }
                 }
-
-                if (allReviews.length === 0) {
-                    allReviews = [
-                        { author_name: 'Sarah Jenkins', rating: 5, review_text: 'Literally the easiest move of my life. The team showed up early, worked hard, and took incredible care of my furniture.', review_date: '2026-04-10', verified: true, is_featured: true, response_text: 'Thank you, Sarah! We are glad the move went smoothly.' },
-                        { author_name: 'Mark T.', rating: 5, review_text: 'No hidden fees and no stress. They disassembled my desk and put it back together perfectly in the new spot.', review_date: '2026-03-28', verified: true, is_featured: false, response_text: 'Thanks, Mark! We appreciate the kind words and your trust.' },
-                        { author_name: 'Jessica R.', rating: 4, review_text: 'Really great experience. They were careful with fragile pieces and communicated updates clearly.', review_date: '2026-02-15', verified: false, is_featured: false, response_text: 'Thanks for the feedback, Jessica! We will keep improving our communication.' },
-                        { author_name: 'David Chen', rating: 5, review_text: 'By far the best company I have used. Fast, polite, and careful with every item.', review_date: '2026-01-05', verified: true, is_featured: true, response_text: 'Thank you, David! We loved helping you with your move.' }
-                    ];
-                }
-
+                if (allReviews.length === 0) allReviews = FALLBACK_REVIEWS;
                 displayReviews(allReviews);
-                updateStatistics();
-            } catch (error) {
-                showError('Unable to load reviews. Please try again later.');
+            } catch (e) {
+                allReviews = FALLBACK_REVIEWS;
+                displayReviews(allReviews);
             }
         }
 
         function displayReviews(reviews) {
             const container = document.getElementById('reviewsContainer');
             if (!reviews || reviews.length === 0) {
-                container.className = 'loading';
-                container.textContent = 'No reviews found.';
+                container.innerHTML = '<p style="text-align:center;color:#5f6b82;padding:2rem 0">No reviews found.</p>';
                 return;
             }
-
             container.className = 'reviews-grid';
-            container.innerHTML = reviews.map((review) => {
-                const authorName = review.author_name || 'Anonymous';
-                const initial = authorName.charAt(0).toUpperCase();
-                const colorIndex = authorName.length % avatarGradients.length;
-                const reviewText = review.review_text || review.text || 'No review text provided.';
-                const reviewDate = review.review_date || review.created_at || review.date || '';
-                const verified = review.is_featured || review.verified;
-                const responseText = review.response_text;
-
+            container.innerHTML = reviews.map((r) => {
+                const name = r.author_name || 'Anonymous';
+                const initial = name.charAt(0).toUpperCase();
+                const ci = name.length % avatarGradients.length;
+                const text = r.review_text || r.text || '';
+                const date = r.review_date || r.created_at || r.date || '';
+                const stars = '★'.repeat(Math.min(5, Math.round(r.rating || 5))) + '☆'.repeat(Math.max(0, 5 - Math.round(r.rating || 5)));
+                const ago = timeAgo(date);
                 return `
                 <article class="review-card">
                     <div class="review-header">
-                        <div class="avatar" style="background: ${avatarGradients[colorIndex]}">${initial}</div>
+                        <div class="avatar" style="background:${avatarGradients[ci]}">${initial}</div>
                         <div class="reviewer-info">
-                            <h3>${escapeHtml(authorName)}</h3>
-                            <div class="review-date">${formatDate(reviewDate)}</div>
+                            <h3>${esc(name)}</h3>
+                            <div class="review-date">${ago}</div>
                         </div>
+                        <div class="review-source" title="Google Review">${GOOGLE_SVG}</div>
                     </div>
-                    <div class="rating">${generateStars(review.rating)}</div>
-                    <p class="review-text">${escapeHtml(reviewText)}</p>
-                    ${verified ? '<span class="verified-badge">Verified Move</span>' : ''}
-                    ${responseText ? `<p class="review-response"><strong>Owner response:</strong> ${escapeHtml(responseText)}</p>` : ''}
+                    <div class="rating">${stars}</div>
+                    <p class="review-text">${esc(text)}</p>
+                    ${r.verified ? '<span class="verified-badge">✓ Verified Move</span>' : ''}
+                    ${r.response_text ? `<div class="review-response"><strong>Owner:</strong> ${esc(r.response_text)}</div>` : ''}
                 </article>`;
             }).join('');
         }
 
-        function generateStars(rating) {
-            const fullStars = Math.min(Math.max(Math.round(rating || 0), 0), 5);
-            const emptyStars = 5 - fullStars;
-            return '★'.repeat(fullStars) + '☆'.repeat(emptyStars);
+        function timeAgo(dateStr) {
+            if (!dateStr) return '';
+            const diff = Date.now() - new Date(dateStr).getTime();
+            const months = Math.floor(diff / (1000 * 60 * 60 * 24 * 30));
+            if (months < 1) return 'This month';
+            if (months === 1) return '1 month ago';
+            if (months < 12) return `${months} months ago`;
+            const years = Math.floor(months / 12);
+            return years === 1 ? '1 year ago' : `${years} years ago`;
         }
 
-        function formatDate(dateString) {
-            const date = new Date(dateString);
-            return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-        }
-
-        function escapeHtml(text) {
-            const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
-            return String(text).replace(/[&<>"']/g, (m) => map[m]);
-        }
-
-        function updateStatistics() {
-            if (allReviews.length === 0) {
-                return;
-            }
-
-            const avgRating = allReviews.reduce((sum, r) => sum + r.rating, 0) / allReviews.length;
-            document.getElementById('avgRating').textContent = avgRating.toFixed(1);
-            document.getElementById('totalReviews').textContent = allReviews.length;
-            const fiveStarCount = allReviews.filter((r) => r.rating === 5).length;
-            const fiveStarPercent = Math.round((fiveStarCount / allReviews.length) * 100);
-            document.getElementById('fiveStarPercent').textContent = `${fiveStarPercent}%`;
+        function esc(t) {
+            return String(t).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
         }
 
         function showError(message) {

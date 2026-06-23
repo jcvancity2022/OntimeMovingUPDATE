@@ -60,40 +60,10 @@ body {
     font-size: var(--font-size-base);
     line-height: var(--line-height-base);
     color: var(--color-dark);
-    background:
-        radial-gradient(circle at 12% 18%, rgba(211, 47, 47, 0.12), transparent 36%),
-        radial-gradient(circle at 88% 12%, rgba(211, 47, 47, 0.16), transparent 34%),
-        linear-gradient(180deg, #f9fbff 0%, #f3f7ff 42%, #ffffff 100%);
+    background: #f9f9f9;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    position: relative;
     overflow-x: hidden;
-}
-
-body::before,
-body::after {
-    content: "";
-    position: fixed;
-    z-index: -1;
-    pointer-events: none;
-    border-radius: 50%;
-    filter: blur(2px);
-}
-
-body::before {
-    width: 420px;
-    height: 420px;
-    right: -110px;
-    top: 90px;
-    background: radial-gradient(circle, rgba(239, 83, 80, 0.23) 0%, rgba(239, 83, 80, 0) 72%);
-}
-
-body::after {
-    width: 360px;
-    height: 360px;
-    left: -120px;
-    bottom: 60px;
-    background: radial-gradient(circle, rgba(211, 47, 47, 0.18) 0%, rgba(211, 47, 47, 0) 70%);
 }
 
 /* Container */
@@ -1018,7 +988,7 @@ body::after {
     width: 0.55rem;
     height: 0.55rem;
     border-radius: 50%;
-    background: #ef5350;
+    background: #22c55e;
 }
 
 .chat-close {
@@ -1168,8 +1138,8 @@ section {
 }
 
 .service-card {
-    background: linear-gradient(160deg, #ffffff 0%, var(--color-surface-strong) 100%);
-    border: 1px solid rgba(123, 146, 187, 0.2);
+    background: #ffffff;
+    border: 1px solid #e8e8e8;
     padding: var(--spacing-xl);
     border-radius: var(--border-radius-lg);
     text-align: center;
@@ -1722,6 +1692,36 @@ section {
     
     .section-title {
         font-size: 1.75rem;
+    }
+}
+
+/* Trust chips in hero */
+.hero-trust-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.2rem;
+}
+
+.hero-trust-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.32rem 0.72rem;
+    border-radius: var(--border-radius-full);
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    color: #ffffff;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    backdrop-filter: blur(4px);
+}
+
+/* Always show phone chip on mobile */
+@media (max-width: 768px) {
+    .nav-utility {
+        display: inline-flex !important;
     }
 }
 

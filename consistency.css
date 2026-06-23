@@ -28,10 +28,7 @@ html {
 body {
     font-family: 'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif;
     color: var(--brand-ink);
-    background:
-        radial-gradient(circle at 12% 8%, var(--brand-tint-strong) 0%, rgba(211, 47, 47, 0) 34%),
-        radial-gradient(circle at 88% 14%, var(--brand-tint-soft) 0%, rgba(211, 47, 47, 0) 38%),
-        linear-gradient(180deg, #fff9f9 0%, #fffdfd 48%, #ffffff 100%);
+    background: #f9f9f9;
 }
 
 .container {
@@ -86,7 +83,6 @@ body {
     padding: 0;
 }
 
-.hero-visual-card,
 .service-card,
 .review-card,
 .contact-info,
@@ -94,10 +90,9 @@ body {
 .value-card,
 .login-container,
 .booking-content,
-.chat-widget,
 .hours-card {
-    background: linear-gradient(170deg, rgba(255, 255, 255, 0.97), rgba(255, 248, 248, 0.95));
-    border: 1px solid rgba(211, 47, 47, 0.08);
+    background: #ffffff;
+    border: 1px solid #e8e8e8;
 }
 
 .nav-links a,
