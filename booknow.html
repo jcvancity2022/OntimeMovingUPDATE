@@ -390,14 +390,14 @@
                 const result = await response.json();
 
                 if (result.success) {
-                    alert('Thank you. Your booking request was submitted. Booking ID: ' + result.booking_id + '.');
+                    showToast('Booking Submitted!', 'We\'ll call you within 24 hours to confirm. Booking ID: ' + result.booking_id, 'success');
                     event.target.reset();
                 } else {
-                    alert('Error: ' + (result.error || 'Failed to submit booking request.'));
+                    showToast('Submission Error', result.error || 'Failed to submit booking request. Please try again.', 'error');
                 }
             } catch (error) {
                 console.error('Form submission error:', error);
-                alert('Booking service is currently unavailable. Please call (604) 505-0026.');
+                showToast('Service Unavailable', 'Please call us directly at (604) 505-0026.', 'error');
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.textContent = originalText;

@@ -573,17 +573,14 @@
                 const result = await response.json();
                 
                 if (result.success) {
-                    // Show success message
-                    alert('Thank you! Your booking request has been submitted successfully. Booking ID: ' + result.booking_id + '. We will contact you shortly at ' + bookingData.phone + ' to confirm your move details.');
-                    // Reset form
+                    showToast('Request Sent!', 'We\'ll follow up within 24 hours to arrange your free estimate. Booking ID: ' + result.booking_id, 'success');
                     event.target.reset();
                 } else {
-                    // Show error message
-                    alert('Error: ' + (result.error || 'Failed to submit booking. Please try again or call us directly.'));
+                    showToast('Submission Error', result.error || 'Failed to submit. Please try again or call us directly.', 'error');
                 }
             } catch (error) {
                 console.error('Form submission error:', error);
-                alert('Failed to submit booking. The booking system may not be running. Please call us directly at (604) 505-0026 or try again later.');
+                showToast('Service Unavailable', 'Please call us directly at (604) 505-0026 or try again later.', 'error');
             } finally {
                 // Re-enable submit button
                 submitBtn.disabled = false;
