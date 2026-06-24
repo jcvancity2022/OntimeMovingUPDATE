@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="description" content="Read verified Google reviews from OnTime Moving customers across the Lower Mainland. 4.2 stars, 52 reviews. See what families say about our moving and storage service.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Reviews - OnTime Moving & Storage</title>
+    <title>Customer Reviews — OnTime Moving & Storage | 4.2★ on Google</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="consistency.css">
     <style>
@@ -76,7 +77,7 @@
         }
         .reviews-page-stat .stat-label {
             font-size: 0.8rem;
-            color: #5f6b82;
+            color: #4b5563;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.05em;
@@ -118,7 +119,7 @@
         }
         #reviewsContainer.loading {
             text-align: center;
-            color: #5f6b82;
+            color: #374151;
             padding: 3rem 0;
             font-weight: 600;
         }
@@ -168,7 +169,7 @@
         }
         .review-date {
             font-size: 0.78rem;
-            color: #5f6b82;
+            color: #4b5563;
         }
         .review-source {
             margin-left: auto;
@@ -201,7 +202,7 @@
         }
         .review-response {
             font-size: 0.82rem;
-            color: #5f6b82;
+            color: #374151;
             background: #f8f8f8;
             border-left: 3px solid #d32f2f;
             border-radius: 0 8px 8px 0;
@@ -283,8 +284,8 @@
     <section class="reviews-page-hero">
         <div class="container">
             <div class="reviews-hero-badge">⭐ Verified Google Reviews · Lower Mainland, BC</div>
-            <h1>What Our Customers Say</h1>
-            <p>Real reviews from real moves — from first call to final box, straight from Google.</p>
+            <h1>Real People. Real Moves. Real Reviews.</h1>
+            <p>We don't cherry-pick testimonials — these are unedited reviews pulled directly from Google. 52 families across the Lower Mainland shared their experience, and we're proud of every one. Read what they said about their move, then let us earn yours.</p>
         </div>
     </section>
 
@@ -318,9 +319,9 @@
             <div id="reviewsContainer" class="loading">Loading reviews…</div>
 
             <div class="reviews-page-cta">
-                <h2>Happy with your move?</h2>
-                <p>Share your experience on Google and help other families find a mover they can trust.</p>
-                <a href="#" class="btn" onclick="openGoogleReview(); return false;">Leave a Google Review</a>
+                <h2>Did we move you recently?</h2>
+                <p>Your review makes a real difference. It helps other Lower Mainland families find a mover they can trust — and it takes less than 2 minutes on Google. We read every one and genuinely appreciate every word.</p>
+                <a href="#" class="btn" onclick="openGoogleReview(); return false;">Leave Us a Google Review</a>
             </div>
         </div>
     </section>
@@ -334,18 +335,26 @@
                 </div>
                 <div class="footer-section">
                     <h4>Contact</h4>
-                    <p><a href="tel:6045050026" style="color:inherit;text-decoration:none;">Call (604) 505-0026</a></p>
-                    <p>Email: info@ontime-moving.com</p>
+                    <p><a href="tel:6045050026" >Call (604) 505-0026</a></p>
+                    <p><a href="mailto:info@ontime-moving.com">info@ontime-moving.com</a></p>
                     <p>104-1525 Broadway St., Port Coquitlam, BC V3C 6P6</p>
-                    <p>Open 7 Days</p>
+                    <p>Mon – Sun: 8:00 AM – 8:00 PM</p>
+                </div>
+                                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <p><a href="services.html">Our Services</a></p>
+                    <p><a href="about.html">About Us</a></p>
+                    <p><a href="reviews.html">Customer Reviews</a></p>
+                    <p><a href="booknow.html">Book a Move</a></p>
+                    <p><a href="contact.html">Contact</a></p>
                 </div>
                 <div class="footer-section">
                     <h4>Service Areas</h4>
-                    <p>Lower Mainland, BC Interior, Vancouver Island, and surrounding islands</p>
+                    <p>Metro Vancouver &middot; Burnaby &middot; Surrey &middot; Coquitlam &middot; Port Coquitlam &middot; New Westminster &middot; Langley &middot; BC Interior &middot; Vancouver Island</p>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 OnTime Moving Corp. All rights reserved.</p>
+                <p>&copy; 2026 OnTime Moving Corp. All rights reserved. &middot; <a href="contact.html" style="color:inherit;">Contact Us</a></p>
             </div>
         </div>
     </footer>
@@ -437,7 +446,7 @@
         function displayReviews(reviews) {
             const container = document.getElementById('reviewsContainer');
             if (!reviews || reviews.length === 0) {
-                container.innerHTML = '<p style="text-align:center;color:#5f6b82;padding:2rem 0">No reviews found.</p>';
+                container.innerHTML = '<p style="text-align:center;color:#374151;padding:2rem 0">No reviews found.</p>';
                 return;
             }
             container.className = 'reviews-grid';

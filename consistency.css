@@ -156,12 +156,10 @@ h3 {
 footer.footer,
 body .footer,
 body footer.footer {
-    background:
-        radial-gradient(circle at 85% 22%, rgba(211, 47, 47, 0.2), transparent 34%),
-        linear-gradient(160deg, #151c2a, #1f2a42 55%, #1f3050 100%);
-    color: #ffffff;
+    background: #c2cbd6;
+    color: #182133;
     padding: 48px 0 24px;
-    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    border-top: 2px solid #c8cfd9;
 }
 
 .footer .container,
@@ -186,38 +184,54 @@ body .footer-content {
 
 .footer-section h3,
 body .footer-section h3 {
-    color: #ffd0c2;
+    color: #182133;
     margin-bottom: 12px;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
 }
 
 .footer-section h4,
 body .footer-section h4 {
-    color: #ffd9d9;
+    color: #182133;
     margin-bottom: 12px;
-    font-size: 1rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
 }
 
 .footer-section p,
 body .footer-section p {
-    color: #c7d0df;
+    color: #2d3748;
     margin-bottom: 6px;
+    font-size: 0.95rem;
 }
 
 .footer a,
 footer.footer a,
 body .footer a,
 body footer.footer a {
-    color: inherit;
+    color: #2d3748;
     text-decoration: none;
     transition: var(--shared-transition);
+}
+
+.footer a:hover,
+footer.footer a:hover,
+body .footer a:hover,
+body footer.footer a:hover {
+    color: var(--brand-primary);
 }
 
 .footer-bottom,
 body .footer-bottom {
     text-align: center;
     padding-top: 24px;
-    border-top: 1px solid rgba(255, 255, 255, 0.12);
-    color: #adbad1;
+    border-top: 1px solid #c8cfd9;
+    color: #6b7a8d;
+    font-size: 0.88rem;
 }
 
 @media (max-width: 768px) {
