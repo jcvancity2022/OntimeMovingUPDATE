@@ -1,6 +1,6 @@
 /* Modern OnTime Moving Styles */
 
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Inter:opsz,wght@14..32,300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
 
 /* CSS Variables */
 :root {
@@ -20,7 +20,7 @@
     --color-surface-strong: #fdf3f3;
 
     --font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
-    --font-family-display: 'Bricolage Grotesque', 'Inter', system-ui, sans-serif;
+    --font-family-display: 'Outfit', Arial, sans-serif;
     --font-size-base: 16.5px;
     --line-height-base: 1.7;
 
@@ -32,14 +32,14 @@
     --spacing-2xl: 4rem;
     --spacing-3xl: 5.5rem;
     
-    --border-radius: 16px;
-    --border-radius-lg: 24px;
+    --border-radius: 10px;
+    --border-radius-lg: 16px;
     --border-radius-full: 9999px;
-    
-    --shadow-sm: 0 8px 18px rgba(26, 33, 51, 0.08);
-    --shadow: 0 12px 28px rgba(26, 33, 51, 0.1);
-    --shadow-lg: 0 20px 36px rgba(26, 33, 51, 0.13);
-    --shadow-xl: 0 26px 56px rgba(26, 33, 51, 0.16);
+
+    --shadow-sm: 0 2px 8px rgba(26, 33, 51, 0.06);
+    --shadow: 0 4px 16px rgba(26, 33, 51, 0.08);
+    --shadow-lg: 0 8px 24px rgba(26, 33, 51, 0.10);
+    --shadow-xl: 0 16px 40px rgba(26, 33, 51, 0.13);
     
     --transition: all 0.3s ease;
 
@@ -72,11 +72,11 @@ h1, h2, h3, h4, h5, h6,
 .hero-title, .section-title, .landing-hero-title,
 .hero-overlay h1, .story-copy h3 {
     font-family: var(--font-family-display);
-    font-optical-sizing: auto;
-    font-feature-settings: 'kern' 1, 'liga' 1;
+    font-feature-settings: 'kern' 1;
     text-rendering: optimizeLegibility;
-    letter-spacing: -0.025em;
-    line-height: 1.1;
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+    font-weight: 700;
 }
 
 p, li, label, input, select, textarea, button, a {
