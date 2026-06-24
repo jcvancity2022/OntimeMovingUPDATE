@@ -556,3 +556,27 @@ if (typeof module !== 'undefined' && module.exports) {
         showMessage
     };
 }
+
+// ── Scroll-reveal via Intersection Observer ──
+(function () {
+    const els = document.querySelectorAll(
+        '.story-copy, .story-image, .service-card, .value-card, .step, ' +
+        '.contact-info, .contact-form, .hours-card, .reviews-page-cta, ' +
+        '.section-title, .book-shell, .how-it-works .steps'
+    );
+    if (!els.length || !('IntersectionObserver' in window)) return;
+    els.forEach((el, i) => {
+        el.classList.add('reveal');
+        if (i % 2 === 1) el.classList.add('reveal--right');
+        el.classList.add('reveal-delay-' + Math.min(4, (i % 4) + 1));
+    });
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.classList.add('is-visible');
+                io.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    els.forEach(el => io.observe(el));
+})();
