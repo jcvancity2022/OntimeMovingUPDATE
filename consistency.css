@@ -26,7 +26,7 @@ html {
 }
 
 body {
-    font-family: 'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
     color: var(--brand-ink);
     background: #f9f9f9;
 }

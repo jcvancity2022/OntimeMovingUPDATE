@@ -1,6 +1,6 @@
 /* Modern OnTime Moving Styles */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Inter:opsz,wght@14..32,300..700&display=swap');
 
 /* CSS Variables */
 :root {
@@ -19,10 +19,10 @@
     --color-error: #dc2626;
     --color-surface-strong: #fdf3f3;
 
-    --font-family: 'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif;
-    --font-family-display: 'Inter', 'Segoe UI', Arial, sans-serif;
-    --font-size-base: 17px;
-    --line-height-base: 1.65;
+    --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-family-display: 'Bricolage Grotesque', 'Inter', system-ui, sans-serif;
+    --font-size-base: 16.5px;
+    --line-height-base: 1.7;
 
     --spacing-xs: 0.75rem;
     --spacing-sm: 1.5rem;
@@ -64,6 +64,23 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+    font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+    text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5, h6,
+.hero-title, .section-title, .landing-hero-title,
+.hero-overlay h1, .story-copy h3 {
+    font-family: var(--font-family-display);
+    font-optical-sizing: auto;
+    font-feature-settings: 'kern' 1, 'liga' 1;
+    text-rendering: optimizeLegibility;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+}
+
+p, li, label, input, select, textarea, button, a {
+    font-family: var(--font-family);
 }
 
 /* Container */

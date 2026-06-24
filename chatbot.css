@@ -4,7 +4,7 @@
   bottom: 24px;
   right: 24px;
   z-index: 9999;
-  font-family: 'Segoe UI', Arial, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 #chatbot-toggle {
@@ -41,7 +41,7 @@
   bottom: 80px;   /* sits above the launcher button */
   right: 1.25rem;
   z-index: 9999;
-  font-family: 'Segoe UI', Arial, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 #chatbot-window.launcher-mode.open { display: flex; }
 
