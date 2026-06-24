@@ -557,6 +557,112 @@ if (typeof module !== 'undefined' && module.exports) {
     };
 }
 
+// ── Scroll progress bar ──
+(function () {
+    const bar = document.createElement('div');
+    bar.className = 'scroll-progress-bar';
+    document.body.prepend(bar);
+    window.addEventListener('scroll', () => {
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + '%';
+    }, { passive: true });
+})();
+
+// ── Sticky CTA + Back-to-top ──
+(function () {
+    const cta = document.createElement('a');
+    cta.className = 'sticky-cta-bar hidden';
+    cta.href = 'booknow.html';
+    cta.innerHTML = '📋 Get a Free Quote';
+    document.body.appendChild(cta);
+
+    const btt = document.createElement('button');
+    btt.className = 'back-to-top hidden';
+    btt.setAttribute('aria-label', 'Back to top');
+    btt.innerHTML = '↑';
+    btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    document.body.appendChild(btt);
+
+    let heroH = 0;
+    const updateHeroH = () => {
+        const hero = document.querySelector('.hero, .book-hero, .reviews-page-hero');
+        heroH = hero ? hero.offsetHeight : 300;
+    };
+    updateHeroH();
+    window.addEventListener('resize', updateHeroH, { passive: true });
+
+    window.addEventListener('scroll', () => {
+        const past = window.scrollY > heroH;
+        cta.classList.toggle('hidden', !past);
+        btt.classList.toggle('hidden', window.scrollY < 400);
+    }, { passive: true });
+})();
+
+// ── Toast notification system ──
+window.showToast = function (title, msg, type = 'info', duration = 5000) {
+    let container = document.querySelector('.toast-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.className = 'toast-container';
+        document.body.appendChild(container);
+    }
+    const icons = { success: '✅', error: '❌', info: 'ℹ️' };
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.innerHTML = `
+        <span class="toast-icon">${icons[type] || icons.info}</span>
+        <div class="toast-body">
+            <div class="toast-title">${title}</div>
+            <div class="toast-msg">${msg}</div>
+        </div>
+        <button class="toast-close" aria-label="Dismiss">✕</button>`;
+    container.appendChild(toast);
+    const dismiss = () => {
+        toast.classList.add('removing');
+        setTimeout(() => toast.remove(), 300);
+    };
+    toast.querySelector('.toast-close').addEventListener('click', dismiss);
+    setTimeout(dismiss, duration);
+};
+
+// ── Animated stat counters ──
+(function () {
+    const els = document.querySelectorAll('.stat-number');
+    if (!els.length || !('IntersectionObserver' in window)) return;
+    const animate = (el) => {
+        const raw = el.textContent.trim();
+        const num = parseFloat(raw.replace(/[^0-9.]/g, ''));
+        if (isNaN(num) || num === 0) return;
+        const suffix = raw.replace(/[0-9.]/g, '');
+        let start = 0;
+        const duration = 1400;
+        const step = (timestamp) => {
+            if (!start) start = timestamp;
+            const progress = Math.min((timestamp - start) / duration, 1);
+            const ease = 1 - Math.pow(1 - progress, 3);
+            el.textContent = (num < 20 ? (Math.round(ease * num * 10) / 10) : Math.floor(ease * num)) + suffix;
+            if (progress < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+    };
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { animate(e.target); io.unobserve(e.target); } });
+    }, { threshold: 0.5 });
+    els.forEach(el => io.observe(el));
+})();
+
+// ── FAQ accordion ──
+(function () {
+    document.querySelectorAll('.faq-question').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const item = btn.closest('.faq-item');
+            const isOpen = item.classList.contains('open');
+            document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+            if (!isOpen) item.classList.add('open');
+        });
+    });
+})();
+
 // ── Scroll-reveal via Intersection Observer ──
 (function () {
     const els = document.querySelectorAll(
