@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,22 +6,554 @@
     <meta name="description" content="OnTime Moving and Storage — professional moving, containerized storage, and packing supplies in the Lower Mainland. Get a free quote or call (604) 505-0026.">
     <meta name="theme-color" content="#d32f2f">
     <title>OnTime Moving & Storage — Lower Mainland's Trusted Movers Since 2003</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="consistency.css">
-    <link rel="preload" as="image" href="images/homepage/homepageimage1.png">
+    <style>
+        /* ══════════════════════════════════════════
+           HOMEPAGE — FANCY MODERN LAYOUT
+        ══════════════════════════════════════════ */
+
+        /* ── 1. FULL-BLEED DARK HERO ── */
+        .hp-hero {
+            position: relative;
+            min-height: 92vh;
+            display: flex;
+            align-items: center;
+            background: #0a0f1a;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+        .hp-hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+        .hp-hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 30%;
+            opacity: 0.32;
+        }
+        /* Gradient overlay: dark left, transparent right */
+        .hp-hero-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(100deg,
+                rgba(10,15,26,0.97) 0%,
+                rgba(10,15,26,0.80) 45%,
+                rgba(10,15,26,0.30) 100%);
+        }
+        .hp-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 680px;
+            padding: 60px 0;
+        }
+        .hp-hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: #ef5350;
+            background: rgba(211,47,47,0.12);
+            border: 1px solid rgba(211,47,47,0.3);
+            border-radius: 999px;
+            padding: 6px 14px;
+            margin-bottom: 28px;
+        }
+        .hp-hero-eyebrow::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: #ef5350;
+            border-radius: 50%;
+        }
+        .hp-hero-title {
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            font-weight: 900;
+            line-height: 1.02;
+            letter-spacing: -0.03em;
+            color: #fff;
+            margin-bottom: 24px;
+        }
+        .hp-hero-title .accent-line {
+            display: block;
+            background: linear-gradient(90deg, #ef5350 0%, #ff8a65 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hp-hero-desc {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.65);
+            line-height: 1.75;
+            max-width: 520px;
+            margin-bottom: 40px;
+        }
+        .hp-hero-actions {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-bottom: 56px;
+        }
+        .hp-btn-primary {
+            background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+            color: #fff;
+            padding: 16px 36px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            box-shadow: 0 8px 32px rgba(211,47,47,0.45);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: inline-block;
+        }
+        .hp-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(211,47,47,0.55);
+        }
+        .hp-btn-ghost {
+            background: rgba(255,255,255,0.08);
+            color: #fff;
+            padding: 16px 36px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: 1px solid rgba(255,255,255,0.18);
+            backdrop-filter: blur(10px);
+            transition: background 0.2s, border-color 0.2s;
+            display: inline-block;
+        }
+        .hp-btn-ghost:hover {
+            background: rgba(255,255,255,0.14);
+            border-color: rgba(255,255,255,0.35);
+        }
+        /* Glass trust bar */
+        .hp-hero-trust {
+            display: flex;
+            gap: 0;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            padding: 20px 28px;
+            width: fit-content;
+        }
+        .hp-trust-item {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0 28px 0 0;
+            margin-right: 28px;
+            border-right: 1px solid rgba(255,255,255,0.1);
+        }
+        .hp-trust-item:last-child {
+            border-right: none;
+            padding-right: 0;
+            margin-right: 0;
+        }
+        .hp-trust-num {
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: 1.9rem;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1;
+        }
+        .hp-trust-label {
+            font-size: 0.73rem;
+            color: rgba(255,255,255,0.5);
+            font-weight: 500;
+            margin-top: 4px;
+            white-space: nowrap;
+        }
+
+        /* ── 2. MARQUEE ── */
+        .marquee-strip {
+            background: #d32f2f;
+        }
+        .marquee-item { color: #fff; opacity: 0.9; }
+        .marquee-dot { background: rgba(255,255,255,0.5); }
+
+        /* ── 3. SERVICES ── */
+        .hp-services {
+            padding: 100px 0;
+            background: #fff;
+        }
+        .hp-section-label {
+            font-size: 0.72rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: #d32f2f;
+            margin-bottom: 12px;
+        }
+        .hp-section-title {
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            color: #0a0f1a;
+            margin-bottom: 16px;
+            line-height: 1.1;
+        }
+        .hp-section-sub {
+            font-size: 1rem;
+            color: #64748b;
+            max-width: 500px;
+            line-height: 1.7;
+            margin-bottom: 56px;
+        }
+        .hp-services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        .hp-svc-card {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 3/4;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+        }
+        .hp-svc-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .hp-svc-card:hover img { transform: scale(1.06); }
+        .hp-svc-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 35%, rgba(10,15,26,0.92) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 28px 24px;
+        }
+        .hp-svc-tag {
+            display: inline-block;
+            background: rgba(211,47,47,0.85);
+            color: #fff;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 4px 10px;
+            border-radius: 999px;
+            margin-bottom: 10px;
+            width: fit-content;
+        }
+        .hp-svc-card-title {
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.25;
+            margin-bottom: 8px;
+        }
+        .hp-svc-card-desc {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.68);
+            line-height: 1.55;
+        }
+        .hp-svc-card-arrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            color: #ef5350;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-top: 12px;
+            transition: gap 0.2s;
+        }
+        .hp-svc-card:hover .hp-svc-card-arrow { gap: 8px; }
+
+        /* ── 4. FEATURES (DARK) ── */
+        .hp-features {
+            background: #0a0f1a;
+            padding: 100px 0;
+        }
+        .hp-features .hp-section-label { color: #ef5350; }
+        .hp-features .hp-section-title { color: #fff; }
+        .hp-features .hp-section-sub { color: rgba(255,255,255,0.5); }
+        .hp-features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .hp-feat-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 16px;
+            padding: 36px;
+            transition: background 0.25s, border-color 0.25s;
+        }
+        .hp-feat-card:hover {
+            background: rgba(255,255,255,0.07);
+            border-color: rgba(211,47,47,0.3);
+        }
+        .hp-feat-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(211,47,47,0.15);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+        }
+        .hp-feat-card h3 {
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        .hp-feat-card p {
+            font-size: 0.875rem;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.7;
+        }
+
+        /* ── 5. SPLIT SECTION (STORAGE) ── */
+        .hp-split {
+            padding: 100px 0;
+            background: #fff;
+        }
+        .hp-split-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+        .hp-split-media {
+            position: relative;
+        }
+        .hp-split-img {
+            width: 100%;
+            border-radius: 20px;
+            object-fit: cover;
+            aspect-ratio: 4/3;
+            display: block;
+        }
+        .hp-split-badge {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            background: #fff;
+            border-radius: 16px;
+            padding: 18px 22px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .hp-split-badge-icon {
+            width: 44px;
+            height: 44px;
+            background: #fff0f0;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+        .hp-split-badge-num {
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #0a0f1a;
+            line-height: 1;
+        }
+        .hp-split-badge-label {
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-top: 2px;
+        }
+        .hp-split-copy { padding-left: 0; }
+        .hp-split-copy .hp-section-title { margin-bottom: 16px; }
+        .hp-split-copy p {
+            font-size: 1rem;
+            color: #475569;
+            line-height: 1.8;
+            margin-bottom: 28px;
+        }
+        .hp-checklist {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 36px;
+        }
+        .hp-checklist li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 0.92rem;
+            color: #374151;
+        }
+        .hp-check {
+            width: 20px;
+            height: 20px;
+            background: #fff0f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.65rem;
+            color: #d32f2f;
+            font-weight: 900;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        /* ── 6. CTA BANNER ── */
+        .hp-cta {
+            background: linear-gradient(135deg, #b71c1c 0%, #d32f2f 50%, #e53935 100%);
+            padding: 90px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hp-cta::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .hp-cta-inner { position: relative; z-index: 1; }
+        .hp-cta-eyebrow {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: rgba(255,255,255,0.65);
+            margin-bottom: 16px;
+        }
+        .hp-cta h2 {
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -0.025em;
+            margin-bottom: 16px;
+            line-height: 1.1;
+        }
+        .hp-cta p {
+            font-size: 1.05rem;
+            color: rgba(255,255,255,0.8);
+            max-width: 500px;
+            margin: 0 auto 36px;
+            line-height: 1.7;
+        }
+        .hp-cta-actions {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .hp-cta-btn-white {
+            background: #fff;
+            color: #d32f2f;
+            padding: 16px 36px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            box-shadow: 0 8px 28px rgba(0,0,0,0.2);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .hp-cta-btn-white:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(0,0,0,0.25); }
+        .hp-cta-btn-outline {
+            border: 2px solid rgba(255,255,255,0.55);
+            color: #fff;
+            padding: 16px 36px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: border-color 0.2s;
+        }
+        .hp-cta-btn-outline:hover { border-color: #fff; }
+
+        /* ── 7. FAQ ── */
+        .hp-faq {
+            padding: 100px 0;
+            background: #f8fafc;
+        }
+        .hp-faq-layout {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 80px;
+            align-items: start;
+        }
+        .hp-faq-sticky {
+            position: sticky;
+            top: 120px;
+        }
+        .hp-faq-sticky .hp-section-title { margin-bottom: 16px; }
+        .hp-faq-sticky p {
+            font-size: 0.95rem;
+            color: #64748b;
+            line-height: 1.7;
+            margin-bottom: 28px;
+        }
+        .hp-faq-sticky a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #d32f2f;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-decoration: none;
+        }
+        .hp-faq-sticky a:hover { text-decoration: underline; }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hp-services-grid { grid-template-columns: repeat(2, 1fr); }
+            .hp-features-grid { grid-template-columns: 1fr; }
+            .hp-faq-layout { grid-template-columns: 1fr; gap: 40px; }
+            .hp-faq-sticky { position: static; }
+        }
+        @media (max-width: 768px) {
+            .hp-hero { min-height: 100svh; padding-top: 70px; }
+            .hp-hero-title { font-size: 2.4rem; }
+            .hp-hero-trust { flex-wrap: wrap; gap: 16px; padding: 16px 20px; }
+            .hp-trust-item { border-right: none; padding-right: 0; margin-right: 0; }
+            .hp-services-grid { grid-template-columns: 1fr; }
+            .hp-svc-card { aspect-ratio: 16/9; }
+            .hp-split-inner { grid-template-columns: 1fr; gap: 40px; }
+            .hp-split-badge { right: 0; bottom: -16px; }
+            .hp-services, .hp-features, .hp-split, .hp-faq { padding: 72px 0; }
+        }
+    </style>
 </head>
 <body>
     <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">Skip to content</a>
+
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
             <div class="nav-content">
                 <a href="index.html" class="logo">OnTime Moving and Storage</a>
                 <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-controls="primaryNav" aria-expanded="false">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                    <span></span><span></span><span></span>
                 </button>
                 <ul id="primaryNav" class="nav-links" role="navigation">
                     <li><a href="index.html" class="active">Home</a></li>
@@ -35,288 +567,242 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <main id="main">
-    <section id="home" class="hero hero-homepage">
-        <div class="container">
-            <div class="hero-visual-card">
-                 <picture>
-                     <source type="image/webp"
-                         srcset="images/homepage/homepageimage1-w320.webp 320w, images/homepage/homepageimage1-w640.webp 640w, images/homepage/homepageimage1-w1024.webp 1024w, images/homepage/homepageimage1-w1600.webp 1600w"
-                         sizes="(max-width: 600px) 100vw, (max-width: 1200px) 80vw, 1200px">
-                     <source type="image/jpeg"
-                         srcset="images/homepage/homepageimage1-w320.jpg 320w, images/homepage/homepageimage1-w640.jpg 640w, images/homepage/homepageimage1-w1024.jpg 1024w, images/homepage/homepageimage1-w1600.jpg 1600w"
-                         sizes="(max-width: 600px) 100vw, (max-width: 1200px) 80vw, 1200px">
-                     <img src="images/homepage/homepageimage1-w1024.jpg"
-                         alt="OnTime Moving truck on a residential move"
-                         loading="eager" decoding="async" fetchpriority="high">
-                 </picture>
-                <div class="hero-overlay">
-                    <p class="hero-kicker">Port Coquitlam · Proudly Serving the Lower Mainland Since 2003</p>
-                    <h1 class="hero-title">Your Move, Done Right — <span class="gradient-text">On Time, Every Time.</span></h1>
-                    <p class="hero-description">
-                        22 years. 10,000+ families moved. Zero hidden fees. Whether you're moving across the street or across the province, OnTime delivers a smooth, stress-free experience backed by a BBB A+ rating and real in-home estimates — at no charge.
+
+        <!-- ══ HERO ══ -->
+        <section class="hp-hero">
+            <div class="hp-hero-bg">
+                <img src="images/homepage/homepageimage1.png"
+                    alt=""
+                    loading="eager" fetchpriority="high"
+                    onerror="this.src='images/homepage/homepageimage1-w1024.jpg'">
+            </div>
+            <div class="container">
+                <div class="hp-hero-content">
+                    <div class="hp-hero-eyebrow">Port Coquitlam · Serving BC Since 2003</div>
+                    <h1 class="hp-hero-title">
+                        Moving Made<br>
+                        <span class="accent-line">Effortless.</span>
+                    </h1>
+                    <p class="hp-hero-desc">
+                        22 years. 10,000+ families moved. Free in-home estimates, no hidden fees, and a BBB A+ rating you can trust — every time.
                     </p>
-                    <div class="hero-trust-chips">
-                        <span class="hero-trust-chip">⭐ 4.2 · 52 Google Reviews</span>
-                        <span class="hero-trust-chip">✓ BBB A+ Accredited</span>
-                        <span class="hero-trust-chip">✓ Licensed &amp; Insured</span>
-                        <span class="hero-trust-chip">✓ No Hidden Fees</span>
+                    <div class="hp-hero-actions">
+                        <a href="booknow.html" class="hp-btn-primary">Get a Free Estimate</a>
+                        <a href="tel:6045050026" class="hp-btn-ghost">Call (604) 505-0026</a>
                     </div>
-                    <div class="hero-actions">
-                        <a href="booknow.html" class="btn btn-primary btn-large">Get a Free Quote</a>
-                        <a href="tel:6045050026" class="btn btn-secondary btn-large">Call (604) 505-0026</a>
-                    </div>
-                    <div class="hero-stats">
-                        <div class="stat">
-                            <div class="stat-number">22+</div>
-                            <div class="stat-label">Years in Business</div>
+                    <div class="hp-hero-trust">
+                        <div class="hp-trust-item">
+                            <div class="hp-trust-num">22+</div>
+                            <div class="hp-trust-label">Years in Business</div>
                         </div>
-                        <div class="stat">
-                            <div class="stat-number">10k+</div>
-                            <div class="stat-label">Happy Customers</div>
+                        <div class="hp-trust-item">
+                            <div class="hp-trust-num">10,000+</div>
+                            <div class="hp-trust-label">Families Moved</div>
                         </div>
-                        <div class="stat">
-                            <div class="stat-number">100</div>
-                            <div class="stat-label">Storage Containers</div>
+                        <div class="hp-trust-item">
+                            <div class="hp-trust-num">A+</div>
+                            <div class="hp-trust-label">BBB Rating</div>
                         </div>
-                        <div class="stat">
-                            <div class="stat-number">7</div>
-                            <div class="stat-label">Days a Week</div>
+                        <div class="hp-trust-item">
+                            <div class="hp-trust-num">4.2★</div>
+                            <div class="hp-trust-label">Google Rating</div>
                         </div>
                     </div>
                 </div>
             </div>
+        </section>
+
+        <!-- ══ MARQUEE ══ -->
+        <div class="marquee-strip" aria-hidden="true">
+            <div class="marquee-inner">
+                <span class="marquee-item"><span class="marquee-dot"></span>BBB A+ Accredited</span>
+                <span class="marquee-item"><span class="marquee-dot"></span>Licensed &amp; Insured</span>
+                <span class="marquee-item"><span class="marquee-dot"></span>Free In-Home Estimates</span>
+                <span class="marquee-item"><span class="marquee-dot"></span>No Hidden Fees</span>
+                <span class="marquee-item"><span class="marquee-dot"></span>Open 7 Days · 8AM–8PM</span>
+                <span class="marquee-item"><span class="marquee-dot"></span>22 Years in Business</span>
+                <span class="marquee-item"><span class="marquee-dot"></span>Port Coquitlam · Burnaby · Surrey · Vancouver · Langley</span>
+                <span class="marquee-item"><span class="marquee-dot"></span>10,000+ Families Moved</span>
+                <span class="marquee-item"><span class="marquee-dot"></span>4.2★ Google Rating</span>
+                <span class="marquee-item"><span class="marquee-dot"></span>BBB A+ Accredited</span>
+                <span class="marquee-item"><span class="marquee-dot"></span>Licensed &amp; Insured</span>
+                <span class="marquee-item"><span class="marquee-dot"></span>Free In-Home Estimates</span>
+                <span class="marquee-item"><span class="marquee-dot"></span>No Hidden Fees</span>
+                <span class="marquee-item"><span class="marquee-dot"></span>Open 7 Days · 8AM–8PM</span>
+                <span class="marquee-item"><span class="marquee-dot"></span>22 Years in Business</span>
+                <span class="marquee-item"><span class="marquee-dot"></span>Port Coquitlam · Burnaby · Surrey · Vancouver · Langley</span>
+                <span class="marquee-item"><span class="marquee-dot"></span>10,000+ Families Moved</span>
+                <span class="marquee-item"><span class="marquee-dot"></span>4.2★ Google Rating</span>
+            </div>
         </div>
-    </section>
 
-    <!-- Marquee trust strip -->
-    <div class="marquee-strip" aria-hidden="true">
-        <div class="marquee-inner">
-            <span class="marquee-item"><span class="marquee-dot"></span>BBB A+ Accredited</span>
-            <span class="marquee-item"><span class="marquee-dot"></span>Licensed & Insured</span>
-            <span class="marquee-item"><span class="marquee-dot"></span>Free In-Home Estimates</span>
-            <span class="marquee-item"><span class="marquee-dot"></span>No Hidden Fees</span>
-            <span class="marquee-item"><span class="marquee-dot"></span>Open 7 Days · 8AM–8PM</span>
-            <span class="marquee-item"><span class="marquee-dot"></span>22 Years in Business</span>
-            <span class="marquee-item"><span class="marquee-dot"></span>Port Coquitlam · Burnaby · Surrey · Coquitlam · Langley · Vancouver</span>
-            <span class="marquee-item"><span class="marquee-dot"></span>10,000+ Families Moved</span>
-            <span class="marquee-item"><span class="marquee-dot"></span>4.2★ Google Rating</span>
-            <span class="marquee-item"><span class="marquee-dot"></span>BBB A+ Accredited</span>
-            <span class="marquee-item"><span class="marquee-dot"></span>Licensed & Insured</span>
-            <span class="marquee-item"><span class="marquee-dot"></span>Free In-Home Estimates</span>
-            <span class="marquee-item"><span class="marquee-dot"></span>No Hidden Fees</span>
-            <span class="marquee-item"><span class="marquee-dot"></span>Open 7 Days · 8AM–8PM</span>
-            <span class="marquee-item"><span class="marquee-dot"></span>22 Years in Business</span>
-            <span class="marquee-item"><span class="marquee-dot"></span>Port Coquitlam · Burnaby · Surrey · Coquitlam · Langley · Vancouver</span>
-            <span class="marquee-item"><span class="marquee-dot"></span>10,000+ Families Moved</span>
-            <span class="marquee-item"><span class="marquee-dot"></span>4.2★ Google Rating</span>
-        </div>
-    </div>
+        <!-- ══ SERVICES ══ -->
+        <section class="hp-services">
+            <div class="container">
+                <div class="hp-section-label">Our Services</div>
+                <h2 class="hp-section-title">Everything you need,<br>under one roof</h2>
+                <p class="hp-section-sub">Full-service moving, flexible storage, professional packing, and supplies — all handled by one trusted team.</p>
+                <div class="hp-services-grid">
+                    <a href="services.html" class="hp-svc-card">
+                        <img src="images/homepage/ontimemovingtrucks-w640.jpg" alt="Moving trucks" loading="lazy">
+                        <div class="hp-svc-card-overlay">
+                            <span class="hp-svc-tag">Moving</span>
+                            <div class="hp-svc-card-title">Local &amp; Long-Distance</div>
+                            <div class="hp-svc-card-desc">Lower Mainland, BC Interior, Vancouver Island, Alberta</div>
+                            <span class="hp-svc-card-arrow">View service →</span>
+                        </div>
+                    </a>
+                    <a href="services.html" class="hp-svc-card">
+                        <img src="images/homepage/containerizedstorage-w640.jpg" alt="Storage containers" loading="lazy">
+                        <div class="hp-svc-card-overlay">
+                            <span class="hp-svc-tag">Storage</span>
+                            <div class="hp-svc-card-title">Containerized Storage</div>
+                            <div class="hp-svc-card-desc">Delivered to your door, secured in our Port Coquitlam facility</div>
+                            <span class="hp-svc-card-arrow">View service →</span>
+                        </div>
+                    </a>
+                    <a href="services.html" class="hp-svc-card">
+                        <img src="images/homepage/ontimemovingservices-w640.jpg" alt="Packing service" loading="lazy">
+                        <div class="hp-svc-card-overlay">
+                            <span class="hp-svc-tag">Packing</span>
+                            <div class="hp-svc-card-title">Professional Packing</div>
+                            <div class="hp-svc-card-desc">Fragile items, antiques, TVs — double-wrapped every time</div>
+                            <span class="hp-svc-card-arrow">View service →</span>
+                        </div>
+                    </a>
+                    <a href="services.html" class="hp-svc-card">
+                        <img src="images/homepage/onTimeSupplyStore-w640.jpg" alt="Moving supplies" loading="lazy">
+                        <div class="hp-svc-card-overlay">
+                            <span class="hp-svc-tag">Supplies</span>
+                            <div class="hp-svc-card-title">Moving Supplies</div>
+                            <div class="hp-svc-card-desc">Boxes, tape, bubble wrap — pick up in store or on moving day</div>
+                            <span class="hp-svc-card-arrow">View service →</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
 
-    <section class="homepage-story-grid">
-        <div class="container">
-            <h2 class="section-title">Everything We Handle — So You Don't Have To</h2>
-            <div class="story-list">
-                <div class="story-collection story-gallery">
-                    <div class="story-row">
-                        <figure class="story-image">
-                            <button class="story-share-button" type="button" aria-label="Share OnTime Moving Trucks image" data-share-title="OnTime Moving Trucks" data-share-text="OnTime provides local and long-distance moving services."></button>
-                            <picture>
-                                <source type="image/webp"
-                                    srcset="images/homepage/ontimemovingtrucks-w320.webp 320w, images/homepage/ontimemovingtrucks-w640.webp 640w, images/homepage/ontimemovingtrucks-w1024.webp 1024w"
-                                    sizes="(max-width:600px) 100vw, 50vw">
-                                <source type="image/jpeg"
-                                    srcset="images/homepage/ontimemovingtrucks-w320.jpg 320w, images/homepage/ontimemovingtrucks-w640.jpg 640w, images/homepage/ontimemovingtrucks-w1024.jpg 1024w"
-                                    sizes="(max-width:600px) 100vw, 50vw">
-                                <img src="images/homepage/ontimemovingtrucks-w640.jpg"
-                                    alt="OnTime Moving fleet and service trucks" loading="lazy" decoding="async">
-                            </picture>
-                        </figure>
-                        <div class="story-copy">
-                            <h3>A Fleet Built for BC's Roads</h3>
-                            <p>Our modern moving trucks are fully equipped with furniture pads, heavy-duty straps, loading ramps, and tie-downs — everything needed to protect your belongings on every road, from city streets to mountain highways.</p>
+        <!-- ══ FEATURES (DARK) ══ -->
+        <section class="hp-features">
+            <div class="container">
+                <div class="hp-section-label">Why OnTime</div>
+                <h2 class="hp-section-title">The standards we hold<br>ourselves to — every job</h2>
+                <p class="hp-section-sub">22 years hasn't made us complacent. It's made our process tighter.</p>
+                <div class="hp-features-grid">
+                    <div class="hp-feat-card">
+                        <div class="hp-feat-icon">⏰</div>
+                        <h3>On Time. No Excuses.</h3>
+                        <p>No 4-hour arrival windows. Your crew shows up at the agreed time, every time. Our name is the standard we hold ourselves to on every single job.</p>
+                    </div>
+                    <div class="hp-feat-card">
+                        <div class="hp-feat-icon">💬</div>
+                        <h3>The Price You're Quoted Is Final</h3>
+                        <p>Free in-home estimate, written quote, no fuel surcharges at the door. The number you approve is the number on your final invoice — guaranteed.</p>
+                    </div>
+                    <div class="hp-feat-card">
+                        <div class="hp-feat-icon">🛡️</div>
+                        <h3>Fully Licensed &amp; BBB A+ Accredited</h3>
+                        <p>BC Passenger Transportation Board licensed, comprehensive cargo and liability insurance, background-checked uniformed crew — every move, every time.</p>
+                    </div>
+                    <div class="hp-feat-card">
+                        <div class="hp-feat-icon">🏠</div>
+                        <h3>Your Home Is Protected Too</h3>
+                        <p>Neoprene floor runners and door-frame guards are installed before the first box moves. We leave your home in exactly the same condition we found it.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ STORAGE SPLIT ══ -->
+        <section class="hp-split">
+            <div class="container">
+                <div class="hp-split-inner">
+                    <div class="hp-split-media">
+                        <img class="hp-split-img"
+                            src="images/homepage/onTimeWarehouseinside-w640.jpg"
+                            alt="OnTime Moving secure warehouse interior"
+                            loading="lazy">
+                        <div class="hp-split-badge">
+                            <div class="hp-split-badge-icon">📦</div>
+                            <div>
+                                <div class="hp-split-badge-num">100</div>
+                                <div class="hp-split-badge-label">Individual containers</div>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="story-row story-row-reverse">
-                        <figure class="story-image">
-                            <button class="story-share-button" type="button" aria-label="Share OnTime Truck image" data-share-title="OnTime Truck" data-share-text="OnTime moving truck."></button>
-                            <picture>
-                                <source type="image/webp"
-                                    srcset="images/homepage/ontimetruck-w320.webp 320w, images/homepage/ontimetruck-w640.webp 640w, images/homepage/ontimetruck-w1024.webp 1024w"
-                                    sizes="(max-width:600px) 100vw, 50vw">
-                                <source type="image/jpeg"
-                                    srcset="images/homepage/ontimetruck-w320.jpg 320w, images/homepage/ontimetruck-w640.jpg 640w, images/homepage/ontimetruck-w1024.jpg 1024w"
-                                    sizes="(max-width:600px) 100vw, 50vw">
-                                <img src="images/homepage/ontimetruck-w640.jpg"
-                                    alt="OnTime moving truck prepared for service" loading="lazy" decoding="async">
-                            </picture>
-                        </figure>
-                        <div class="story-copy">
-                            <h3>Local Moves & Long-Distance Hauls</h3>
-                            <p>Relocating within the Lower Mainland or heading to the BC Interior, Vancouver Island, or Alberta? We coordinate every detail — dedicated drivers, full cargo insurance, and a confirmed delivery window you can actually rely on.</p>
-                        </div>
+                    <div class="hp-split-copy">
+                        <div class="hp-section-label">Storage</div>
+                        <h2 class="hp-section-title">Secure storage in<br>Port Coquitlam</h2>
+                        <p>Between closes, renovating, or going through a life transition? Our fully-fenced, camera-monitored warehouse holds 100 individual containers — each locked, labeled, and yours alone.</p>
+                        <ul class="hp-checklist">
+                            <li><span class="hp-check">✓</span>Container delivered to your driveway</li>
+                            <li><span class="hp-check">✓</span>You load at your own pace</li>
+                            <li><span class="hp-check">✓</span>Transported to our secure facility</li>
+                            <li><span class="hp-check">✓</span>Access on your schedule</li>
+                            <li><span class="hp-check">✓</span>Short-term or long-term</li>
+                        </ul>
+                        <a href="services.html" class="hp-btn-primary" style="display:inline-block;">View Storage Options</a>
                     </div>
+                </div>
+            </div>
+        </section>
 
-                    <div class="story-row">
-                        <figure class="story-image">
-                            <button class="story-share-button" type="button" aria-label="Share OnTime Moving Services image" data-share-title="OnTime Moving Services" data-share-text="Our professional team prepares your house and your furniture for a safe move."></button>
-                            <picture>
-                                <source type="image/webp"
-                                    srcset="images/homepage/ontimemovingservices-w320.webp 320w, images/homepage/ontimemovingservices-w640.webp 640w, images/homepage/ontimemovingservices-w1024.webp 1024w"
-                                    sizes="(max-width:600px) 100vw, 50vw">
-                                <source type="image/jpeg"
-                                    srcset="images/homepage/ontimemovingservices-w320.jpg 320w, images/homepage/ontimemovingservices-w640.jpg 640w, images/homepage/ontimemovingservices-w1024.jpg 1024w"
-                                    sizes="(max-width:600px) 100vw, 50vw">
-                                <img src="images/homepage/ontimemovingservices-w640.jpg"
-                                    alt="OnTime Moving service presentation and equipment" loading="lazy" decoding="async">
-                            </picture>
-                        </figure>
-                        <div class="story-copy">
-                            <h3>White-Glove Packing, Every Time</h3>
-                            <p>Fragile antiques, flat-screen TVs, pianos, fine art — nothing leaves your home without being double-wrapped, padded, and properly secured. Our trained crew treats every item as if it were irreplaceable, because to you, it is.</p>
-                        </div>
+        <!-- ══ CTA ══ -->
+        <section class="hp-cta">
+            <div class="hp-cta-inner">
+                <p class="hp-cta-eyebrow">Port Coquitlam · Open 7 Days · 8AM–8PM</p>
+                <h2>Ready to move with confidence?</h2>
+                <p>Join over 10,000 Lower Mainland families. Your free in-home estimate takes 30 minutes and comes with zero obligation.</p>
+                <div class="hp-cta-actions">
+                    <a href="booknow.html" class="hp-cta-btn-white">Book My Free Estimate</a>
+                    <a href="tel:6045050026" class="hp-cta-btn-outline">Call (604) 505-0026</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ FAQ ══ -->
+        <section class="hp-faq">
+            <div class="container">
+                <div class="hp-faq-layout">
+                    <div class="hp-faq-sticky">
+                        <div class="hp-section-label">FAQ</div>
+                        <h2 class="hp-section-title">Got questions?<br>We've got answers.</h2>
+                        <p>Everything you need to know about booking, pricing, and what to expect on moving day.</p>
+                        <a href="contact.html">Ask us anything →</a>
                     </div>
-
-                    <div class="story-row story-row-reverse">
-                        <figure class="story-image">
-                            <button class="story-share-button" type="button" aria-label="Share Containerized Storage image" data-share-title="Containerized Storage at your Door" data-share-text="OnTime's containerized storage transports your furniture safely from your door to your new home or our storage facility."></button>
-                            <picture>
-                                <source type="image/webp"
-                                    srcset="images/homepage/containerizedstorage-w320.webp 320w, images/homepage/containerizedstorage-w640.webp 640w, images/homepage/containerizedstorage-w1024.webp 1024w"
-                                    sizes="(max-width:600px) 100vw, 50vw">
-                                <source type="image/jpeg"
-                                    srcset="images/homepage/containerizedstorage-w320.jpg 320w, images/homepage/containerizedstorage-w640.jpg 640w, images/homepage/containerizedstorage-w1024.jpg 1024w"
-                                    sizes="(max-width:600px) 100vw, 50vw">
-                                <img src="images/homepage/containerizedstorage-w640.jpg"
-                                    alt="Containerized storage units at OnTime Moving" loading="lazy" decoding="async">
-                            </picture>
-                        </figure>
-                        <div class="story-copy">
-                            <h3>Containerized Storage, Delivered to Your Door</h3>
-                            <p>Between moves, renovating, or downsizing? Our weatherproof containers are brought right to your driveway, loaded at your pace, then transported to our secure Port Coquitlam facility. Access your belongings on your schedule — no extra handling, no damage risk.</p>
+                    <div class="faq-grid">
+                        <div class="faq-item">
+                            <button class="faq-question">How does the free in-home estimate work?<span class="faq-icon">+</span></button>
+                            <div class="faq-answer"><div class="faq-answer-inner">One of our estimators visits your home, walks through every room, and takes inventory of what needs to move. You'll receive a written all-in price — covering labour, truck, materials, and any stairs or long carries — before we book anything. No pressure, no obligation, no surprises on bill day.</div></div>
                         </div>
-                    </div>
-
-                    <div class="story-row">
-                        <figure class="story-image">
-                            <button class="story-share-button" type="button" aria-label="Share OnTime Warehouse image" data-share-title="OnTime Warehouse" data-share-text="OnTime's storage warehouse is located in Port Coquitlam."></button>
-                            <picture>
-                                <source type="image/webp"
-                                    srcset="images/homepage/onTimeWarehouse-w320.webp 320w, images/homepage/onTimeWarehouse-w640.webp 640w, images/homepage/onTimeWarehouse-w1024.webp 1024w"
-                                    sizes="(max-width:600px) 100vw, 50vw">
-                                <source type="image/jpeg"
-                                    srcset="images/homepage/onTimeWarehouse-w320.jpg 320w, images/homepage/onTimeWarehouse-w640.jpg 640w, images/homepage/onTimeWarehouse-w1024.jpg 1024w"
-                                    sizes="(max-width:600px) 100vw, 50vw">
-                                <img src="images/homepage/onTimeWarehouse-w640.jpg"
-                                    alt="OnTime Moving warehouse storage containers" loading="lazy" decoding="async">
-                            </picture>
-                        </figure>
-                        <div class="story-copy">
-                            <h3>Our Port Coquitlam Warehouse</h3>
-                            <p>Fully fenced, camera-monitored 24/7, and staffed during business hours — our storage facility is built to keep your belongings safe and dry. Short-term between closes or long-term through a life transition, we have the space and the security to handle it.</p>
+                        <div class="faq-item">
+                            <button class="faq-question">Do you move on weekends?<span class="faq-icon">+</span></button>
+                            <div class="faq-answer"><div class="faq-answer-inner">Yes — we're open Monday through Sunday, 8:00 AM to 8:00 PM. Weekend moves book fast, especially on month-end dates, so we recommend requesting your estimate at least 2–3 weeks ahead when possible.</div></div>
                         </div>
-                    </div>
-
-                    <div class="story-row story-row-reverse">
-                        <figure class="story-image">
-                            <button class="story-share-button" type="button" aria-label="Share OnTime Warehouse interior image" data-share-title="OnTime Warehouse" data-share-text="OnTime's containerized storage is organized inside our secure warehouse facility."></button>
-                            <picture>
-                                <source type="image/webp"
-                                    srcset="images/homepage/onTimeWarehouseinside-w320.webp 320w, images/homepage/onTimeWarehouseinside-w640.webp 640w, images/homepage/onTimeWarehouseinside-w1024.webp 1024w"
-                                    sizes="(max-width:600px) 100vw, 50vw">
-                                <source type="image/jpeg"
-                                    srcset="images/homepage/onTimeWarehouseinside-w320.jpg 320w, images/homepage/onTimeWarehouseinside-w640.jpg 640w, images/homepage/onTimeWarehouseinside-w1024.jpg 1024w"
-                                    sizes="(max-width:600px) 100vw, 50vw">
-                                <img src="images/homepage/onTimeWarehouseinside-w640.jpg"
-                                    alt="OnTime Moving warehouse interior" loading="lazy" decoding="async">
-                            </picture>
-                        </figure>
-                        <div class="story-copy">
-                            <h3>100 Containers, Perfectly Organized</h3>
-                            <p>Each container is individually locked and labeled. Your items stay separate, protected, and easy to access — no rummaging through a shared unit.</p>
+                        <div class="faq-item">
+                            <button class="faq-question">What areas do you serve?<span class="faq-icon">+</span></button>
+                            <div class="faq-answer"><div class="faq-answer-inner">We cover the entire Lower Mainland — Port Coquitlam, Coquitlam, Burnaby, Vancouver, Surrey, New Westminster, Langley, and beyond. We also handle long-distance moves to the BC Interior, Vancouver Island, and Alberta.</div></div>
                         </div>
-                    </div>
-
-                    <div class="story-row">
-                        <figure class="story-image">
-                            <button class="story-share-button" type="button" aria-label="Share OnTime Supply Store image" data-share-title="OnTime Supply Store" data-share-text="OnTime provides moving boxes, packing materials, and supplies to make your move smooth and secure."></button>
-                            <picture>
-                                <source type="image/webp"
-                                    srcset="images/homepage/onTimeSupplyStore-w320.webp 320w, images/homepage/onTimeSupplyStore-w640.webp 640w, images/homepage/onTimeSupplyStore-w1024.webp 1024w"
-                                    sizes="(max-width:600px) 100vw, 50vw">
-                                <source type="image/jpeg"
-                                    srcset="images/homepage/onTimeSupplyStore-w320.jpg 320w, images/homepage/onTimeSupplyStore-w640.jpg 640w, images/homepage/onTimeSupplyStore-w1024.jpg 1024w"
-                                    sizes="(max-width:600px) 100vw, 50vw">
-                                <img src="images/homepage/onTimeSupplyStore-w640.jpg"
-                                    alt="OnTime Moving supplies store" loading="lazy" decoding="async">
-                            </picture>
-                        </figure>
-                        <div class="story-copy">
-                            <h3>Moving Supplies — Pick Up or Pre-Order</h3>
-                            <p>Stop by our Port Coquitlam supply store for boxes in every size, heavy-duty tape, bubble wrap, mattress bags, dish kits, and specialty packing materials. Or simply tell us what you need and we'll bring it all on moving day — nothing left to chance.</p>
+                        <div class="faq-item">
+                            <button class="faq-question">Are you licensed and insured?<span class="faq-icon">+</span></button>
+                            <div class="faq-answer"><div class="faq-answer-inner">Yes. OnTime Moving is fully licensed by the BC Passenger Transportation Board and carries comprehensive cargo and liability insurance. We're also BBB A+ accredited. All crew members are background-checked and uniformed.</div></div>
                         </div>
-                    </div>
-
-                    <div class="story-row story-row-reverse">
-                        <figure class="story-image">
-                            <button class="story-share-button" type="button" aria-label="Share Red Carpet Service image" data-share-title="Red-Carpet Service" data-share-text="OnTime's Red (Neoprene) Carpet Service protects your home and furniture during a move."></button>
-                            <picture>
-                                <source type="image/webp"
-                                    srcset="images/homepage/redcarpetservice-w320.webp 320w, images/homepage/redcarpetservice-w640.webp 640w, images/homepage/redcarpetservice-w1024.webp 1024w"
-                                    sizes="(max-width:600px) 100vw, 50vw">
-                                <source type="image/jpeg"
-                                    srcset="images/homepage/redcarpetservice-w320.jpg 320w, images/homepage/redcarpetservice-w640.jpg 640w, images/homepage/redcarpetservice-w1024.jpg 1024w"
-                                    sizes="(max-width:600px) 100vw, 50vw">
-                                <img src="images/homepage/redcarpetservice-w640.jpg"
-                                    alt="OnTime Moving red carpet service" loading="lazy" decoding="async">
-                            </picture>
-                        </figure>
-                        <div class="story-copy">
-                            <h3>Red-Carpet Protection — Included Standard</h3>
-                            <p>We lay neoprene carpet runners throughout your home and install door-frame guards before a single box is moved. When we leave, your floors, walls, and paint are in exactly the same condition as when we arrived — guaranteed.</p>
+                        <div class="faq-item">
+                            <button class="faq-question">What if something gets damaged?<span class="faq-icon">+</span></button>
+                            <div class="faq-answer"><div class="faq-answer-inner">Every move includes standard cargo insurance. If anything is damaged during transport, we file a claim immediately and resolve it — no runaround, no fine print loopholes. We also use floor runners, door-frame guards, and double-wrapped padding on every job to prevent damage from happening in the first place.</div></div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">How far in advance should I book?<span class="faq-icon">+</span></button>
+                            <div class="faq-answer"><div class="faq-answer-inner">For peak months (May–September) and month-end dates, 3–4 weeks is ideal. Off-peak moves can often be booked with 1–2 weeks' notice. We recommend reaching out as soon as you have a rough date — an estimate costs nothing and locks nothing in.</div></div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
     </main>
-
-    <!-- FAQ Section -->
-    <section class="faq-section">
-        <div class="container">
-            <h2 class="section-title" style="text-align:center;margin-bottom:40px;">Common Questions</h2>
-            <div class="faq-grid">
-                <div class="faq-item">
-                    <button class="faq-question">How does the free in-home estimate work?<span class="faq-icon">+</span></button>
-                    <div class="faq-answer"><div class="faq-answer-inner">One of our estimators visits your home, walks through every room, and takes inventory of what needs to move. You'll receive a written all-in price — covering labour, truck, materials, and any stairs or long carries — before we book anything. No pressure, no obligation, no surprises on bill day.</div></div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question">Do you move on weekends?<span class="faq-icon">+</span></button>
-                    <div class="faq-answer"><div class="faq-answer-inner">Yes — we're open Monday through Sunday, 8:00 AM to 8:00 PM. Weekend moves book fast, especially on month-end dates, so we recommend requesting your estimate at least 2–3 weeks ahead when possible.</div></div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question">What areas do you serve?<span class="faq-icon">+</span></button>
-                    <div class="faq-answer"><div class="faq-answer-inner">We cover the entire Lower Mainland — Port Coquitlam, Coquitlam, Burnaby, Vancouver, Surrey, New Westminster, Langley, and beyond. We also handle long-distance moves to the BC Interior, Vancouver Island, and Alberta.</div></div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question">Are you licensed and insured?<span class="faq-icon">+</span></button>
-                    <div class="faq-answer"><div class="faq-answer-inner">Yes. OnTime Moving is fully licensed by the BC Passenger Transportation Board and carries comprehensive cargo and liability insurance. We're also BBB A+ accredited. All crew members are background-checked and uniformed.</div></div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question">What if something gets damaged?<span class="faq-icon">+</span></button>
-                    <div class="faq-answer"><div class="faq-answer-inner">Every move includes standard cargo insurance. If anything is damaged during transport, we file a claim immediately and resolve it — no runaround, no fine print loopholes. We also use floor runners, door-frame guards, and double-wrapped padding on every job to prevent damage from happening in the first place.</div></div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question">How far in advance should I book?<span class="faq-icon">+</span></button>
-                    <div class="faq-answer"><div class="faq-answer-inner">For peak months (May–September) and month-end dates, 3–4 weeks is ideal. Off-peak moves can often be booked with 1–2 weeks' notice. We recommend reaching out as soon as you have a rough date — an estimate costs nothing and locks nothing in.</div></div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Footer -->
     <footer class="footer">
@@ -328,7 +814,7 @@
                 </div>
                 <div class="footer-section">
                     <h4>Contact</h4>
-                    <p><a href="tel:6045050026" >Call (604) 505-0026</a></p>
+                    <p><a href="tel:6045050026">Call (604) 505-0026</a></p>
                     <p><a href="mailto:info@ontime-moving.com">info@ontime-moving.com</a></p>
                     <p>104-1525 Broadway St., Port Coquitlam, BC V3C 6P6</p>
                     <p>Mon – Sun: 8:00 AM – 8:00 PM</p>
@@ -378,37 +864,8 @@
         </form>
     </section>
 
-    <div id="shareModal" class="share-modal" hidden>
-        <div class="share-modal-backdrop" data-share-close></div>
-        <div class="share-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="shareModalTitle">
-            <button id="shareModalClose" class="share-modal-close" type="button" aria-label="Close share dialog">X</button>
-            <div class="share-modal-layout">
-                <div class="share-modal-preview">
-                    <img id="shareModalImage" src="" alt="">
-                </div>
-                <div class="share-modal-copy">
-                    <h3 id="shareModalTitle"></h3>
-                    <p id="shareModalDescription"></p>
-                    <div class="share-modal-links">
-                        <a id="shareFacebook" class="share-link-chip" href="#" target="_blank" rel="noopener noreferrer">Facebook</a>
-                        <a id="shareX" class="share-link-chip" href="#" target="_blank" rel="noopener noreferrer">X</a>
-                        <a id="sharePinterest" class="share-link-chip" href="#" target="_blank" rel="noopener noreferrer">Pinterest</a>
-                        <a id="shareEmail" class="share-link-chip" href="#">Email</a>
-                    </div>
-                    <div class="share-copy-row">
-                        <input id="shareModalUrl" class="share-copy-input" type="text" readonly>
-                        <button id="shareCopyButton" class="share-copy-button" type="button">Copy</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script src="script.js"></script>
     <link rel="stylesheet" href="chatbot.css">
     <script src="chatbot.js"></script>
 </body>
 </html>
-
-
-
