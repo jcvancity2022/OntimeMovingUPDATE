@@ -12,242 +12,311 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="consistency.css">
     <style>
-        /* ══════════════════════════════════════════
-           HOMEPAGE — FANCY MODERN LAYOUT
-        ══════════════════════════════════════════ */
+        /* ════════════════════════════════════
+           HOMEPAGE — MODERN PREMIUM LAYOUT
+        ════════════════════════════════════ */
 
-        /* ── 1. FULL-BLEED DARK HERO ── */
+        /* ─── HERO ─── */
         .hp-hero {
             position: relative;
-            min-height: 92vh;
-            display: flex;
-            align-items: center;
+            min-height: 94vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: stretch;
             background: #0a0f1a;
+            padding-top: 72px;
             overflow: hidden;
-            padding-top: 80px;
         }
-        .hp-hero-bg {
-            position: absolute;
-            inset: 0;
-            z-index: 0;
-        }
-        .hp-hero-bg img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center 30%;
-            opacity: 0.32;
-        }
-        /* Gradient overlay: dark left, transparent right */
-        .hp-hero-bg::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(100deg,
-                rgba(10,15,26,0.97) 0%,
-                rgba(10,15,26,0.80) 45%,
-                rgba(10,15,26,0.30) 100%);
-        }
-        .hp-hero-content {
+        /* Left: text side */
+        .hp-hero-left {
             position: relative;
             z-index: 2;
-            max-width: 680px;
-            padding: 60px 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 72px 56px 72px 0;
         }
         .hp-hero-eyebrow {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.14em;
+            letter-spacing: 0.15em;
             color: #ef5350;
-            background: rgba(211,47,47,0.12);
-            border: 1px solid rgba(211,47,47,0.3);
+            background: rgba(211,47,47,0.1);
+            border: 1px solid rgba(211,47,47,0.28);
             border-radius: 999px;
             padding: 6px 14px;
             margin-bottom: 28px;
+            width: fit-content;
         }
         .hp-hero-eyebrow::before {
             content: '';
-            width: 6px;
-            height: 6px;
+            width: 6px; height: 6px;
             background: #ef5350;
             border-radius: 50%;
+            animation: pulse-dot 2s ease infinite;
+        }
+        @keyframes pulse-dot {
+            0%,100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.75); }
         }
         .hp-hero-title {
             font-family: 'Outfit', Arial, sans-serif;
-            font-size: clamp(2.8rem, 6vw, 5rem);
+            font-size: clamp(3rem, 5.5vw, 5.2rem);
             font-weight: 900;
-            line-height: 1.02;
-            letter-spacing: -0.03em;
+            line-height: 1;
+            letter-spacing: -0.035em;
             color: #fff;
-            margin-bottom: 24px;
+            margin-bottom: 28px;
         }
-        .hp-hero-title .accent-line {
+        .hp-hero-title em {
+            font-style: normal;
             display: block;
-            background: linear-gradient(90deg, #ef5350 0%, #ff8a65 100%);
+            background: linear-gradient(95deg, #ef5350 0%, #ff8a65 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
         .hp-hero-desc {
             font-size: 1.1rem;
-            color: rgba(255,255,255,0.65);
-            line-height: 1.75;
-            max-width: 520px;
+            color: rgba(255,255,255,0.58);
+            line-height: 1.78;
+            max-width: 460px;
             margin-bottom: 40px;
         }
         .hp-hero-actions {
             display: flex;
-            gap: 14px;
+            gap: 12px;
             flex-wrap: wrap;
             margin-bottom: 56px;
         }
-        .hp-btn-primary {
+        .hp-btn-red {
             background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
             color: #fff;
-            padding: 16px 36px;
+            padding: 17px 38px;
             border-radius: 999px;
             text-decoration: none;
             font-weight: 700;
             font-size: 0.95rem;
-            box-shadow: 0 8px 32px rgba(211,47,47,0.45);
+            box-shadow: 0 8px 28px rgba(211,47,47,0.42);
             transition: transform 0.2s, box-shadow 0.2s;
-            display: inline-block;
         }
-        .hp-btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 40px rgba(211,47,47,0.55);
-        }
-        .hp-btn-ghost {
-            background: rgba(255,255,255,0.08);
+        .hp-btn-red:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(211,47,47,0.52); }
+        .hp-btn-outline-w {
+            background: rgba(255,255,255,0.07);
             color: #fff;
-            padding: 16px 36px;
+            padding: 17px 38px;
             border-radius: 999px;
             text-decoration: none;
             font-weight: 600;
             font-size: 0.95rem;
-            border: 1px solid rgba(255,255,255,0.18);
-            backdrop-filter: blur(10px);
-            transition: background 0.2s, border-color 0.2s;
-            display: inline-block;
+            border: 1px solid rgba(255,255,255,0.16);
+            backdrop-filter: blur(8px);
+            transition: background 0.2s;
         }
-        .hp-btn-ghost:hover {
-            background: rgba(255,255,255,0.14);
-            border-color: rgba(255,255,255,0.35);
-        }
-        /* Glass trust bar */
-        .hp-hero-trust {
-            display: flex;
-            gap: 0;
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.1);
+        .hp-btn-outline-w:hover { background: rgba(255,255,255,0.13); }
+        /* Stats glass bar */
+        .hp-stats-bar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            background: rgba(255,255,255,0.055);
+            border: 1px solid rgba(255,255,255,0.09);
             backdrop-filter: blur(20px);
             border-radius: 16px;
-            padding: 20px 28px;
-            width: fit-content;
+            overflow: hidden;
         }
-        .hp-trust-item {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            padding: 0 28px 0 0;
-            margin-right: 28px;
-            border-right: 1px solid rgba(255,255,255,0.1);
+        .hp-stat {
+            padding: 20px 22px;
+            border-right: 1px solid rgba(255,255,255,0.09);
+            text-align: center;
         }
-        .hp-trust-item:last-child {
-            border-right: none;
-            padding-right: 0;
-            margin-right: 0;
-        }
-        .hp-trust-num {
+        .hp-stat:last-child { border-right: none; }
+        .hp-stat-num {
             font-family: 'Outfit', Arial, sans-serif;
-            font-size: 1.9rem;
+            font-size: 1.65rem;
             font-weight: 800;
             color: #fff;
             line-height: 1;
         }
-        .hp-trust-label {
-            font-size: 0.73rem;
-            color: rgba(255,255,255,0.5);
-            font-weight: 500;
-            margin-top: 4px;
-            white-space: nowrap;
-        }
-
-        /* ── 2. MARQUEE ── */
-        .marquee-strip {
-            background: #d32f2f;
-        }
-        .marquee-item { color: #fff; opacity: 0.9; }
-        .marquee-dot { background: rgba(255,255,255,0.5); }
-
-        /* ── 3. SERVICES ── */
-        .hp-services {
-            padding: 100px 0;
-            background: #fff;
-        }
-        .hp-section-label {
-            font-size: 0.72rem;
-            font-weight: 800;
+        .hp-stat-lbl {
+            font-size: 0.68rem;
+            color: rgba(255,255,255,0.46);
+            font-weight: 600;
+            margin-top: 5px;
             text-transform: uppercase;
-            letter-spacing: 0.16em;
-            color: #d32f2f;
-            margin-bottom: 12px;
+            letter-spacing: 0.06em;
         }
-        .hp-section-title {
-            font-family: 'Outfit', Arial, sans-serif;
-            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-            font-weight: 800;
-            letter-spacing: -0.025em;
-            color: #0a0f1a;
-            margin-bottom: 16px;
-            line-height: 1.1;
-        }
-        .hp-section-sub {
-            font-size: 1rem;
-            color: #64748b;
-            max-width: 500px;
-            line-height: 1.7;
-            margin-bottom: 56px;
-        }
-        .hp-services-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-        }
-        .hp-svc-card {
+        /* Right: image side */
+        .hp-hero-right {
             position: relative;
-            border-radius: 16px;
             overflow: hidden;
-            aspect-ratio: 3/4;
-            cursor: pointer;
-            text-decoration: none;
-            display: block;
         }
-        .hp-svc-card img {
+        .hp-hero-right img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            object-position: center 20%;
+            display: block;
         }
-        .hp-svc-card:hover img { transform: scale(1.06); }
-        .hp-svc-card-overlay {
+        /* Diagonal clip on left edge of image */
+        .hp-hero-right::before {
+            content: '';
+            position: absolute;
+            top: 0; bottom: 0; left: -1px;
+            width: 120px;
+            background: #0a0f1a;
+            clip-path: polygon(0 0, 60px 0, 0 100%);
+            z-index: 1;
+        }
+        /* Floating badge on image */
+        .hp-hero-badge {
+            position: absolute;
+            bottom: 36px;
+            left: 48px;
+            z-index: 3;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 14px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .hp-badge-icon {
+            width: 42px; height: 42px;
+            background: rgba(211,47,47,0.85);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+        .hp-badge-num {
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1;
+        }
+        .hp-badge-lbl {
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.62);
+            margin-top: 3px;
+        }
+        /* Second badge */
+        .hp-hero-badge2 {
+            position: absolute;
+            top: 48px;
+            right: 32px;
+            z-index: 3;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 14px;
+            padding: 14px 18px;
+            text-align: center;
+        }
+        .hp-badge2-stars { color: #fbbf24; font-size: 0.85rem; letter-spacing: 2px; margin-bottom: 4px; }
+        .hp-badge2-num {
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1;
+        }
+        .hp-badge2-lbl { font-size: 0.65rem; color: rgba(255,255,255,0.55); margin-top: 3px; }
+
+        /* ─── MARQUEE ─── */
+        .marquee-strip { background: #d32f2f; }
+        .marquee-item { color: #fff; opacity: 0.9; font-weight: 600; }
+        .marquee-dot { background: rgba(255,255,255,0.45); }
+
+        /* ─── SERVICES BENTO ─── */
+        .hp-services {
+            padding: 100px 0;
+            background: #f8fafc;
+        }
+        .hp-label {
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: #d32f2f;
+            margin-bottom: 10px;
+        }
+        .hp-title {
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: clamp(1.9rem, 3.6vw, 2.9rem);
+            font-weight: 800;
+            letter-spacing: -0.028em;
+            color: #0a0f1a;
+            line-height: 1.08;
+            margin-bottom: 14px;
+        }
+        .hp-sub {
+            font-size: 1rem;
+            color: #64748b;
+            line-height: 1.72;
+            max-width: 480px;
+            margin-bottom: 52px;
+        }
+        /* Bento grid: big card left, 2 stacked right */
+        .hp-bento {
+            display: grid;
+            grid-template-columns: 1.35fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 16px;
+        }
+        .hp-bento-big {
+            grid-row: span 2;
+        }
+        /* Bottom row: 2 more cards */
+        .hp-bento-row2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 16px;
+        }
+        .hp-bcard {
+            position: relative;
+            border-radius: 18px;
+            overflow: hidden;
+            text-decoration: none;
+            display: block;
+            background: #0a0f1a;
+        }
+        .hp-bcard-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease, opacity 0.4s;
+            opacity: 0.8;
+        }
+        .hp-bcard:hover .hp-bcard-img { transform: scale(1.05); opacity: 0.65; }
+        .hp-bcard-big { min-height: 520px; }
+        .hp-bcard-med { min-height: 240px; }
+        .hp-bcard-sm  { min-height: 185px; }
+        .hp-bcard-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(180deg, transparent 35%, rgba(10,15,26,0.92) 100%);
+            background: linear-gradient(180deg, transparent 25%, rgba(10,15,26,0.88) 100%);
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            padding: 28px 24px;
+            padding: 28px 28px 26px;
         }
-        .hp-svc-tag {
+        .hp-bcard-big .hp-bcard-overlay { padding: 36px; }
+        .hp-bcard-tag {
             display: inline-block;
-            background: rgba(211,47,47,0.85);
+            background: #d32f2f;
             color: #fff;
-            font-size: 0.65rem;
+            font-size: 0.62rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.1em;
@@ -256,64 +325,64 @@
             margin-bottom: 10px;
             width: fit-content;
         }
-        .hp-svc-card-title {
+        .hp-bcard-title {
             font-family: 'Outfit', Arial, sans-serif;
-            font-size: 1.15rem;
             font-weight: 700;
             color: #fff;
-            line-height: 1.25;
-            margin-bottom: 8px;
+            line-height: 1.2;
+            margin-bottom: 6px;
         }
-        .hp-svc-card-desc {
-            font-size: 0.82rem;
-            color: rgba(255,255,255,0.68);
+        .hp-bcard-big .hp-bcard-title { font-size: 1.45rem; margin-bottom: 10px; }
+        .hp-bcard-med .hp-bcard-title,
+        .hp-bcard-sm  .hp-bcard-title { font-size: 1rem; }
+        .hp-bcard-desc {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.65);
             line-height: 1.55;
         }
-        .hp-svc-card-arrow {
+        .hp-bcard-sm .hp-bcard-desc { display: none; }
+        .hp-bcard-arrow {
             display: inline-flex;
             align-items: center;
             gap: 4px;
-            color: #ef5350;
-            font-size: 0.8rem;
+            margin-top: 14px;
+            font-size: 0.82rem;
             font-weight: 700;
-            margin-top: 12px;
+            color: #ef5350;
             transition: gap 0.2s;
         }
-        .hp-svc-card:hover .hp-svc-card-arrow { gap: 8px; }
+        .hp-bcard:hover .hp-bcard-arrow { gap: 8px; }
 
-        /* ── 4. FEATURES (DARK) ── */
+        /* ─── FEATURES DARK ─── */
         .hp-features {
             background: #0a0f1a;
             padding: 100px 0;
         }
-        .hp-features .hp-section-label { color: #ef5350; }
-        .hp-features .hp-section-title { color: #fff; }
-        .hp-features .hp-section-sub { color: rgba(255,255,255,0.5); }
-        .hp-features-grid {
+        .hp-features .hp-label { color: #ef5350; }
+        .hp-features .hp-title { color: #fff; }
+        .hp-features .hp-sub { color: rgba(255,255,255,0.46); }
+        .hp-feat-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
+            gap: 18px;
         }
         .hp-feat-card {
             background: rgba(255,255,255,0.04);
             border: 1px solid rgba(255,255,255,0.07);
             border-radius: 16px;
-            padding: 36px;
+            padding: 36px 32px;
             transition: background 0.25s, border-color 0.25s;
         }
         .hp-feat-card:hover {
-            background: rgba(255,255,255,0.07);
-            border-color: rgba(211,47,47,0.3);
+            background: rgba(255,255,255,0.065);
+            border-color: rgba(211,47,47,0.28);
         }
         .hp-feat-icon {
-            width: 48px;
-            height: 48px;
-            background: rgba(211,47,47,0.15);
+            width: 48px; height: 48px;
+            background: rgba(211,47,47,0.14);
             border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.3rem;
             margin-bottom: 20px;
         }
         .hp-feat-card h3 {
@@ -325,11 +394,11 @@
         }
         .hp-feat-card p {
             font-size: 0.875rem;
-            color: rgba(255,255,255,0.5);
-            line-height: 1.7;
+            color: rgba(255,255,255,0.48);
+            line-height: 1.72;
         }
 
-        /* ── 5. SPLIT SECTION (STORAGE) ── */
+        /* ─── STORAGE SPLIT ─── */
         .hp-split {
             padding: 100px 0;
             background: #fff;
@@ -340,9 +409,7 @@
             gap: 80px;
             align-items: center;
         }
-        .hp-split-media {
-            position: relative;
-        }
+        .hp-split-media { position: relative; }
         .hp-split-img {
             width: 100%;
             border-radius: 20px;
@@ -350,43 +417,34 @@
             aspect-ratio: 4/3;
             display: block;
         }
-        .hp-split-badge {
+        .hp-split-float {
             position: absolute;
-            bottom: -20px;
-            right: -20px;
+            bottom: -22px;
+            right: -22px;
             background: #fff;
             border-radius: 16px;
             padding: 18px 22px;
-            box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.11);
             display: flex;
             align-items: center;
             gap: 14px;
         }
-        .hp-split-badge-icon {
-            width: 44px;
-            height: 44px;
+        .hp-split-float-icon {
+            width: 44px; height: 44px;
             background: #fff0f0;
             border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             font-size: 1.4rem;
-            flex-shrink: 0;
         }
-        .hp-split-badge-num {
+        .hp-split-float-num {
             font-family: 'Outfit', Arial, sans-serif;
             font-size: 1.5rem;
             font-weight: 800;
             color: #0a0f1a;
             line-height: 1;
         }
-        .hp-split-badge-label {
-            font-size: 0.75rem;
-            color: #64748b;
-            margin-top: 2px;
-        }
-        .hp-split-copy { padding-left: 0; }
-        .hp-split-copy .hp-section-title { margin-bottom: 16px; }
+        .hp-split-float-lbl { font-size: 0.73rem; color: #64748b; margin-top: 2px; }
+        .hp-split-copy .hp-title { margin-bottom: 14px; }
         .hp-split-copy p {
             font-size: 1rem;
             color: #475569;
@@ -408,21 +466,123 @@
             color: #374151;
         }
         .hp-check {
-            width: 20px;
-            height: 20px;
+            width: 20px; height: 20px;
             background: #fff0f0;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.65rem;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.62rem;
             color: #d32f2f;
             font-weight: 900;
             flex-shrink: 0;
             margin-top: 1px;
         }
 
-        /* ── 6. CTA BANNER ── */
+        /* ─── REVIEWS ─── */
+        .hp-reviews {
+            padding: 100px 0;
+            background: #f8fafc;
+        }
+        .hp-reviews-head {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            margin-bottom: 52px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .hp-reviews-rating {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .hp-reviews-stars {
+            font-size: 1.2rem;
+            color: #f59e0b;
+            letter-spacing: 3px;
+        }
+        .hp-reviews-score {
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: #0a0f1a;
+            line-height: 1;
+        }
+        .hp-reviews-meta {
+            font-size: 0.82rem;
+            color: #64748b;
+            margin-top: 4px;
+        }
+        .hp-reviews-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #d32f2f;
+            font-weight: 700;
+            font-size: 0.88rem;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        .hp-reviews-link:hover { text-decoration: underline; }
+        /* Review cards */
+        .hp-review-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .hp-review-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 30px 28px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+            border: 1px solid #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            transition: box-shadow 0.25s, transform 0.25s;
+        }
+        .hp-review-card:hover {
+            box-shadow: 0 8px 28px rgba(0,0,0,0.09);
+            transform: translateY(-3px);
+        }
+        .hp-review-stars { color: #f59e0b; font-size: 0.9rem; letter-spacing: 2px; }
+        .hp-review-text {
+            font-size: 0.92rem;
+            color: #374151;
+            line-height: 1.72;
+            flex: 1;
+        }
+        .hp-review-text::before { content: '\201C'; }
+        .hp-review-text::after  { content: '\201D'; }
+        .hp-review-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-top: 14px;
+            border-top: 1px solid #f3f4f6;
+        }
+        .hp-review-avatar {
+            width: 38px; height: 38px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #d32f2f 0%, #e53935 100%);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #fff;
+            flex-shrink: 0;
+        }
+        .hp-review-name {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #0a0f1a;
+        }
+        .hp-review-verified {
+            font-size: 0.72rem;
+            color: #22c55e;
+            font-weight: 600;
+            margin-top: 2px;
+        }
+
+        /* ─── CTA ─── */
         .hp-cta {
             background: linear-gradient(135deg, #b71c1c 0%, #d32f2f 50%, #e53935 100%);
             padding: 90px 20px;
@@ -434,40 +594,41 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+            background-size: 28px 28px;
         }
         .hp-cta-inner { position: relative; z-index: 1; }
         .hp-cta-eyebrow {
-            font-size: 0.72rem;
+            font-size: 0.7rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.14em;
-            color: rgba(255,255,255,0.65);
+            letter-spacing: 0.15em;
+            color: rgba(255,255,255,0.6);
             margin-bottom: 16px;
         }
         .hp-cta h2 {
             font-family: 'Outfit', Arial, sans-serif;
-            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-size: clamp(1.9rem, 4vw, 3.1rem);
             font-weight: 800;
             color: #fff;
             letter-spacing: -0.025em;
-            margin-bottom: 16px;
-            line-height: 1.1;
+            margin-bottom: 14px;
+            line-height: 1.08;
         }
         .hp-cta p {
             font-size: 1.05rem;
-            color: rgba(255,255,255,0.8);
+            color: rgba(255,255,255,0.78);
             max-width: 500px;
             margin: 0 auto 36px;
             line-height: 1.7;
         }
-        .hp-cta-actions {
+        .hp-cta-btns {
             display: flex;
-            gap: 14px;
+            gap: 12px;
             justify-content: center;
             flex-wrap: wrap;
         }
-        .hp-cta-btn-white {
+        .hp-cta-white {
             background: #fff;
             color: #d32f2f;
             padding: 16px 36px;
@@ -475,12 +636,12 @@
             text-decoration: none;
             font-weight: 700;
             font-size: 0.95rem;
-            box-shadow: 0 8px 28px rgba(0,0,0,0.2);
-            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 8px 28px rgba(0,0,0,0.18);
+            transition: transform 0.2s;
         }
-        .hp-cta-btn-white:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(0,0,0,0.25); }
-        .hp-cta-btn-outline {
-            border: 2px solid rgba(255,255,255,0.55);
+        .hp-cta-white:hover { transform: translateY(-2px); }
+        .hp-cta-ghost {
+            border: 2px solid rgba(255,255,255,0.5);
             color: #fff;
             padding: 16px 36px;
             border-radius: 999px;
@@ -489,12 +650,12 @@
             font-size: 0.95rem;
             transition: border-color 0.2s;
         }
-        .hp-cta-btn-outline:hover { border-color: #fff; }
+        .hp-cta-ghost:hover { border-color: #fff; }
 
-        /* ── 7. FAQ ── */
+        /* ─── FAQ ─── */
         .hp-faq {
             padding: 100px 0;
-            background: #f8fafc;
+            background: #fff;
         }
         .hp-faq-layout {
             display: grid;
@@ -506,48 +667,57 @@
             position: sticky;
             top: 120px;
         }
-        .hp-faq-sticky .hp-section-title { margin-bottom: 16px; }
+        .hp-faq-sticky .hp-title { margin-bottom: 14px; }
         .hp-faq-sticky p {
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             color: #64748b;
-            line-height: 1.7;
-            margin-bottom: 28px;
+            line-height: 1.72;
+            margin-bottom: 24px;
         }
         .hp-faq-sticky a {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
             color: #d32f2f;
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             text-decoration: none;
         }
         .hp-faq-sticky a:hover { text-decoration: underline; }
 
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .hp-services-grid { grid-template-columns: repeat(2, 1fr); }
-            .hp-features-grid { grid-template-columns: 1fr; }
-            .hp-faq-layout { grid-template-columns: 1fr; gap: 40px; }
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 1100px) {
+            .hp-hero { grid-template-columns: 1fr; min-height: auto; }
+            .hp-hero-right { display: none; }
+            .hp-hero-left { padding: 60px 0; max-width: 600px; }
+            .hp-hero-bg { display: block; }
+            .hp-hero-bg img { opacity: 0.18; }
+            .hp-bento { grid-template-columns: 1fr; }
+            .hp-bento-big { grid-row: auto; }
+            .hp-bcard-big { min-height: 340px; }
+            .hp-feat-grid { grid-template-columns: 1fr; }
+            .hp-review-grid { grid-template-columns: repeat(2, 1fr); }
+            .hp-faq-layout { grid-template-columns: 1fr; gap: 36px; }
             .hp-faq-sticky { position: static; }
+            .hp-split-inner { grid-template-columns: 1fr; gap: 36px; }
+            .hp-split-float { right: 0; }
         }
-        @media (max-width: 768px) {
-            .hp-hero { min-height: 100svh; padding-top: 70px; }
-            .hp-hero-title { font-size: 2.4rem; }
-            .hp-hero-trust { flex-wrap: wrap; gap: 16px; padding: 16px 20px; }
-            .hp-trust-item { border-right: none; padding-right: 0; margin-right: 0; }
-            .hp-services-grid { grid-template-columns: 1fr; }
-            .hp-svc-card { aspect-ratio: 16/9; }
-            .hp-split-inner { grid-template-columns: 1fr; gap: 40px; }
-            .hp-split-badge { right: 0; bottom: -16px; }
-            .hp-services, .hp-features, .hp-split, .hp-faq { padding: 72px 0; }
+        @media (max-width: 680px) {
+            .hp-hero-title { font-size: 2.6rem; }
+            .hp-stats-bar { grid-template-columns: repeat(2, 1fr); }
+            .hp-stat:nth-child(2) { border-right: none; }
+            .hp-stat:nth-child(3) { border-right: 1px solid rgba(255,255,255,0.09); }
+            .hp-bento-row2,
+            .hp-review-grid { grid-template-columns: 1fr; }
+            .hp-bcard-med { min-height: 200px; }
+            .hp-reviews-head { flex-direction: column; align-items: flex-start; }
+            .hp-services, .hp-features, .hp-split, .hp-reviews, .hp-faq { padding: 72px 0; }
         }
     </style>
 </head>
 <body>
     <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">Skip to content</a>
 
-    <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
             <div class="nav-content">
@@ -571,44 +741,63 @@
 
         <!-- ══ HERO ══ -->
         <section class="hp-hero">
-            <div class="hp-hero-bg">
-                <img src="images/homepage/homepageimage1.png"
-                    alt=""
-                    loading="eager" fetchpriority="high"
-                    onerror="this.src='images/homepage/homepageimage1-w1024.jpg'">
+            <!-- Background (mobile only) -->
+            <div class="hp-hero-bg" aria-hidden="true">
+                <img src="images/homepage/homepageimage1-w1024.jpg" alt="" loading="eager" fetchpriority="high">
             </div>
-            <div class="container">
-                <div class="hp-hero-content">
-                    <div class="hp-hero-eyebrow">Port Coquitlam · Serving BC Since 2003</div>
-                    <h1 class="hp-hero-title">
-                        Moving Made<br>
-                        <span class="accent-line">Effortless.</span>
-                    </h1>
-                    <p class="hp-hero-desc">
-                        22 years. 10,000+ families moved. Free in-home estimates, no hidden fees, and a BBB A+ rating you can trust — every time.
-                    </p>
-                    <div class="hp-hero-actions">
-                        <a href="booknow.html" class="hp-btn-primary">Get a Free Estimate</a>
-                        <a href="tel:6045050026" class="hp-btn-ghost">Call (604) 505-0026</a>
+            <!-- Left: copy -->
+            <div class="container" style="display:contents;">
+                <div style="padding-left: clamp(1rem,4vw,3rem); padding-right: 0; display:flex; flex-direction:column; justify-content:center; z-index:2; position:relative;">
+                    <div class="hp-hero-left">
+                        <div class="hp-hero-eyebrow">Port Coquitlam · BC · Since 2003</div>
+                        <h1 class="hp-hero-title">
+                            Moving<br>Made
+                            <em>Effortless.</em>
+                        </h1>
+                        <p class="hp-hero-desc">22 years. 10,000+ families moved. Free in-home estimates, transparent pricing, and a BBB A+ rating — every single time.</p>
+                        <div class="hp-hero-actions">
+                            <a href="booknow.html" class="hp-btn-red">Get a Free Estimate</a>
+                            <a href="tel:6045050026" class="hp-btn-outline-w">&#9742; (604) 505-0026</a>
+                        </div>
+                        <div class="hp-stats-bar">
+                            <div class="hp-stat">
+                                <div class="hp-stat-num">22+</div>
+                                <div class="hp-stat-lbl">Years</div>
+                            </div>
+                            <div class="hp-stat">
+                                <div class="hp-stat-num">10k+</div>
+                                <div class="hp-stat-lbl">Families Moved</div>
+                            </div>
+                            <div class="hp-stat">
+                                <div class="hp-stat-num">A+</div>
+                                <div class="hp-stat-lbl">BBB Rating</div>
+                            </div>
+                            <div class="hp-stat">
+                                <div class="hp-stat-num">4.2★</div>
+                                <div class="hp-stat-lbl">Google</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="hp-hero-trust">
-                        <div class="hp-trust-item">
-                            <div class="hp-trust-num">22+</div>
-                            <div class="hp-trust-label">Years in Business</div>
-                        </div>
-                        <div class="hp-trust-item">
-                            <div class="hp-trust-num">10,000+</div>
-                            <div class="hp-trust-label">Families Moved</div>
-                        </div>
-                        <div class="hp-trust-item">
-                            <div class="hp-trust-num">A+</div>
-                            <div class="hp-trust-label">BBB Rating</div>
-                        </div>
-                        <div class="hp-trust-item">
-                            <div class="hp-trust-num">4.2★</div>
-                            <div class="hp-trust-label">Google Rating</div>
-                        </div>
+                </div>
+            </div>
+            <!-- Right: photo -->
+            <div class="hp-hero-right">
+                <img src="images/homepage/homepageimage1-w1600.jpg"
+                    alt="OnTime Moving crew loading a truck"
+                    loading="eager" fetchpriority="high">
+                <!-- Floating badge: containers -->
+                <div class="hp-hero-badge">
+                    <div class="hp-badge-icon">📦</div>
+                    <div>
+                        <div class="hp-badge-num">100</div>
+                        <div class="hp-badge-lbl">Storage containers</div>
                     </div>
+                </div>
+                <!-- Floating badge: rating -->
+                <div class="hp-hero-badge2">
+                    <div class="hp-badge2-stars">★★★★★</div>
+                    <div class="hp-badge2-num">BBB A+</div>
+                    <div class="hp-badge2-lbl">Accredited since 2003</div>
                 </div>
             </div>
         </section>
@@ -637,60 +826,77 @@
             </div>
         </div>
 
-        <!-- ══ SERVICES ══ -->
+        <!-- ══ SERVICES BENTO ══ -->
         <section class="hp-services">
             <div class="container">
-                <div class="hp-section-label">Our Services</div>
-                <h2 class="hp-section-title">Everything you need,<br>under one roof</h2>
-                <p class="hp-section-sub">Full-service moving, flexible storage, professional packing, and supplies — all handled by one trusted team.</p>
-                <div class="hp-services-grid">
-                    <a href="services.html" class="hp-svc-card">
-                        <img src="images/homepage/ontimemovingtrucks-w640.jpg" alt="Moving trucks" loading="lazy">
-                        <div class="hp-svc-card-overlay">
-                            <span class="hp-svc-tag">Moving</span>
-                            <div class="hp-svc-card-title">Local &amp; Long-Distance</div>
-                            <div class="hp-svc-card-desc">Lower Mainland, BC Interior, Vancouver Island, Alberta</div>
-                            <span class="hp-svc-card-arrow">View service →</span>
+                <div class="hp-label">Our Services</div>
+                <h2 class="hp-title">Everything handled —<br>one trusted team</h2>
+                <p class="hp-sub">Full-service moving, flexible storage, professional packing, and supplies for the whole Lower Mainland.</p>
+
+                <!-- Row 1: big left + 2 stacked right -->
+                <div class="hp-bento">
+                    <a href="services.html" class="hp-bcard hp-bcard-big hp-bento-big">
+                        <img class="hp-bcard-img" src="images/homepage/homepageimage1-w1024.jpg" alt="Local and long-distance moving" loading="lazy">
+                        <div class="hp-bcard-overlay">
+                            <span class="hp-bcard-tag">Moving</span>
+                            <div class="hp-bcard-title">Local &amp; Long-Distance Moving</div>
+                            <div class="hp-bcard-desc">Lower Mainland, BC Interior, Vancouver Island, Alberta — dedicated crews, cargo insurance, confirmed windows.</div>
+                            <span class="hp-bcard-arrow">View service →</span>
                         </div>
                     </a>
-                    <a href="services.html" class="hp-svc-card">
-                        <img src="images/homepage/containerizedstorage-w640.jpg" alt="Storage containers" loading="lazy">
-                        <div class="hp-svc-card-overlay">
-                            <span class="hp-svc-tag">Storage</span>
-                            <div class="hp-svc-card-title">Containerized Storage</div>
-                            <div class="hp-svc-card-desc">Delivered to your door, secured in our Port Coquitlam facility</div>
-                            <span class="hp-svc-card-arrow">View service →</span>
+                    <div style="display:flex; flex-direction:column; gap:16px;">
+                        <a href="services.html" class="hp-bcard hp-bcard-med">
+                            <img class="hp-bcard-img" src="images/homepage/containerizedstorage-w640.jpg" alt="Containerized storage" loading="lazy">
+                            <div class="hp-bcard-overlay">
+                                <span class="hp-bcard-tag">Storage</span>
+                                <div class="hp-bcard-title">Containerized Storage</div>
+                                <div class="hp-bcard-desc">Delivered to your door, secured in our Port Coquitlam facility.</div>
+                                <span class="hp-bcard-arrow">View service →</span>
+                            </div>
+                        </a>
+                        <a href="services.html" class="hp-bcard hp-bcard-med">
+                            <img class="hp-bcard-img" src="images/homepage/ontimemovingservices-w640.jpg" alt="Professional packing" loading="lazy">
+                            <div class="hp-bcard-overlay">
+                                <span class="hp-bcard-tag">Packing</span>
+                                <div class="hp-bcard-title">Professional Packing</div>
+                                <div class="hp-bcard-desc">Fragile items, antiques, TVs — double-wrapped, every time.</div>
+                                <span class="hp-bcard-arrow">View service →</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Row 2: 2 equal cards across the bottom -->
+                <div class="hp-bento-row2">
+                    <a href="services.html" class="hp-bcard hp-bcard-med">
+                        <img class="hp-bcard-img" src="images/homepage/onTimeWarehouseinside-w640.jpg" alt="Secure warehouse" loading="lazy">
+                        <div class="hp-bcard-overlay">
+                            <span class="hp-bcard-tag">Warehouse</span>
+                            <div class="hp-bcard-title">Secure Port Coquitlam Warehouse</div>
+                            <div class="hp-bcard-desc">100 individual containers, fenced and camera-monitored 24/7.</div>
+                            <span class="hp-bcard-arrow">View service →</span>
                         </div>
                     </a>
-                    <a href="services.html" class="hp-svc-card">
-                        <img src="images/homepage/ontimemovingservices-w640.jpg" alt="Packing service" loading="lazy">
-                        <div class="hp-svc-card-overlay">
-                            <span class="hp-svc-tag">Packing</span>
-                            <div class="hp-svc-card-title">Professional Packing</div>
-                            <div class="hp-svc-card-desc">Fragile items, antiques, TVs — double-wrapped every time</div>
-                            <span class="hp-svc-card-arrow">View service →</span>
-                        </div>
-                    </a>
-                    <a href="services.html" class="hp-svc-card">
-                        <img src="images/homepage/onTimeSupplyStore-w640.jpg" alt="Moving supplies" loading="lazy">
-                        <div class="hp-svc-card-overlay">
-                            <span class="hp-svc-tag">Supplies</span>
-                            <div class="hp-svc-card-title">Moving Supplies</div>
-                            <div class="hp-svc-card-desc">Boxes, tape, bubble wrap — pick up in store or on moving day</div>
-                            <span class="hp-svc-card-arrow">View service →</span>
+                    <a href="services.html" class="hp-bcard hp-bcard-med">
+                        <img class="hp-bcard-img" src="images/homepage/onTimeSupplyStore-w640.jpg" alt="Moving supplies store" loading="lazy">
+                        <div class="hp-bcard-overlay">
+                            <span class="hp-bcard-tag">Supplies</span>
+                            <div class="hp-bcard-title">Moving Supplies Store</div>
+                            <div class="hp-bcard-desc">Boxes, tape, bubble wrap — pick up in-store or have it brought on moving day.</div>
+                            <span class="hp-bcard-arrow">View service →</span>
                         </div>
                     </a>
                 </div>
             </div>
         </section>
 
-        <!-- ══ FEATURES (DARK) ══ -->
+        <!-- ══ WHY US (DARK) ══ -->
         <section class="hp-features">
             <div class="container">
-                <div class="hp-section-label">Why OnTime</div>
-                <h2 class="hp-section-title">The standards we hold<br>ourselves to — every job</h2>
-                <p class="hp-section-sub">22 years hasn't made us complacent. It's made our process tighter.</p>
-                <div class="hp-features-grid">
+                <div class="hp-label">Why OnTime</div>
+                <h2 class="hp-title">The standards we hold<br>ourselves to — every job</h2>
+                <p class="hp-sub" style="margin-bottom:52px;">22 years hasn't made us complacent. It's made our process tighter.</p>
+                <div class="hp-feat-grid">
                     <div class="hp-feat-card">
                         <div class="hp-feat-icon">⏰</div>
                         <h3>On Time. No Excuses.</h3>
@@ -704,7 +910,7 @@
                     <div class="hp-feat-card">
                         <div class="hp-feat-icon">🛡️</div>
                         <h3>Fully Licensed &amp; BBB A+ Accredited</h3>
-                        <p>BC Passenger Transportation Board licensed, comprehensive cargo and liability insurance, background-checked uniformed crew — every move, every time.</p>
+                        <p>BC Passenger Transportation Board licensed, comprehensive cargo and liability insurance, background-checked uniformed crew — on every move.</p>
                     </div>
                     <div class="hp-feat-card">
                         <div class="hp-feat-icon">🏠</div>
@@ -722,28 +928,83 @@
                     <div class="hp-split-media">
                         <img class="hp-split-img"
                             src="images/homepage/onTimeWarehouseinside-w640.jpg"
-                            alt="OnTime Moving secure warehouse interior"
+                            alt="OnTime secure warehouse interior"
                             loading="lazy">
-                        <div class="hp-split-badge">
-                            <div class="hp-split-badge-icon">📦</div>
+                        <div class="hp-split-float">
+                            <div class="hp-split-float-icon">📦</div>
                             <div>
-                                <div class="hp-split-badge-num">100</div>
-                                <div class="hp-split-badge-label">Individual containers</div>
+                                <div class="hp-split-float-num">100</div>
+                                <div class="hp-split-float-lbl">Individual containers</div>
                             </div>
                         </div>
                     </div>
                     <div class="hp-split-copy">
-                        <div class="hp-section-label">Storage</div>
-                        <h2 class="hp-section-title">Secure storage in<br>Port Coquitlam</h2>
+                        <div class="hp-label">Storage</div>
+                        <h2 class="hp-title">Secure storage in<br>Port Coquitlam</h2>
                         <p>Between closes, renovating, or going through a life transition? Our fully-fenced, camera-monitored warehouse holds 100 individual containers — each locked, labeled, and yours alone.</p>
                         <ul class="hp-checklist">
                             <li><span class="hp-check">✓</span>Container delivered to your driveway</li>
-                            <li><span class="hp-check">✓</span>You load at your own pace</li>
+                            <li><span class="hp-check">✓</span>Load at your own pace — no rushing</li>
                             <li><span class="hp-check">✓</span>Transported to our secure facility</li>
-                            <li><span class="hp-check">✓</span>Access on your schedule</li>
-                            <li><span class="hp-check">✓</span>Short-term or long-term</li>
+                            <li><span class="hp-check">✓</span>Access your belongings on your schedule</li>
+                            <li><span class="hp-check">✓</span>Short-term or long-term — we flex to you</li>
                         </ul>
-                        <a href="services.html" class="hp-btn-primary" style="display:inline-block;">View Storage Options</a>
+                        <a href="services.html" class="hp-btn-red" style="display:inline-block;">View Storage Options</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ REVIEWS ══ -->
+        <section class="hp-reviews">
+            <div class="container">
+                <div class="hp-reviews-head">
+                    <div>
+                        <div class="hp-label">Customer Reviews</div>
+                        <h2 class="hp-title" style="margin-bottom:16px;">What our customers say</h2>
+                        <div class="hp-reviews-rating">
+                            <div>
+                                <div class="hp-reviews-stars">★★★★☆</div>
+                                <div class="hp-reviews-meta">52 verified Google reviews</div>
+                            </div>
+                            <div class="hp-reviews-score">4.2</div>
+                        </div>
+                    </div>
+                    <a href="reviews.html" class="hp-reviews-link">Read all reviews →</a>
+                </div>
+                <div class="hp-review-grid">
+                    <div class="hp-review-card">
+                        <div class="hp-review-stars">★★★★★</div>
+                        <p class="hp-review-text">We just completed our second move with OnTime Movers and I'm not sure how much more I could say about how responsible and dependable they are. We called them again because we were sure our belongings would get to our new home safely.</p>
+                        <div class="hp-review-author">
+                            <div class="hp-review-avatar">RF</div>
+                            <div>
+                                <div class="hp-review-name">Reg Freebody</div>
+                                <div class="hp-review-verified">✓ Verified Google Review</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hp-review-card">
+                        <div class="hp-review-stars">★★★★★</div>
+                        <p class="hp-review-text">Ronald (owner) is very personable and professional. His staff were very hard working, careful, polite and personable. I would highly recommend this moving company.</p>
+                        <div class="hp-review-author">
+                            <div class="hp-review-avatar">CL</div>
+                            <div>
+                                <div class="hp-review-name">Cindy Lukey</div>
+                                <div class="hp-review-verified">✓ Verified Google Review</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hp-review-card">
+                        <div class="hp-review-stars">★★★★★</div>
+                        <p class="hp-review-text">I've never had a better moving crew. The men were professional, very courteous and so helpful. I have no hesitation in recommending On Time Moving and Storage.</p>
+                        <div class="hp-review-author">
+                            <div class="hp-review-avatar">ES</div>
+                            <div>
+                                <div class="hp-review-name">Ellen Silvergieter</div>
+                                <div class="hp-review-verified">✓ Verified Google Review</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -755,9 +1016,9 @@
                 <p class="hp-cta-eyebrow">Port Coquitlam · Open 7 Days · 8AM–8PM</p>
                 <h2>Ready to move with confidence?</h2>
                 <p>Join over 10,000 Lower Mainland families. Your free in-home estimate takes 30 minutes and comes with zero obligation.</p>
-                <div class="hp-cta-actions">
-                    <a href="booknow.html" class="hp-cta-btn-white">Book My Free Estimate</a>
-                    <a href="tel:6045050026" class="hp-cta-btn-outline">Call (604) 505-0026</a>
+                <div class="hp-cta-btns">
+                    <a href="booknow.html" class="hp-cta-white">Book My Free Estimate</a>
+                    <a href="tel:6045050026" class="hp-cta-ghost">Call (604) 505-0026</a>
                 </div>
             </div>
         </section>
@@ -767,8 +1028,8 @@
             <div class="container">
                 <div class="hp-faq-layout">
                     <div class="hp-faq-sticky">
-                        <div class="hp-section-label">FAQ</div>
-                        <h2 class="hp-section-title">Got questions?<br>We've got answers.</h2>
+                        <div class="hp-label">FAQ</div>
+                        <h2 class="hp-title">Got questions?<br>We've got answers.</h2>
                         <p>Everything you need to know about booking, pricing, and what to expect on moving day.</p>
                         <a href="contact.html">Ask us anything →</a>
                     </div>
@@ -804,7 +1065,6 @@
 
     </main>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
