@@ -597,11 +597,36 @@
             dateInput.setAttribute('min', today);
         });
     </script>
-    <script src="script.js"></script>
+    <button id="chatLauncher" class="chat-launcher" type="button" aria-label="Open chat support" aria-expanded="false">
+        <svg class="chat-launcher-icon" viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+        <span class="chat-launcher-label">Chat with us</span>
+    </button>
+    <section id="chatWidget" class="chat-widget" aria-label="Chat support panel" hidden>
+        <header class="chat-header">
+            <div class="chat-header-text">
+                <h3>How can we help with your move?</h3>
+                <p><span class="chat-status-dot"></span>We reply as soon as we can</p>
+            </div>
+            <button id="chatClose" class="chat-close" type="button" aria-label="Close chat">X</button>
+        </header>
+        <div id="chatMessages" class="chat-messages" role="log" aria-live="polite"></div>
+        <div class="chat-quick-actions" aria-label="Suggested questions">
+            <button class="chat-quick-action" type="button" data-question="I need a quote">Get a quote</button>
+            <button class="chat-quick-action" type="button" data-question="What areas do you serve?">Service areas</button>
+            <button class="chat-quick-action" type="button" data-question="Do you offer storage?">Storage</button>
+            <button class="chat-quick-action" type="button" data-question="How do I book a move?">Book a move</button>
+        </div>
+        <form id="chatForm" class="chat-form">
+            <input id="chatInput" type="text" placeholder="Write your message..." autocomplete="off" required>
+            <button id="chatSend" type="submit">Send</button>
+        </form>
+    </section>
+    <script src="script.js?v=2"></script>
     <link rel="stylesheet" href="chatbot.css">
     <script src="chatbot.js"></script>
 </body>
 </html>
+
 
 
 
