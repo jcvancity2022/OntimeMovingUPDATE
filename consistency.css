@@ -117,6 +117,12 @@ body {
     color: var(--brand-primary-dark);
 }
 
+.nav-links a.nav-highlight.active,
+.nav-links a.nav-highlight {
+    background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%) !important;
+    color: #fff !important;
+}
+
 .nav-highlight,
 .nav-cta,
 .btn-book {
