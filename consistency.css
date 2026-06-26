@@ -156,10 +156,10 @@ h3 {
 footer.footer,
 body .footer,
 body footer.footer {
-    background: #c2cbd6;
-    color: #182133;
-    padding: 48px 0 24px;
-    border-top: 2px solid #c8cfd9;
+    background: #0a0f1a;
+    color: rgba(255,255,255,0.75);
+    padding: 64px 0 28px;
+    border-top: none;
 }
 
 .footer .container,
@@ -184,53 +184,54 @@ body .footer-content {
 
 .footer-section h3,
 body .footer-section h3 {
-    color: #182133;
-    margin-bottom: 12px;
-    font-size: 1rem;
+    color: #fff;
+    margin-bottom: 14px;
+    font-size: 0.85rem;
     font-weight: 700;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
 }
 
 .footer-section h4,
 body .footer-section h4 {
-    color: #182133;
-    margin-bottom: 12px;
-    font-size: 0.85rem;
+    color: #fff;
+    margin-bottom: 14px;
+    font-size: 0.75rem;
     font-weight: 700;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
 }
 
 .footer-section p,
 body .footer-section p {
-    color: #2d3748;
+    color: rgba(255,255,255,0.55);
     margin-bottom: 6px;
-    font-size: 0.95rem;
+    font-size: 0.88rem;
+    line-height: 1.7;
 }
 
 .footer a,
 footer.footer a,
 body .footer a,
 body footer.footer a {
-    color: #2d3748;
+    color: rgba(255,255,255,0.55);
     text-decoration: none;
-    transition: var(--shared-transition);
+    transition: color 0.2s;
 }
 
 .footer a:hover,
 footer.footer a:hover,
 body .footer a:hover,
 body footer.footer a:hover {
-    color: var(--brand-primary);
+    color: #fff;
 }
 
 .footer-bottom,
 body .footer-bottom {
     text-align: center;
     padding-top: 24px;
-    border-top: 1px solid #c8cfd9;
-    color: #6b7a8d;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.3);
     font-size: 0.88rem;
 }
 

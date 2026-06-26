@@ -568,15 +568,8 @@ if (typeof module !== 'undefined' && module.exports) {
     }, { passive: true });
 })();
 
-// ── Sticky CTA + Back-to-top ──
+// ── Back-to-top ──
 (function () {
-    const isHome = ['/', '/index.html', ''].some(p => location.pathname.endsWith(p));
-    const cta = document.createElement('a');
-    cta.className = 'sticky-cta-bar hidden';
-    cta.href = 'booknow.html';
-    cta.innerHTML = '📋 Get a Free Quote';
-    if (!isHome) document.body.appendChild(cta);
-
     const btt = document.createElement('button');
     btt.className = 'back-to-top hidden';
     btt.setAttribute('aria-label', 'Back to top');
@@ -584,17 +577,7 @@ if (typeof module !== 'undefined' && module.exports) {
     btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
     document.body.appendChild(btt);
 
-    let heroH = 0;
-    const updateHeroH = () => {
-        const hero = document.querySelector('.hero, .book-hero, .reviews-page-hero');
-        heroH = hero ? hero.offsetHeight : 300;
-    };
-    updateHeroH();
-    window.addEventListener('resize', updateHeroH, { passive: true });
-
     window.addEventListener('scroll', () => {
-        const past = window.scrollY > heroH;
-        cta.classList.toggle('hidden', !past);
         btt.classList.toggle('hidden', window.scrollY < 400);
     }, { passive: true });
 })();
