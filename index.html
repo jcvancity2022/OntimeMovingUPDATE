@@ -19,22 +19,26 @@
         /* ─── HERO ─── */
         .hp-hero {
             position: relative;
-            min-height: 94vh;
+            background: #0a0f1a;
+            overflow: hidden;
+            padding-top: 72px; /* nav height */
+        }
+        .hp-hero-inner {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            align-items: stretch;
-            background: #0a0f1a;
-            padding-top: 72px;
-            overflow: hidden;
+            min-height: calc(92vh - 72px);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 clamp(1rem, 4vw, 2.5rem);
         }
         /* Left: text side */
         .hp-hero-left {
-            position: relative;
-            z-index: 2;
             display: flex;
             flex-direction: column;
             justify-content: center;
             padding: 72px 56px 72px 0;
+            position: relative;
+            z-index: 2;
         }
         .hp-hero-eyebrow {
             display: inline-flex;
