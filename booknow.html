@@ -7,172 +7,249 @@
     <title>Book Your Free In-Home Estimate — OnTime Moving & Storage</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="consistency.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #d32f2f;
-            --primary-dark: #b71c1c;
-            --dark-gray: #111827;
-            --light-gray: #f3f4f6;
-            --white: #fff;
-            --shadow: 0 10px 30px rgba(17, 24, 39, 0.08);
-        }
+        body { background: #fff; overflow-x: hidden; }
 
-        body {
-            background: #fafafa;
-            color: var(--dark-gray);
-        }
-
+        /* ── Dark hero ── */
         .book-hero {
-            background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
-            color: var(--white);
-            padding: 128px 16px 30px;
+            background: #0a0f1a;
+            position: relative;
+            overflow: hidden;
+            padding: clamp(5rem, 10vh, 7.5rem) clamp(1.25rem, 4vw, 3rem) clamp(3.5rem, 7vh, 5rem);
             text-align: center;
         }
-
+        .book-hero::before {
+            content: '';
+            position: absolute;
+            width: 700px;
+            height: 700px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(211,47,47,0.13) 0%, transparent 65%);
+            top: -250px;
+            left: 50%;
+            transform: translateX(-50%);
+            pointer-events: none;
+        }
+        .book-hero .container { position: relative; z-index: 2; max-width: 800px; }
+        .book-hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.42rem 1.1rem;
+            border-radius: 999px;
+            background: rgba(211,47,47,0.14);
+            border: 1px solid rgba(211,47,47,0.28);
+            color: #ff8a80;
+            font-size: 0.74rem;
+            font-weight: 700;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            margin-bottom: 1.75rem;
+        }
         .book-hero h1 {
-            font-size: clamp(1.8rem, 4vw, 2.4rem);
-            margin-bottom: 0.5rem;
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: clamp(2rem, 4vw, 3.4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            color: #fff;
+            margin-bottom: 1.1rem;
         }
-
         .book-hero p {
-            max-width: 760px;
+            font-size: 1.05rem;
+            color: rgba(255,255,255,0.62);
+            max-width: 60ch;
             margin: 0 auto;
-            opacity: 0.95;
+            line-height: 1.78;
         }
 
-        .book-section {
-            padding: 20px 16px 34px;
+        /* ── Trust bar (dark) ── */
+        .book-trust {
+            background: #0d1321;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            padding: 16px 0;
+        }
+        .book-trust-inner {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px 32px;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .book-trust-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.84rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.7);
+            white-space: nowrap;
+        }
+        .book-trust-check {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #d32f2f, #b71c1c);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.6rem;
+            font-weight: 800;
+            color: #fff;
+            flex-shrink: 0;
         }
 
-        .how-it-works .container {
-            max-width: 980px;
+        /* ── How it works ── */
+        .how-it-works {
+            padding: 72px 0 56px;
+            background: #fff;
         }
-
-        .how-it-works .steps {
+        .how-it-works .container { max-width: 1060px; }
+        .how-it-works-title {
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: clamp(1.7rem, 3vw, 2.4rem);
+            font-weight: 800;
+            color: #0a0f1a;
+            text-align: center;
+            margin-bottom: 48px;
+            letter-spacing: -0.025em;
+        }
+        .steps {
             display: grid;
-            grid-auto-flow: column;
-            grid-auto-columns: minmax(220px, 1fr);
-            gap: 12px;
-            margin: 0 auto;
-            overflow-x: auto;
-            padding: 0 2px 8px;
-            scroll-snap-type: x mandatory;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+        .step {
+            background: #fff;
+            border: 1px solid #e8edf4;
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+        .step:hover {
+            transform: translateY(-4px);
+            border-color: rgba(211,47,47,0.2);
+            box-shadow: 0 12px 32px rgba(211,47,47,0.08);
+        }
+        .step-number {
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #d32f2f, #ef5350);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+            margin-bottom: 0.85rem;
+        }
+        .step h3 {
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: 0.97rem;
+            font-weight: 700;
+            color: #0a0f1a;
+            margin-bottom: 0.6rem;
+            letter-spacing: -0.01em;
+        }
+        .step p {
+            font-size: 0.85rem;
+            color: #6b7280;
+            line-height: 1.65;
         }
 
-        .how-it-works .step {
-            padding: 12px;
-            scroll-snap-align: start;
+        /* ── Form shell ── */
+        .book-section {
+            padding: 0 16px 64px;
+            background: #fff;
         }
-
         .book-shell {
-            width: min(760px, 96vw);
+            width: min(800px, 96vw);
             margin: 0 auto;
-            background: var(--white);
-            border-radius: 14px;
-            box-shadow: var(--shadow);
-            border: 1px solid #eceff3;
+            background: #fff;
+            border-radius: 20px;
+            border: 1px solid #e8edf4;
             overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.07);
         }
-
         .book-header {
-            padding: 14px 18px;
-            border-bottom: 1px solid #edf0f3;
-            background: #fcfcfc;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid #f1f5f9;
+            background: #fafbfc;
         }
-
         .book-header h2 {
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #0a0f1a;
+            letter-spacing: -0.02em;
             margin: 0;
-            font-size: 1.2rem;
         }
-
         .book-form {
-            padding: 16px 18px 18px;
+            padding: 1.5rem 2rem 2rem;
         }
-
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            gap: 12px;
         }
-
-        .form-group {
-            margin-bottom: 10px;
-        }
-
+        .form-group { margin-bottom: 14px; }
         .form-group label {
             display: block;
-            font-weight: 600;
-            font-size: 0.92rem;
-            margin-bottom: 0.35rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #374151;
+            margin-bottom: 6px;
+            letter-spacing: 0.02em;
         }
-
         .form-group input,
         .form-group select,
         .form-group textarea {
             width: 100%;
-            border: 1px solid #d1d5db;
-            border-radius: 8px;
-            padding: 0.62rem 0.72rem;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 0.65rem 0.85rem;
             font-size: 0.95rem;
             font-family: inherit;
             background: #fff;
+            color: #111827;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
-
-        .form-group textarea {
-            min-height: 84px;
-            resize: vertical;
-        }
-
+        .form-group textarea { min-height: 88px; resize: vertical; }
         .form-group input:focus,
         .form-group select:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.1);
+            border-color: #d32f2f;
+            box-shadow: 0 0 0 3px rgba(211,47,47,0.1);
         }
-
         .submit-btn {
             width: 100%;
-            border: 0;
-            border-radius: 8px;
-            padding: 0.72rem 0.9rem;
-            font-size: 1rem;
+            border: none;
+            border-radius: 999px;
+            padding: 14px;
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: 0.97rem;
             font-weight: 700;
             color: #fff;
-            background: var(--primary);
+            background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
             cursor: pointer;
+            box-shadow: 0 6px 20px rgba(211,47,47,0.32);
+            transition: transform 0.22s ease, box-shadow 0.22s ease;
         }
-
-        .submit-btn:hover {
-            background: var(--primary-dark);
-        }
+        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(211,47,47,0.42); }
+        .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
         @media (max-width: 768px) {
-            .book-hero {
-                padding-top: 112px;
-            }
-
-            .form-row {
-                grid-template-columns: 1fr;
-                gap: 0;
-            }
-
-            .book-shell {
-                width: min(760px, 98vw);
-            }
-
-            .book-form {
-                padding: 14px;
-            }
-
-            .how-it-works .container,
-            .how-it-works .steps {
-                max-width: 100%;
-            }
-
-            .how-it-works .steps {
-                grid-auto-columns: minmax(260px, 82vw);
-            }
+            .steps { grid-template-columns: repeat(2, 1fr); }
+            .form-row { grid-template-columns: 1fr; gap: 0; }
+            .book-form, .book-header { padding: 1.25rem; }
+        }
+        @media (max-width: 480px) {
+            .steps { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -200,25 +277,26 @@
 
     <section class="book-hero">
         <div class="container">
+            <div class="book-hero-eyebrow">Free In-Home Estimate · No Obligation</div>
             <h1>Request Your Free In-Home Estimate</h1>
-            <p>Fill out the form below and we'll call you within 24 hours to confirm the details and schedule a free walkthrough of your home or office. You'll get a clear, written all-in price before anything is booked — no commitment, no pressure, no hidden charges ever.</p>
+            <p>Fill out the form below and we'll call you within 24 hours to confirm the details and schedule a free walkthrough. You'll get a clear, written all-in price before anything is booked — no commitment, no pressure, no hidden charges ever.</p>
         </div>
     </section>
 
-    <!-- Trust bar -->
-    <div style="background:#fff;border-bottom:1px solid #e8e8e8;padding:16px 20px;">
-        <div class="container" style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px 28px;">
-            <span style="font-size:0.88rem;font-weight:600;color:#182133;display:flex;align-items:center;gap:7px;"><span style="background:#d32f2f;color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:800;">✓</span>Free In-Home Estimate</span>
-            <span style="font-size:0.88rem;font-weight:600;color:#182133;display:flex;align-items:center;gap:7px;"><span style="background:#d32f2f;color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:800;">✓</span>No Hidden Fees</span>
-            <span style="font-size:0.88rem;font-weight:600;color:#182133;display:flex;align-items:center;gap:7px;"><span style="background:#d32f2f;color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:800;">✓</span>We Call Within 24 Hours</span>
-            <span style="font-size:0.88rem;font-weight:600;color:#182133;display:flex;align-items:center;gap:7px;"><span style="background:#d32f2f;color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:800;">✓</span>BBB A+ Accredited</span>
+    <!-- Dark trust bar -->
+    <div class="book-trust">
+        <div class="book-trust-inner">
+            <div class="book-trust-item"><span class="book-trust-check">✓</span> Free In-Home Estimate</div>
+            <div class="book-trust-item"><span class="book-trust-check">✓</span> No Hidden Fees — Ever</div>
+            <div class="book-trust-item"><span class="book-trust-check">✓</span> We Call Within 24 Hours</div>
+            <div class="book-trust-item"><span class="book-trust-check">✓</span> BBB A+ Accredited</div>
         </div>
     </div>
 
     <!-- How It Works -->
     <section id="how-it-works" class="how-it-works">
         <div class="container">
-            <h2 class="section-title">How It Works</h2>
+            <h2 class="how-it-works-title">How It Works</h2>
             <div class="steps">
                 <div class="step">
                     <div class="step-number">1</div>

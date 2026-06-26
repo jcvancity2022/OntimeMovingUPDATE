@@ -1,172 +1,414 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Family-owned and BBB A+ accredited since 2003. Over 10,000 families moved across the Lower Mainland. Licensed, insured, and built on transparent pricing with no hidden fees.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About OnTime Moving & Storage — Family-Owned Since 2003 | Port Coquitlam</title>
-    <!-- Modern Font -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #fff; overflow-x: hidden; }
 
-        :root {
-            --primary: #d32f2f;
-            --primary-gradient: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
-            --dark: #0F172A;
-            --light-bg: #F8FAFC;
-            --text-main: #1E293B;
-            --text-muted: #374151;
-            --radius-lg: 12px;
-            --radius-pill: 999px;
-            --shadow: 0 2px 12px rgba(0,0,0,0.07);
-        }
-
-        body {
-            font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
-            background: var(--light-bg);
-            color: var(--text-main);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Modern Split Hero */
-        .hero {
-            padding: 140px 20px 80px;
-        }
-        
-        .hero-visual-card {
-            background: #fff;
-            border-radius: 14px;
-            padding: 40px;
-            box-shadow: var(--shadow);
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
+        /* ── DARK SPLIT HERO ── */
+        .abt-hero {
+            background: #0a0f1a;
+            position: relative;
             overflow: hidden;
         }
-
-        .hero-visual-card img {
+        .abt-hero::before {
+            content: '';
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(211,47,47,0.14) 0%, transparent 70%);
+            top: -300px;
+            right: -200px;
+            pointer-events: none;
+        }
+        .abt-hero::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(211,47,47,0.07) 0%, transparent 70%);
+            bottom: -100px;
+            left: 0;
+            pointer-events: none;
+        }
+        .abt-hero-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: calc(90vh - 60px);
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 clamp(1.25rem, 4vw, 3rem);
+            gap: 3rem;
+            position: relative;
+            z-index: 2;
+        }
+        .abt-hero-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 5rem 3rem 5rem 0;
+            color: #fff;
+        }
+        .abt-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1.1rem;
+            border-radius: 999px;
+            background: rgba(211,47,47,0.14);
+            border: 1px solid rgba(211,47,47,0.28);
+            color: #ff8a80;
+            font-size: 0.74rem;
+            font-weight: 700;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            margin-bottom: 1.75rem;
+            width: fit-content;
+        }
+        .abt-headline {
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: clamp(2.2rem, 3.8vw, 3.6rem);
+            font-weight: 800;
+            line-height: 1.08;
+            letter-spacing: -0.03em;
+            color: #fff;
+            margin-bottom: 1.5rem;
+        }
+        .abt-headline .grad {
+            background: linear-gradient(135deg, #ff8a80 0%, #ef5350 50%, #d32f2f 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .abt-desc {
+            font-size: 1.05rem;
+            color: rgba(255,255,255,0.62);
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+            max-width: 48ch;
+        }
+        .abt-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            margin-bottom: 2.75rem;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        .abt-stat {
+            padding: 1.25rem 1rem;
+            border-right: 1px solid rgba(255,255,255,0.07);
+            text-align: center;
+        }
+        .abt-stat:last-child { border-right: none; }
+        .abt-stat-num {
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: 1.9rem;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1;
+            margin-bottom: 0.4rem;
+        }
+        .abt-stat-lbl {
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.42);
+            font-weight: 600;
+            line-height: 1.3;
+            letter-spacing: 0.02em;
+        }
+        .abt-hero-right {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3.5rem 0;
+        }
+        .abt-img-wrap {
+            position: relative;
+            width: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.06);
+        }
+        .abt-img-wrap img {
             width: 100%;
             height: 100%;
+            min-height: 440px;
+            max-height: 580px;
             object-fit: cover;
-            border-radius: var(--radius-lg);
-            min-height: 400px;
+            display: block;
         }
+        .abt-img-badge {
+            position: absolute;
+            bottom: 1.25rem;
+            left: 1.25rem;
+            background: rgba(10,15,26,0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            color: #fff;
+            font-family: 'Outfit', Arial, sans-serif;
+        }
+        .abt-img-badge strong { display: block; font-size: 0.95rem; font-weight: 700; margin-bottom: 0.2rem; }
+        .abt-img-badge span { font-size: 0.75rem; color: rgba(255,255,255,0.55); }
 
-        .hero-kicker {
-            color: var(--primary);
+        /* ── Red marquee ── */
+        .abt-marquee {
+            background: #d32f2f;
+            color: #fff;
+            padding: 10px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            user-select: none;
+        }
+        .abt-marquee-inner {
+            display: inline-flex;
+            animation: abt-marquee 30s linear infinite;
+        }
+        .abt-marquee-inner:hover { animation-play-state: paused; }
+        .abt-marquee-item {
+            padding: 0 2.5rem;
+            font-size: 0.78rem;
             font-weight: 700;
+            letter-spacing: 0.09em;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.9rem;
-            margin-bottom: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .abt-marquee-dot {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            flex-shrink: 0;
+        }
+        @keyframes abt-marquee {
+            from { transform: translateX(0); }
+            to   { transform: translateX(-50%); }
         }
 
-        .hero-title {
-            font-size: clamp(2rem, 4vw, 3.5rem);
+        /* ── Story section ── */
+        .story-section {
+            padding: 96px 0;
+            background: #fff;
+        }
+        .section-title {
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: clamp(1.9rem, 3vw, 2.8rem);
             font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 24px;
-            color: var(--dark);
-            letter-spacing: -1px;
+            color: #0a0f1a;
+            text-align: center;
+            margin-bottom: 72px;
+            letter-spacing: -0.03em;
+            line-height: 1.12;
         }
-
-        .hero-description {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            margin-bottom: 32px;
-            font-weight: 500;
-        }
-
-        .hero-stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin-top: 40px;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            line-height: 1;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            font-weight: 600;
-            margin-top: 8px;
-        }
-
-        /* Story Grid Setup */
-        .story-section { padding: 80px 0; }
-        .section-title { text-align: center; font-size: 2.5rem; font-weight: 800; color: var(--dark); margin-bottom: 60px; letter-spacing: -1px; }
-
+        .story-list { display: flex; flex-direction: column; gap: 80px; }
         .story-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 60px;
+            gap: 72px;
             align-items: center;
-            margin-bottom: 80px;
         }
-
         .story-row-reverse { direction: rtl; }
         .story-row-reverse > * { direction: ltr; }
-
+        .story-image { position: relative; }
         .story-image img {
             width: 100%;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow);
+            border-radius: 18px;
+            box-shadow: 0 24px 72px rgba(0,0,0,0.1);
+            display: block;
         }
-
+        .story-label {
+            display: inline-block;
+            font-size: 0.71rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #d32f2f;
+            margin-bottom: 0.85rem;
+        }
         .story-copy h3 {
-            font-size: 2rem;
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: clamp(1.5rem, 2.2vw, 2.1rem);
             font-weight: 800;
-            margin-bottom: 16px;
-            color: var(--dark);
+            line-height: 1.18;
+            letter-spacing: -0.028em;
+            color: #0a0f1a;
+            margin-bottom: 1.1rem;
         }
-        
         .story-copy p {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            font-weight: 500;
+            font-size: 1rem;
+            color: #4b5563;
+            line-height: 1.82;
         }
 
-        /* Values Grid */
+        /* ── Values section (dark glass) ── */
+        .values-section {
+            background: #0d1321;
+            padding: 96px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .values-section::before {
+            content: '';
+            position: absolute;
+            width: 700px;
+            height: 700px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(211,47,47,0.07), transparent 70%);
+            bottom: -300px;
+            right: -200px;
+            pointer-events: none;
+        }
+        .values-section .section-title { color: #fff; }
         .values-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
         }
-
         .value-card {
-            background: #fff;
-            padding: 40px;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow);
-            transition: transform 0.3s;
+            background: rgba(255,255,255,0.035);
+            border: 1px solid rgba(255,255,255,0.08);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 2.25rem;
+            border-radius: 20px;
+            transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+        }
+        .value-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(211,47,47,0.32);
+            background: rgba(255,255,255,0.065);
+        }
+        .value-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, rgba(211,47,47,0.22), rgba(211,47,47,0.08));
+            border: 1px solid rgba(211,47,47,0.22);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            flex-shrink: 0;
+        }
+        .value-card h3 {
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.85rem;
+            letter-spacing: -0.015em;
+            line-height: 1.3;
+        }
+        .value-card p {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+            line-height: 1.78;
         }
 
-        .value-card:hover { transform: translateY(-5px); }
-        .value-icon { font-size: 2rem; margin-bottom: 20px; }
-        .value-card h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 10px; color: var(--dark); }
-        .value-card p { color: var(--text-muted); font-size: 0.95rem; font-weight: 500; }
+        /* ── CTA section ── */
+        .cta-section {
+            background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+            padding: 96px 20px;
+            text-align: center;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 80% 80% at 50% 130%, rgba(255,255,255,0.1), transparent);
+            pointer-events: none;
+        }
+        .cta-eyebrow {
+            font-size: 0.73rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.65);
+            margin-bottom: 1rem;
+        }
+        .cta-section h2 {
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: 1rem;
+            line-height: 1.12;
+            position: relative;
+        }
+        .cta-section p {
+            font-size: 1.05rem;
+            color: rgba(255,255,255,0.88);
+            max-width: 50ch;
+            margin: 0 auto 2.25rem;
+            line-height: 1.7;
+            position: relative;
+        }
+        .cta-btn-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            position: relative;
+        }
+        .cta-btn-white {
+            background: #fff;
+            color: #d32f2f;
+            padding: 14px 34px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            font-family: 'Outfit', Arial, sans-serif;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            transition: transform 0.22s ease, box-shadow 0.22s ease;
+        }
+        .cta-btn-white:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,0.28); }
+        .cta-btn-ghost {
+            border: 1.5px solid rgba(255,255,255,0.55);
+            color: #fff;
+            padding: 14px 34px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            font-family: 'Outfit', Arial, sans-serif;
+            transition: background 0.22s ease, border-color 0.22s ease;
+        }
+        .cta-btn-ghost:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.85); }
 
+        /* ── Responsive ── */
         @media (max-width: 900px) {
-            .hero-visual-card, .story-row { grid-template-columns: 1fr; gap: 30px; }
-            .hero-visual-card { padding: 24px; }
+            .abt-hero-inner {
+                grid-template-columns: 1fr;
+                min-height: auto;
+                padding-top: 2rem;
+            }
+            .abt-hero-left { padding: 3rem 0 0; }
+            .abt-hero-right { padding: 2rem 0 3.5rem; }
+            .abt-stats { grid-template-columns: repeat(2, 1fr); }
+            .story-row { grid-template-columns: 1fr; gap: 2rem; }
+            .story-row-reverse { direction: ltr; }
+            .values-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 560px) {
+            .abt-stats { grid-template-columns: repeat(2, 1fr); }
+            .cta-btn-white, .cta-btn-ghost { width: 100%; text-align: center; justify-content: center; display: block; }
         }
     </style>
     <link rel="stylesheet" href="consistency.css">
@@ -178,9 +420,7 @@
             <div class="nav-content">
                 <a href="index.html" class="logo">OnTime Moving and Storage</a>
                 <button class="mobile-menu-toggle" aria-label="Toggle menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                    <span></span><span></span><span></span>
                 </button>
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
@@ -189,45 +429,69 @@
                     <li><a href="reviews.html">Reviews</a></li>
                     <li><a href="contact.html">Contact</a></li>
                     <li><a href="booknow.html" class="nav-highlight">Book Now</a></li>
-
                 </ul>
             </div>
         </div>
     </nav>
 
-    <section class="hero">
-        <div class="container">
-            <div class="hero-visual-card">
-                <div class="hero-overlay">
-                    <p class="hero-kicker">Port Coquitlam, BC · Family-Owned & Operated Since 2003</p>
-                    <h1 class="hero-title">Moving families forward — 22 years and counting.</h1>
-                    <p class="hero-description">
-                        What started as a single truck and a commitment to punctuality has grown into one of the Lower Mainland's most trusted moving companies. We're BBB A+ accredited, fully licensed and insured, and still driven by the same promise we made on day one: show up on time, treat your belongings like our own, and never leave a surprise on the final bill.
-                    </p>
-                    <div class="hero-stats">
-                        <div class="stat">
-                            <div class="stat-number">22+</div>
-                            <div class="stat-label">Years in Business</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-number">10k+</div>
-                            <div class="stat-label">Families Moved</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-number">A+</div>
-                            <div class="stat-label">BBB Rating</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-number">100%</div>
-                            <div class="stat-label">Fully Insured</div>
-                        </div>
+    <!-- Dark Split Hero -->
+    <section class="abt-hero">
+        <div class="abt-hero-inner">
+            <div class="abt-hero-left">
+                <p class="abt-eyebrow">Port Coquitlam, BC · Family-Owned Since 2003</p>
+                <h1 class="abt-headline">Moving families forward —<br><span class="grad">22 years and counting.</span></h1>
+                <p class="abt-desc">What started as a single truck and a commitment to punctuality has grown into one of the Lower Mainland's most trusted moving companies. BBB A+ accredited, fully licensed and insured, and still driven by the same promise we made on day one.</p>
+                <div class="abt-stats">
+                    <div class="abt-stat">
+                        <div class="abt-stat-num">22+</div>
+                        <div class="abt-stat-lbl">Years in Business</div>
+                    </div>
+                    <div class="abt-stat">
+                        <div class="abt-stat-num">10k+</div>
+                        <div class="abt-stat-lbl">Families Moved</div>
+                    </div>
+                    <div class="abt-stat">
+                        <div class="abt-stat-num">A+</div>
+                        <div class="abt-stat-lbl">BBB Rating</div>
+                    </div>
+                    <div class="abt-stat">
+                        <div class="abt-stat-num">100%</div>
+                        <div class="abt-stat-lbl">Fully Insured</div>
                     </div>
                 </div>
-                <img src="images/aboutpage/teamphoto.png" alt="OnTime Moving team" onerror="this.src='https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000&auto=format&fit=crop'">
+                <a href="booknow.html" class="btn btn-primary btn-large">Book My Free Estimate</a>
+            </div>
+            <div class="abt-hero-right">
+                <div class="abt-img-wrap">
+                    <img src="images/aboutpage/teamphoto.png" alt="OnTime Moving team" onerror="this.src='https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000&auto=format&fit=crop'">
+                    <div class="abt-img-badge">
+                        <strong>OnTime Moving & Storage</strong>
+                        <span>Port Coquitlam, BC · Since 2003</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- Red marquee -->
+    <div class="abt-marquee" aria-hidden="true">
+        <div class="abt-marquee-inner">
+            <span class="abt-marquee-item">BBB A+ Accredited<span class="abt-marquee-dot"></span></span>
+            <span class="abt-marquee-item">22+ Years Experience<span class="abt-marquee-dot"></span></span>
+            <span class="abt-marquee-item">10,000+ Families Moved<span class="abt-marquee-dot"></span></span>
+            <span class="abt-marquee-item">Fully Licensed & Insured<span class="abt-marquee-dot"></span></span>
+            <span class="abt-marquee-item">No Hidden Fees — Ever<span class="abt-marquee-dot"></span></span>
+            <span class="abt-marquee-item">Open 7 Days a Week<span class="abt-marquee-dot"></span></span>
+            <span class="abt-marquee-item">BBB A+ Accredited<span class="abt-marquee-dot"></span></span>
+            <span class="abt-marquee-item">22+ Years Experience<span class="abt-marquee-dot"></span></span>
+            <span class="abt-marquee-item">10,000+ Families Moved<span class="abt-marquee-dot"></span></span>
+            <span class="abt-marquee-item">Fully Licensed & Insured<span class="abt-marquee-dot"></span></span>
+            <span class="abt-marquee-item">No Hidden Fees — Ever<span class="abt-marquee-dot"></span></span>
+            <span class="abt-marquee-item">Open 7 Days a Week<span class="abt-marquee-dot"></span></span>
+        </div>
+    </div>
+
+    <!-- Story section -->
     <section class="story-section">
         <div class="container">
             <h2 class="section-title">What sets us apart</h2>
@@ -237,6 +501,7 @@
                         <img src="images/aboutpage/movingontimeimage.png" alt="Crew moving" onerror="this.src='https://images.unsplash.com/photo-1587293852726-70cdb56c2866?q=80&w=1000&auto=format&fit=crop'">
                     </figure>
                     <div class="story-copy">
+                        <span class="story-label">Our Process</span>
                         <h3>A Simpler, Smarter Move Process</h3>
                         <p>We've replaced the old-school clipboard-and-guesswork routine with a process that actually makes sense. Book online in minutes, receive a clear written estimate after your free in-home walkthrough, and get real-time updates on moving day. No chasing down phone calls. No wondering where your truck is. No paperwork surprises at delivery.</p>
                     </div>
@@ -244,9 +509,10 @@
 
                 <article class="story-row story-row-reverse">
                     <figure class="story-image">
-                        <img src="images/homepage/onTimeWarehouseinside.png" alt="Storage" onerror="this.src='https://images.unsplash.com/photo-1586528116311-ad8ed7c152a5?q=80&w=1000&auto=format&fit=crop'">
+                        <img src="images/homepage/onTimeWarehouseinside.png" alt="Storage facility" onerror="this.src='https://images.unsplash.com/photo-1586528116311-ad8ed7c152a5?q=80&w=1000&auto=format&fit=crop'">
                     </figure>
                     <div class="story-copy">
+                        <span class="story-label">Our Standards</span>
                         <h3>Your Belongings. Our Full Responsibility.</h3>
                         <p>Every crew member is background-checked, uniformed, and trained specifically on fragile, oversized, and high-value item handling. We arrive with furniture blankets, stretch wrap, door-frame guards, and floor runners — standard on every job, not an add-on. If it matters to you, it matters to us. And if something does go wrong, we're fully insured and we make it right.</p>
                     </div>
@@ -255,7 +521,8 @@
         </div>
     </section>
 
-    <section class="story-section" style="background: #fff; padding-top: 60px;">
+    <!-- Values — dark glass section -->
+    <section class="values-section">
         <div class="container">
             <h2 class="section-title">Our commitments to you</h2>
             <div class="values-grid">
@@ -278,14 +545,15 @@
         </div>
     </section>
 
-    <section style="background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%); padding: 72px 20px; text-align: center; color: #fff;">
+    <!-- CTA -->
+    <section class="cta-section">
         <div class="container">
-            <p style="font-size:0.85rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;opacity:0.75;margin-bottom:0.75rem;">Port Coquitlam · Open 7 Days</p>
-            <h2 style="font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;letter-spacing:-0.02em;margin-bottom:1rem;">Ready to experience the OnTime difference?</h2>
-            <p style="font-size:1.1rem;opacity:0.92;max-width:560px;margin:0 auto 2rem;line-height:1.65;">Join over 10,000 Lower Mainland families who've trusted us with their most important move. Your free in-home estimate takes 30 minutes and comes with zero obligation.</p>
-            <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;">
-                <a href="booknow.html" style="background:#fff;color:#d32f2f;padding:14px 32px;border-radius:999px;text-decoration:none;font-weight:700;font-size:1rem;box-shadow:0 8px 20px rgba(0,0,0,0.15);">Book My Free Estimate</a>
-                <a href="tel:6045050026" style="border:2px solid rgba(255,255,255,0.65);color:#fff;padding:14px 32px;border-radius:999px;text-decoration:none;font-weight:600;font-size:1rem;">Call (604) 505-0026</a>
+            <p class="cta-eyebrow">Port Coquitlam · Open 7 Days</p>
+            <h2>Ready to experience the OnTime difference?</h2>
+            <p>Join over 10,000 Lower Mainland families who've trusted us with their most important move. Your free in-home estimate takes 30 minutes and comes with zero obligation.</p>
+            <div class="cta-btn-row">
+                <a href="booknow.html" class="cta-btn-white">Book My Free Estimate</a>
+                <a href="tel:6045050026" class="cta-btn-ghost">Call (604) 505-0026</a>
             </div>
         </div>
     </section>
@@ -299,12 +567,12 @@
                 </div>
                 <div class="footer-section">
                     <h4>Contact</h4>
-                    <p><a href="tel:6045050026" >Call (604) 505-0026</a></p>
+                    <p><a href="tel:6045050026">Call (604) 505-0026</a></p>
                     <p><a href="mailto:info@ontime-moving.com">info@ontime-moving.com</a></p>
                     <p>104-1525 Broadway St., Port Coquitlam, BC V3C 6P6</p>
                     <p>Mon – Sun: 8:00 AM – 8:00 PM</p>
                 </div>
-                                <div class="footer-section">
+                <div class="footer-section">
                     <h4>Quick Links</h4>
                     <p><a href="services.html">Our Services</a></p>
                     <p><a href="about.html">About Us</a></p>
@@ -352,6 +620,3 @@
     <script src="chatbot.js"></script>
 </body>
 </html>
-
-
-

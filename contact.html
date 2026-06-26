@@ -1,339 +1,321 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Contact OnTime Moving for a free, no-obligation moving estimate. Call (604) 505-0026, email info@ontime-moving.com, or fill out our online form. Open 7 days a week.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact OnTime Moving & Storage — Free Quote | (604) 505-0026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        body { background: #fff; overflow-x: hidden; }
 
-        :root {
-            --primary: #d32f2f;
-            --primary-dark: #b71c1c;
-            --dark-gray: #111827;
-            --light-gray: #f9fafb;
-            --medium-gray: #374151;
-            --white: #fff;
-            --shadow: 0 2px 10px rgba(0,0,0,0.1);
-            --shadow-hover: 0 4px 20px rgba(0,0,0,0.15);
-        }
-
-        body {
-            font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
-            line-height: 1.6;
-            color: var(--dark-gray);
-            background: var(--white);
-        }
-
-        .container {
-            max-width: 1020px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .hero {
-            background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
-            color: var(--white);
-            padding: 132px 20px 36px;
+        /* ── DARK HERO ── */
+        .ctc-hero {
+            background: #0a0f1a;
+            position: relative;
+            overflow: hidden;
+            padding: clamp(5rem, 10vh, 7.5rem) clamp(1.25rem, 4vw, 3rem) clamp(3.5rem, 7vh, 5rem);
             text-align: center;
         }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            font-weight: 700;
+        .ctc-hero::before {
+            content: '';
+            position: absolute;
+            width: 700px;
+            height: 700px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(211,47,47,0.13) 0%, transparent 65%);
+            top: -250px;
+            left: 50%;
+            transform: translateX(-50%);
+            pointer-events: none;
         }
-
-        .hero p {
-            font-size: 1.1rem;
-            max-width: 700px;
+        .ctc-hero-inner {
+            max-width: 760px;
             margin: 0 auto;
-            opacity: 0.95;
+            position: relative;
+            z-index: 2;
         }
-
-        .content-section {
-            padding: 32px 20px;
-        }
-
-        .content-section:nth-child(even) {
-            background: var(--light-gray);
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 14px;
-            margin-top: 16px;
-        }
-
-        .contact-info {
-            background: var(--white);
-            padding: 22px;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            max-width: 470px;
-            width: 100%;
-            margin: 0 auto;
-        }
-
-        .contact-info h2 {
-            font-size: 1.6rem;
-            margin-bottom: 14px;
-            color: var(--primary);
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 10px;
-            gap: 12px;
-        }
-
-        .contact-icon {
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
-            min-width: 56px;
-            padding: 0.2rem 0.45rem;
+        .ctc-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.42rem 1.1rem;
             border-radius: 999px;
-            background: #f3f4f6;
-            color: var(--primary);
-            line-height: 1.2;
-            text-align: center;
+            background: rgba(211,47,47,0.14);
+            border: 1px solid rgba(211,47,47,0.28);
+            color: #ff8a80;
+            font-size: 0.74rem;
+            font-weight: 700;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            margin-bottom: 1.75rem;
         }
-
-        .contact-details h3 {
-            font-size: 1.1rem;
-            margin-bottom: 5px;
-            color: var(--dark-gray);
+        .ctc-hero h1 {
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+            font-weight: 800;
+            line-height: 1.08;
+            letter-spacing: -0.03em;
+            color: #fff;
+            margin-bottom: 1.25rem;
         }
-
-        .contact-details p {
-            color: var(--medium-gray);
-            line-height: 1.6;
-        }
-
-        .contact-details a {
-            color: var(--primary);
-            text-decoration: none;
-        }
-
-        .contact-details a:hover {
-            text-decoration: underline;
-        }
-
-        .contact-form {
-            background: var(--white);
-            padding: 22px;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            max-width: 470px;
-            width: 100%;
+        .ctc-hero p {
+            font-size: 1.05rem;
+            color: rgba(255,255,255,0.62);
+            max-width: 58ch;
             margin: 0 auto;
+            line-height: 1.78;
         }
 
-        .how-it-works .container {
-            max-width: 700px;
+        /* ── Dark trust bar ── */
+        .ctc-trust {
+            background: #0d1321;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            padding: 16px 0;
         }
-
-        .how-it-works .steps {
-            max-width: 560px;
+        .ctc-trust-inner {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px 32px;
+            max-width: 1280px;
             margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .ctc-trust-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.84rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.7);
+            white-space: nowrap;
+        }
+        .ctc-trust-check {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #d32f2f, #b71c1c);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.6rem;
+            font-weight: 800;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        /* ── Main content ── */
+        .ctc-main {
+            padding: 80px 0 0;
+            background: #fff;
+        }
+        .ctc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.4fr;
+            gap: 32px;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 clamp(1.25rem, 4vw, 2.5rem);
+        }
+
+        /* ── Info panel ── */
+        .ctc-info {
+            display: flex;
+            flex-direction: column;
             gap: 16px;
         }
-
-        .how-it-works .step {
-            padding: 18px;
-        }
-
-        .contact-form h2 {
+        .ctc-info-heading {
+            font-family: 'Outfit', Arial, sans-serif;
             font-size: 1.6rem;
-            margin-bottom: 14px;
-            color: var(--primary);
+            font-weight: 800;
+            color: #0a0f1a;
+            letter-spacing: -0.025em;
+            margin-bottom: 4px;
         }
-
-        .form-group {
-            margin-bottom: 12px;
+        .ctc-info-sub {
+            font-size: 0.92rem;
+            color: #6b7280;
+            line-height: 1.65;
+            margin-bottom: 8px;
         }
+        .ctc-contact-card {
+            background: #fff;
+            border: 1px solid #e8edf4;
+            border-radius: 16px;
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+        .ctc-contact-card:hover {
+            border-color: rgba(211,47,47,0.25);
+            box-shadow: 0 8px 24px rgba(211,47,47,0.08);
+        }
+        .ctc-card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #fff5f5, #fee2e2);
+            border: 1px solid #fecaca;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        .ctc-card-body h3 {
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #0a0f1a;
+            margin-bottom: 0.3rem;
+            letter-spacing: -0.01em;
+        }
+        .ctc-card-body p, .ctc-card-body a {
+            font-size: 0.88rem;
+            color: #4b5563;
+            line-height: 1.6;
+            text-decoration: none;
+        }
+        .ctc-card-body a { color: #d32f2f; font-weight: 600; }
+        .ctc-card-body a:hover { text-decoration: underline; }
+        .ctc-hours-card {
+            background: #0a0f1a;
+            border-radius: 16px;
+            padding: 1.5rem;
+            color: #fff;
+        }
+        .ctc-hours-card h3 {
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1rem;
+            letter-spacing: -0.01em;
+        }
+        .ctc-hours-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+        }
+        .ctc-hours-row:last-child { border-bottom: none; }
+        .ctc-hours-row span:first-child { font-size: 0.85rem; color: rgba(255,255,255,0.65); }
+        .ctc-hours-row span:last-child { font-size: 0.85rem; color: #fff; font-weight: 600; }
 
+        /* ── Form panel ── */
+        .ctc-form-shell {
+            background: #fff;
+            border: 1px solid #e8edf4;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        .ctc-form-header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid #f1f5f9;
+            background: #fafbfc;
+        }
+        .ctc-form-header h2 {
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #0a0f1a;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+        }
+        .ctc-form-header p {
+            font-size: 0.85rem;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+        .ctc-form-body {
+            padding: 1.5rem 2rem 2rem;
+        }
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
         }
-
+        .form-group {
+            margin-bottom: 14px;
+        }
         .form-group label {
             display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: var(--dark-gray);
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #374151;
+            margin-bottom: 6px;
+            letter-spacing: 0.02em;
         }
-
         .form-group input,
         .form-group textarea,
         .form-group select {
             width: 100%;
-            padding: 12px;
-            border: 2px solid var(--light-gray);
-            border-radius: 6px;
-            font-size: 1rem;
+            padding: 0.65rem 0.85rem;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 0.95rem;
             font-family: inherit;
-            transition: border-color 0.3s;
+            background: #fff;
+            color: #111827;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
-
         .form-group input:focus,
         .form-group textarea:focus,
         .form-group select:focus {
             outline: none;
-            border-color: var(--primary);
+            border-color: #d32f2f;
+            box-shadow: 0 0 0 3px rgba(211,47,47,0.1);
         }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 86px;
-        }
-
+        .form-group textarea { resize: vertical; min-height: 88px; }
         .submit-btn {
-            background: var(--primary);
-            color: var(--white);
-            padding: 10px 28px;
+            width: 100%;
+            padding: 14px;
             border: none;
-            border-radius: 6px;
-            font-size: 1rem;
-            font-weight: 600;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+            color: #fff;
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: 0.97rem;
+            font-weight: 700;
             cursor: pointer;
-            transition: background 0.3s;
-            width: 100%;
+            box-shadow: 0 6px 20px rgba(211,47,47,0.32);
+            transition: transform 0.22s ease, box-shadow 0.22s ease;
         }
+        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(211,47,47,0.42); }
+        .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
-        .submit-btn:hover {
-            background: #b71c1c;
+        /* ── Map ── */
+        .ctc-map {
+            margin-top: 64px;
+            height: 300px;
+            overflow: hidden;
         }
+        .ctc-map iframe { width: 100%; height: 100%; border: 0; display: block; }
 
-        .map-section {
-            padding: 0;
-            height: 280px;
+        /* ── Responsive ── */
+        @media (max-width: 860px) {
+            .ctc-grid { grid-template-columns: 1fr; }
         }
-
-        .map-container {
-            width: 100%;
-            height: 100%;
-        }
-
-        .map-container iframe {
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
-        .hours-card {
-            background: var(--white);
-            padding: 16px;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            margin-top: 14px;
-        }
-
-        .hours-card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            color: var(--primary);
-        }
-
-        .hours-list {
-            display: grid;
-            gap: 10px;
-        }
-
-        .hours-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 6px;
-            border-bottom: 1px solid var(--light-gray);
-        }
-
-        .hours-item:last-child {
-            border-bottom: none;
-        }
-
-        .day {
-            font-weight: 500;
-            color: var(--dark-gray);
-        }
-
-        .time {
-            color: var(--medium-gray);
-        }
-
-        /* footer styles handled by consistency.css */
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero p {
-                font-size: 1.1rem;
-            }
-
-            .contact-info,
-            .contact-form {
-                padding: 20px;
-            }
-
-            .contact-grid {
-                gap: 12px;
-                margin-top: 14px;
-            }
-
-            .contact-info,
-            .contact-form,
-            .how-it-works .container,
-            .how-it-works .steps {
-                max-width: 100%;
-            }
-
-            .form-row {
-                grid-template-columns: 1fr;
-                gap: 0;
-            }
-
-            .content-section {
-                padding: 24px 14px;
-            }
-
-            .map-section {
-                height: 220px;
-            }
-
-            .top-nav {
-                display: none;
-            }
-
-            .hero {
-                padding-top: 130px;
-            }
+        @media (max-width: 560px) {
+            .form-row { grid-template-columns: 1fr; gap: 0; }
+            .ctc-form-header, .ctc-form-body { padding: 1.25rem; }
         }
     </style>
     <link rel="stylesheet" href="consistency.css">
 </head>
 <body>
-    <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
             <div class="nav-content">
                 <a href="index.html" class="logo">OnTime Moving and Storage</a>
                 <button class="mobile-menu-toggle" aria-label="Toggle menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                    <span></span><span></span><span></span>
                 </button>
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
@@ -342,105 +324,110 @@
                     <li><a href="reviews.html">Reviews</a></li>
                     <li><a href="contact.html" class="active">Contact</a></li>
                     <li><a href="booknow.html" class="nav-highlight">Book Now</a></li>
-
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
+    <!-- Dark Hero -->
+    <section class="ctc-hero">
+        <div class="ctc-hero-inner">
+            <div class="ctc-eyebrow">Open 7 Days · 8 AM – 8 PM</div>
             <h1>Let's plan your move together</h1>
-            <p>Have a question, want to talk through your move, or ready to get a quote? Call us directly at (604) 505-0026 — we pick up 7 days a week, 8am to 8pm. Prefer to write? Fill out the form and we'll respond within 24 hours with a clear, no-obligation estimate tailored to exactly what you need.</p>
+            <p>Call us directly at (604) 505-0026 or fill out the form below. We'll follow up within 24 hours with a clear, no-obligation estimate tailored to exactly what you need.</p>
         </div>
     </section>
 
-    <!-- Trust bar -->
-    <div style="background:#fff;border-bottom:1px solid #e8e8e8;padding:16px 20px;">
-        <div class="container" style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px 28px;">
-            <span style="font-size:0.88rem;font-weight:600;color:#182133;display:flex;align-items:center;gap:7px;"><span style="background:#d32f2f;color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:800;">✓</span>Free In-Home Estimates</span>
-            <span style="font-size:0.88rem;font-weight:600;color:#182133;display:flex;align-items:center;gap:7px;"><span style="background:#d32f2f;color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:800;">✓</span>We Respond Within 24 Hours</span>
-            <span style="font-size:0.88rem;font-weight:600;color:#182133;display:flex;align-items:center;gap:7px;"><span style="background:#d32f2f;color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:800;">✓</span>No Commitment Required</span>
-            <span style="font-size:0.88rem;font-weight:600;color:#182133;display:flex;align-items:center;gap:7px;"><span style="background:#d32f2f;color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:800;">✓</span>Open 7 Days · 8 AM – 8 PM</span>
+    <!-- Dark trust bar -->
+    <div class="ctc-trust">
+        <div class="ctc-trust-inner">
+            <div class="ctc-trust-item"><span class="ctc-trust-check">✓</span> Free In-Home Estimates</div>
+            <div class="ctc-trust-item"><span class="ctc-trust-check">✓</span> We Respond Within 24 Hours</div>
+            <div class="ctc-trust-item"><span class="ctc-trust-check">✓</span> No Commitment Required</div>
+            <div class="ctc-trust-item"><span class="ctc-trust-check">✓</span> BBB A+ Accredited</div>
         </div>
     </div>
 
-    <!-- Contact Information -->
-    <section class="content-section">
-        <div class="container">
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <h2>Contact Information</h2>
-                    
-                    <div class="contact-item">
-                        <span class="contact-icon">Phone</span>
-                        <div class="contact-details">
-                            <h3>Phone</h3>
-                            <p><a href="tel:6045050026">(604) 505-0026</a></p>
-                            <p style="font-size: 0.9rem; margin-top: 5px;">Monday - Sunday: 8:00 AM - 8:00 PM</p>
-                        </div>
-                    </div>
+    <!-- Main content -->
+    <section class="ctc-main">
+        <div class="ctc-grid">
 
-                    <div class="contact-item">
-                        <span class="contact-icon">Email</span>
-                        <div class="contact-details">
-                            <h3>Email</h3>
-                            <p><a href="mailto:info@ontime-moving.com">info@ontime-moving.com</a></p>
-                            <p style="font-size: 0.9rem; margin-top: 5px;">We respond within 24 hours</p>
-                        </div>
-                    </div>
+            <!-- Left: Contact info -->
+            <div class="ctc-info">
+                <div>
+                    <h2 class="ctc-info-heading">Get in touch</h2>
+                    <p class="ctc-info-sub">Reach us by phone, email, or fill out the form. We're available 7 days a week and always happy to talk through your move.</p>
+                </div>
 
-                    <div class="contact-item">
-                        <span class="contact-icon">Map</span>
-                        <div class="contact-details">
-                            <h3>Address</h3>
-                            <p>104-1525 Broadway St<br>Port Coquitlam, BC V3C 6M2<br>Canada</p>
-                        </div>
-                    </div>
-
-                    <div class="hours-card">
-                        <h3>Business Hours</h3>
-                        <div class="hours-list">
-                            <div class="hours-item">
-                                <span class="day">Monday – Sunday</span>
-                                <span class="time">8:00 AM – 8:00 PM</span>
-                            </div>
-                        </div>
+                <div class="ctc-contact-card">
+                    <div class="ctc-card-icon">📞</div>
+                    <div class="ctc-card-body">
+                        <h3>Phone</h3>
+                        <p><a href="tel:6045050026">(604) 505-0026</a></p>
+                        <p>Mon – Sun: 8:00 AM – 8:00 PM</p>
                     </div>
                 </div>
 
-                <div class="contact-form">
+                <div class="ctc-contact-card">
+                    <div class="ctc-card-icon">✉️</div>
+                    <div class="ctc-card-body">
+                        <h3>Email</h3>
+                        <p><a href="mailto:info@ontime-moving.com">info@ontime-moving.com</a></p>
+                        <p>We respond within 24 hours</p>
+                    </div>
+                </div>
+
+                <div class="ctc-contact-card">
+                    <div class="ctc-card-icon">📍</div>
+                    <div class="ctc-card-body">
+                        <h3>Address</h3>
+                        <p>104-1525 Broadway St<br>Port Coquitlam, BC V3C 6M2</p>
+                    </div>
+                </div>
+
+                <div class="ctc-hours-card">
+                    <h3>Business Hours</h3>
+                    <div class="ctc-hours-row">
+                        <span>Monday – Friday</span>
+                        <span>8:00 AM – 8:00 PM</span>
+                    </div>
+                    <div class="ctc-hours-row">
+                        <span>Saturday – Sunday</span>
+                        <span>8:00 AM – 8:00 PM</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Quote form -->
+            <div class="ctc-form-shell">
+                <div class="ctc-form-header">
                     <h2>Request a Free Quote</h2>
-                    <p style="font-size:0.88rem;color:#374151;margin-bottom:14px;line-height:1.5;">We'll review your details and follow up within 24 hours to arrange a free in-home walkthrough — no commitment, no pressure.</p>
+                    <p>We'll review your details and follow up within 24 hours to arrange a free in-home walkthrough — no commitment, no pressure.</p>
+                </div>
+                <div class="ctc-form-body">
                     <form id="quoteForm" onsubmit="return handleSubmit(event)">
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="name">Full Name *</label>
                                 <input type="text" id="name" name="name" required>
                             </div>
-
                             <div class="form-group">
                                 <label for="phone">Phone Number *</label>
                                 <input type="tel" id="phone" name="phone" required>
                             </div>
                         </div>
-
                         <div class="form-group">
                             <label for="email">Email Address *</label>
                             <input type="email" id="email" name="email" required>
                         </div>
-
                         <div class="form-group">
-                            <label for="movingFrom">Moving From (Address) *</label>
+                            <label for="movingFrom">Moving From *</label>
                             <input type="text" id="movingFrom" name="movingFrom" placeholder="123 Main St, City, Province" required>
                         </div>
-
                         <div class="form-group">
-                            <label for="movingTo">Moving To (Address) *</label>
+                            <label for="movingTo">Moving To *</label>
                             <input type="text" id="movingTo" name="movingTo" placeholder="456 Oak Ave, City, Province" required>
                         </div>
-
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="moveSize">Move Size *</label>
@@ -455,48 +442,42 @@
                                     <option value="storage">Storage Unit</option>
                                 </select>
                             </div>
-
                             <div class="form-group">
                                 <label for="moveDate">Preferred Move Date *</label>
                                 <input type="date" id="moveDate" name="moveDate" required>
                             </div>
                         </div>
-
                         <div class="form-group">
                             <label for="preferredTime">Preferred Time</label>
                             <select id="preferredTime" name="preferredTime">
                                 <option value="">Select preferred time</option>
-                                <option value="morning">Morning (8AM - 12PM)</option>
-                                <option value="afternoon">Afternoon (12PM - 5PM)</option>
+                                <option value="morning">Morning (8AM – 12PM)</option>
+                                <option value="afternoon">Afternoon (12PM – 5PM)</option>
                                 <option value="flexible">Flexible</option>
                             </select>
                         </div>
-
                         <div class="form-group">
                             <label for="moveDetails">Move Details</label>
-                            <textarea id="moveDetails" name="moveDetails" placeholder="Fragile items, heavy furniture, stairs, parking restrictions, or any additional notes..."></textarea>
+                            <textarea id="moveDetails" name="moveDetails" placeholder="Fragile items, heavy furniture, stairs, parking restrictions, or any notes…"></textarea>
                         </div>
-
                         <button type="submit" class="submit-btn">Send My Request →</button>
                     </form>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Map Section -->
-    <section class="map-section">
-        <div class="map-container">
-            <iframe 
+        <!-- Map -->
+        <div class="ctc-map">
+            <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2604.2822926807147!2d-122.76993!3d49.26251!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5485d60c7bda081d%3A0x31940ea9dfb00809!2sOnTime%20Moving%20%26%20Storage!5e0!3m2!1sen!2sca!4v1645123456789!5m2!1sen!2sca"
                 allowfullscreen=""
                 loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade">
+                referrerpolicy="no-referrer-when-downgrade"
+                title="OnTime Moving & Storage location">
             </iframe>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -506,12 +487,12 @@
                 </div>
                 <div class="footer-section">
                     <h4>Contact</h4>
-                    <p><a href="tel:6045050026" >Call (604) 505-0026</a></p>
+                    <p><a href="tel:6045050026">Call (604) 505-0026</a></p>
                     <p><a href="mailto:info@ontime-moving.com">info@ontime-moving.com</a></p>
                     <p>104-1525 Broadway St., Port Coquitlam, BC V3C 6P6</p>
                     <p>Mon – Sun: 8:00 AM – 8:00 PM</p>
                 </div>
-                                <div class="footer-section">
+                <div class="footer-section">
                     <h4>Quick Links</h4>
                     <p><a href="services.html">Our Services</a></p>
                     <p><a href="about.html">About Us</a></p>
@@ -535,11 +516,7 @@
 
         async function handleSubmit(event) {
             event.preventDefault();
-            
-            // Get form data
             const formData = new FormData(event.target);
-            
-            // Map form fields to API fields
             const bookingData = {
                 customer_name: formData.get('name'),
                 phone: formData.get('phone'),
@@ -553,50 +530,39 @@
                 notes: formData.get('moveDetails'),
                 status: 'pending'
             };
-            
-            // Disable submit button
             const submitBtn = event.target.querySelector('.submit-btn');
             const originalText = submitBtn.textContent;
             submitBtn.disabled = true;
-            submitBtn.textContent = 'Submitting...';
-            
+            submitBtn.textContent = 'Submitting…';
             try {
-                // Send to booking API
                 const response = await fetch(`${API_BASE_URL}/booking`, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(bookingData)
                 });
-                
                 const result = await response.json();
-                
                 if (result.success) {
-                    showToast('Request Sent!', 'We\'ll follow up within 24 hours to arrange your free estimate. Booking ID: ' + result.booking_id, 'success');
+                    showToast('Request Sent!', 'We\'ll follow up within 24 hours. Booking ID: ' + result.booking_id, 'success');
                     event.target.reset();
                 } else {
-                    showToast('Submission Error', result.error || 'Failed to submit. Please try again or call us directly.', 'error');
+                    showToast('Submission Error', result.error || 'Please try again or call us directly.', 'error');
                 }
             } catch (error) {
-                console.error('Form submission error:', error);
-                showToast('Service Unavailable', 'Please call us directly at (604) 505-0026 or try again later.', 'error');
+                showToast('Service Unavailable', 'Please call us directly at (604) 505-0026.', 'error');
             } finally {
-                // Re-enable submit button
                 submitBtn.disabled = false;
                 submitBtn.textContent = originalText;
             }
-            
             return false;
         }
 
-        // Set minimum date to today for the date picker
         document.addEventListener('DOMContentLoaded', function() {
             const dateInput = document.getElementById('moveDate');
             const today = new Date().toISOString().split('T')[0];
             dateInput.setAttribute('min', today);
         });
     </script>
+
     <button id="chatLauncher" class="chat-launcher" type="button" aria-label="Open chat support" aria-expanded="false">
         <svg class="chat-launcher-icon" viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
         <span class="chat-launcher-label">Chat with us</span>
@@ -626,7 +592,3 @@
     <script src="chatbot.js"></script>
 </body>
 </html>
-
-
-
-

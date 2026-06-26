@@ -1,323 +1,386 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Residential moving, commercial relocation, secure containerized storage, and long-distance moves across BC. Free in-home estimates. BBB A+ accredited. Call (604) 505-0026.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moving & Storage Services — OnTime Moving | Lower Mainland, BC</title>
-    <!-- Modern Font -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        body { background: #fff; overflow-x: hidden; }
 
-        :root {
-            --primary: #d32f2f;
-            --primary-gradient: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
-            --dark: #182133;
-            --light-bg: #F8FAFC;
-            --card-bg: rgba(255, 255, 255, 0.7);
-            --text-main: #1E293B;
-            --text-muted: #374151;
-            --radius-lg: 12px;
-            --radius-pill: 999px;
-            --shadow-soft: 0 2px 12px rgba(0,0,0,0.07);
-            --shadow-hover: 0 8px 24px rgba(211, 47, 47, 0.18);
-        }
-
-        body {
-            font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
-            line-height: 1.6;
-            color: var(--text-main);
-            background: var(--light-bg);
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Modern Hero with Mesh Gradient feel */
-        .hero {
-            padding: 160px 20px 80px;
-            text-align: center;
-            background: radial-gradient(circle at top left, #FFE5E5 0%, transparent 40%),
-                        radial-gradient(circle at bottom right, #E0E7FF 0%, transparent 40%);
-        }
-
-        .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 800;
-            margin-bottom: 20px;
-            letter-spacing: -1px;
-            line-height: 1.1;
-            color: var(--dark);
-        }
-
-        .hero h1 span {
-            background: var(--primary-gradient);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero p {
-            font-size: 1.25rem;
-            color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto;
-            font-weight: 500;
-        }
-
-        .content-section {
-            padding: 60px 20px;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .section-header h2 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--dark);
-            letter-spacing: -0.5px;
-        }
-
-        /* Bento Box Grid */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 24px;
-        }
-
-        .service-card {
-            background: var(--card-bg);
-            border: 1px solid rgba(255,255,255,0.8);
-            backdrop-filter: blur(10px);
-            padding: 40px;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-soft);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        /* ── DARK HERO ── */
+        .svc-hero {
+            background: #0a0f1a;
             position: relative;
             overflow: hidden;
+            padding: 0;
         }
-
-        .service-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-hover);
-            border-color: rgba(211, 47, 47, 0.3);
+        .svc-hero::before {
+            content: '';
+            position: absolute;
+            width: 900px;
+            height: 900px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(211,47,47,0.13) 0%, transparent 65%);
+            top: -350px;
+            left: 50%;
+            transform: translateX(-50%);
+            pointer-events: none;
         }
-
-        .icon-wrapper {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #FFE5E5 0%, #FFF0F0 100%);
-            border-radius: 16px;
-            display: flex;
+        .svc-hero-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: clamp(5rem, 10vh, 8rem) clamp(1.25rem, 4vw, 3rem) clamp(4rem, 8vh, 6rem);
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        .svc-eyebrow {
+            display: inline-flex;
             align-items: center;
+            gap: 0.5rem;
+            padding: 0.42rem 1.1rem;
+            border-radius: 999px;
+            background: rgba(211,47,47,0.14);
+            border: 1px solid rgba(211,47,47,0.28);
+            color: #ff8a80;
+            font-size: 0.74rem;
+            font-weight: 700;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+        .svc-hero-inner h1 {
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: clamp(2.4rem, 5vw, 4.2rem);
+            font-weight: 800;
+            line-height: 1.08;
+            letter-spacing: -0.035em;
+            color: #fff;
+            margin-bottom: 1.5rem;
+        }
+        .svc-hero-inner h1 .grad {
+            background: linear-gradient(135deg, #ff8a80 0%, #ef5350 50%, #d32f2f 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .svc-hero-inner p {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.62);
+            max-width: 60ch;
+            margin: 0 auto 2.5rem;
+            line-height: 1.78;
+        }
+        .svc-hero-btns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
             justify-content: center;
-            font-size: 2rem;
-            margin-bottom: 24px;
         }
 
-        .service-card h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: var(--dark);
+        /* ── Dark trust bar ── */
+        .svc-trust {
+            background: #0d1321;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            padding: 18px 0;
         }
-
-        .service-card p {
-            color: var(--text-muted);
-            margin-bottom: 24px;
-            font-weight: 500;
-        }
-
-        .service-features {
-            list-style: none;
-        }
-
-        .service-features li {
-            padding: 8px 0;
-            color: var(--text-main);
-            font-size: 0.95rem;
-            display: flex;
-            align-items: center;
-            font-weight: 500;
-        }
-
-        .service-features li::before {
-            content: "✓";
-            margin-right: 10px;
-            font-size: 0.9rem;
-            color: #d32f2f;
-            font-weight: 700;
-        }
-
-        /* Trust pillars bar */
-        .trust-bar {
-            background: #fff;
-            border-top: 1px solid #e8e8e8;
-            border-bottom: 1px solid #e8e8e8;
-            padding: 20px 20px;
-        }
-        .trust-pillars {
+        .svc-trust-inner {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 12px 32px;
+            gap: 10px 32px;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
         }
-        .trust-pillar {
+        .svc-trust-item {
             display: flex;
             align-items: center;
             gap: 8px;
-            font-size: 0.9rem;
+            font-size: 0.84rem;
             font-weight: 600;
-            color: #182133;
+            color: rgba(255,255,255,0.7);
+            white-space: nowrap;
         }
-        .trust-check {
+        .svc-trust-check {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #d32f2f, #b71c1c);
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 20px;
-            height: 20px;
-            background: #d32f2f;
-            color: #fff;
-            border-radius: 50%;
-            font-size: 0.7rem;
+            font-size: 0.6rem;
             font-weight: 800;
+            color: #fff;
             flex-shrink: 0;
         }
 
-        /* Section subtitle */
-        .section-subtitle {
+        /* ── Services grid ── */
+        .svc-section {
+            padding: 96px 0;
+            background: #fff;
+        }
+        .svc-section-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+        .svc-section-header h2 {
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: clamp(2rem, 3.5vw, 2.8rem);
+            font-weight: 800;
+            color: #0a0f1a;
+            letter-spacing: -0.03em;
+            line-height: 1.12;
+            margin-bottom: 0.75rem;
+        }
+        .svc-section-header p {
             font-size: 1.05rem;
-            color: #5f6b82;
-            margin-top: 10px;
-            font-weight: 500;
-            max-width: 560px;
-            margin-left: auto;
-            margin-right: auto;
+            color: #6b7280;
+            max-width: 56ch;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+        .svc-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .svc-card {
+            background: #fff;
+            border: 1px solid #e8edf4;
+            border-radius: 20px;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        .svc-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #d32f2f, #ef5350);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.35s ease;
+        }
+        .svc-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 56px rgba(211,47,47,0.1), 0 4px 12px rgba(0,0,0,0.06);
+            border-color: rgba(211,47,47,0.2);
+        }
+        .svc-card:hover::before { transform: scaleX(1); }
+        .svc-card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #fff5f5 0%, #fee2e2 100%);
+            border: 1px solid #fecaca;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            flex-shrink: 0;
+        }
+        .svc-card h3 {
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #0a0f1a;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.02em;
+            line-height: 1.25;
+        }
+        .svc-card p {
+            color: #4b5563;
+            font-size: 0.95rem;
+            line-height: 1.78;
+            margin-bottom: 1.5rem;
+        }
+        .svc-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .svc-features li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: #374151;
+        }
+        .svc-features li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #d32f2f;
+            flex-shrink: 0;
         }
 
-        /* Second CTA button */
-        .cta-secondary {
-            display: inline-block;
+        /* ── Process section (dark) ── */
+        .svc-process {
+            background: #0d1321;
+            padding: 96px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .svc-process::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(211,47,47,0.08), transparent 70%);
+            bottom: -200px;
+            right: -100px;
+            pointer-events: none;
+        }
+        .svc-process-title {
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: clamp(1.9rem, 3vw, 2.8rem);
+            font-weight: 800;
             color: #fff;
-            border: 2px solid rgba(255,255,255,0.6);
-            padding: 14px 32px;
+            text-align: center;
+            margin-bottom: 56px;
+            letter-spacing: -0.03em;
+            line-height: 1.12;
+        }
+        .svc-process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+        .svc-step {
+            background: rgba(255,255,255,0.035);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 18px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .svc-step:hover {
+            transform: translateY(-4px);
+            border-color: rgba(211,47,47,0.28);
+        }
+        .svc-step-num {
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #d32f2f, #ef5350);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+        .svc-step h3 {
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
+        }
+        .svc-step p {
+            font-size: 0.87rem;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.7;
+        }
+
+        /* ── CTA section ── */
+        .svc-cta {
+            background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+            padding: 96px 20px;
+            text-align: center;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        .svc-cta::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 80% 80% at 50% 130%, rgba(255,255,255,0.1), transparent);
+            pointer-events: none;
+        }
+        .svc-cta-eyebrow {
+            font-size: 0.73rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.65);
+            margin-bottom: 1rem;
+        }
+        .svc-cta h2 {
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: 1rem;
+            line-height: 1.12;
+            position: relative;
+        }
+        .svc-cta p {
+            font-size: 1.05rem;
+            color: rgba(255,255,255,0.88);
+            max-width: 52ch;
+            margin: 0 auto 2.25rem;
+            line-height: 1.7;
+            position: relative;
+        }
+        .svc-cta-btns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            position: relative;
+        }
+        .svc-cta-white {
+            background: #fff;
+            color: #d32f2f;
+            padding: 14px 34px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            font-family: 'Outfit', Arial, sans-serif;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            transition: transform 0.22s ease, box-shadow 0.22s ease;
+        }
+        .svc-cta-white:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,0.28); }
+        .svc-cta-ghost {
+            border: 1.5px solid rgba(255,255,255,0.55);
+            color: #fff;
+            padding: 14px 34px;
             border-radius: 999px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 1rem;
-            margin-left: 12px;
-            transition: all 0.3s;
+            font-size: 0.95rem;
+            font-family: 'Outfit', Arial, sans-serif;
+            transition: background 0.22s ease, border-color 0.22s ease;
         }
-        .cta-secondary:hover { background: rgba(255,255,255,0.15); border-color: #fff; }
+        .svc-cta-ghost:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.85); }
 
-        @media (max-width: 560px) {
-            .cta-secondary { margin-left: 0; margin-top: 12px; display: block; }
-        }
-
-        /* Vibrant CTA */
-        .cta-section {
-            margin: 80px 20px;
-            background: var(--primary-gradient);
-            border-radius: var(--radius-lg);
-            padding: 80px 20px;
-            text-align: center;
-            color: white;
-            box-shadow: 0 8px 24px rgba(211, 47, 47, 0.2);
-        }
-
-        .cta-section h2 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 16px;
-            letter-spacing: -1px;
-        }
-
-        .cta-section p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            margin-bottom: 32px;
-            font-weight: 500;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: #fff;
-            color: var(--primary);
-            padding: 16px 40px;
-            border-radius: var(--radius-pill);
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.1rem;
-            transition: all 0.3s;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
-        .cta-button:hover {
-            transform: scale(1.05) translateY(-2px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-        }
-
-        /* Clean Footer */
-        footer {
-            background: #fff;
-            padding: 60px 20px 30px;
-            border-top: 1px solid rgba(0,0,0,0.05);
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-section h3 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: var(--dark);
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li { margin-bottom: 12px; }
-
-        .footer-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-
-        .footer-links a:hover { color: var(--primary); }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(0,0,0,0.05);
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
+        /* ── Responsive ── */
         @media (max-width: 768px) {
-            .hero { padding-top: 120px; }
-            .cta-section { padding: 60px 20px; margin: 40px 10px; }
+            .svc-grid { grid-template-columns: 1fr; }
+            .svc-process-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 480px) {
+            .svc-process-grid { grid-template-columns: 1fr; }
         }
     </style>
     <link rel="stylesheet" href="consistency.css">
@@ -328,9 +391,7 @@
             <div class="nav-content">
                 <a href="index.html" class="logo">OnTime Moving and Storage</a>
                 <button class="mobile-menu-toggle" aria-label="Toggle menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                    <span></span><span></span><span></span>
                 </button>
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
@@ -339,76 +400,81 @@
                     <li><a href="reviews.html">Reviews</a></li>
                     <li><a href="contact.html">Contact</a></li>
                     <li><a href="booknow.html" class="nav-highlight">Book Now</a></li>
-
                 </ul>
             </div>
         </div>
     </nav>
 
-    <section class="hero">
-        <div class="container">
-            <h1>Every service you need — <span>one trusted team.</span></h1>
-            <p>From a studio apartment in Coquitlam to a full office relocation downtown — we've handled it all for 22 years. Licensed, insured, BBB A+ accredited, and available 7 days a week with free in-home estimates and no surprise charges on your final bill.</p>
+    <!-- Dark Hero -->
+    <section class="svc-hero">
+        <div class="svc-hero-inner">
+            <div class="svc-eyebrow">Lower Mainland · 22 Years · BBB A+</div>
+            <h1>Every service you need —<br><span class="grad">one trusted team.</span></h1>
+            <p>From a studio apartment in Coquitlam to a full office relocation downtown — we've handled it all for 22 years. Licensed, insured, and available 7 days a week with free in-home estimates and no surprise charges.</p>
+            <div class="svc-hero-btns">
+                <a href="booknow.html" class="btn btn-primary btn-large">Get My Free Estimate</a>
+                <a href="tel:6045050026" class="btn btn-secondary btn-large">Call (604) 505-0026</a>
+            </div>
         </div>
     </section>
 
-    <div class="trust-bar">
-        <div class="container">
-            <div class="trust-pillars">
-                <div class="trust-pillar"><span class="trust-check">✓</span> Free In-Home Estimates</div>
-                <div class="trust-pillar"><span class="trust-check">✓</span> No Hidden Fees — Ever</div>
-                <div class="trust-pillar"><span class="trust-check">✓</span> BBB A+ Accredited</div>
-                <div class="trust-pillar"><span class="trust-check">✓</span> Licensed & Fully Insured</div>
-                <div class="trust-pillar"><span class="trust-check">✓</span> Available 7 Days a Week</div>
-            </div>
+    <!-- Dark trust bar -->
+    <div class="svc-trust">
+        <div class="svc-trust-inner">
+            <div class="svc-trust-item"><span class="svc-trust-check">✓</span> Free In-Home Estimates</div>
+            <div class="svc-trust-item"><span class="svc-trust-check">✓</span> No Hidden Fees — Ever</div>
+            <div class="svc-trust-item"><span class="svc-trust-check">✓</span> BBB A+ Accredited</div>
+            <div class="svc-trust-item"><span class="svc-trust-check">✓</span> Licensed & Fully Insured</div>
+            <div class="svc-trust-item"><span class="svc-trust-check">✓</span> Available 7 Days a Week</div>
         </div>
     </div>
 
-    <section class="content-section">
+    <!-- Services grid -->
+    <section class="svc-section">
         <div class="container">
-            <div class="section-header">
+            <div class="svc-section-header">
                 <h2>Moving & Storage Services</h2>
-                <p class="section-subtitle">Every service you book includes a written estimate, red-carpet floor protection, and a crew that shows up on time — or we make it right.</p>
+                <p>Every service you book includes a written estimate, red-carpet floor protection, and a crew that shows up on time — or we make it right.</p>
             </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="icon-wrapper">🏠</div>
+            <div class="svc-grid">
+                <div class="svc-card">
+                    <div class="svc-card-icon">🏠</div>
                     <h3>Residential Moving</h3>
                     <p>Studio apartment, condo, townhouse, or a 5-bedroom family home — our residential crews handle every scale of move with the same meticulous care. We pack, wrap, load, transport, unload, and place every item exactly where you want it. Arrive at your new home ready to live in it, not work in it.</p>
-                    <ul class="service-features">
+                    <ul class="svc-features">
                         <li>Full packing & unpacking</li>
                         <li>Furniture disassembly & reassembly</li>
                         <li>Fragile & high-value item care</li>
                     </ul>
                 </div>
 
-                <div class="service-card">
-                    <div class="icon-wrapper">🏢</div>
+                <div class="svc-card">
+                    <div class="svc-card-icon">🏢</div>
                     <h3>Commercial Relocation</h3>
                     <p>Business downtime costs money. We schedule around you — after hours, weekends, or overnight — and assign a dedicated project manager who coordinates your entire move from first walkthrough to final setup. Your team walks into a fully operational office, not a pile of boxes.</p>
-                    <ul class="service-features">
+                    <ul class="svc-features">
                         <li>After-hours & weekend scheduling</li>
                         <li>IT & server equipment handling</li>
                         <li>Dedicated project manager</li>
                     </ul>
                 </div>
 
-                <div class="service-card">
-                    <div class="icon-wrapper">📦</div>
+                <div class="svc-card">
+                    <div class="svc-card-icon">📦</div>
                     <h3>Secure Storage</h3>
                     <p>We bring the container to your door, you load at your own pace, then we transport it to our fully fenced, camera-monitored Port Coquitlam facility. With 100 individual units, short-term or long-term storage is always available — and your items are never mixed with anyone else's.</p>
-                    <ul class="service-features">
+                    <ul class="svc-features">
                         <li>100 on-site containers</li>
                         <li>24/7 monitored security</li>
                         <li>Month-to-month or long-term</li>
                     </ul>
                 </div>
 
-                <div class="service-card">
-                    <div class="icon-wrapper">🚛</div>
+                <div class="svc-card">
+                    <div class="svc-card-icon">🚛</div>
                     <h3>Long-Distance Moving</h3>
-                    <p>Moving to Kelowna, Calgary, Victoria, or beyond? Our long-distance crews are experienced on BC's mountain routes and inter-provincial highways. Your shipment travels with real-time GPS tracking, comprehensive cargo insurance, and a firm delivery window — not a vague estimate that leaves you waiting by the door.</p>
-                    <ul class="service-features">
+                    <p>Moving to Kelowna, Calgary, Victoria, or beyond? Our long-distance crews are experienced on BC's mountain routes and inter-provincial highways. Your shipment travels with real-time GPS tracking, comprehensive cargo insurance, and a firm delivery window — not a vague estimate.</p>
+                    <ul class="svc-features">
                         <li>Real-time GPS tracking</li>
                         <li>Full cargo insurance</li>
                         <li>Guaranteed delivery dates</li>
@@ -418,12 +484,45 @@
         </div>
     </section>
 
-    <section class="cta-section">
+    <!-- Process — dark -->
+    <section class="svc-process">
         <div class="container">
+            <p class="svc-process-title">How it works</p>
+            <div class="svc-process-grid">
+                <div class="svc-step">
+                    <div class="svc-step-num">01</div>
+                    <h3>Submit Your Request</h3>
+                    <p>Fill out the form — takes 2 minutes. We reach out within 24 hours to discuss your move.</p>
+                </div>
+                <div class="svc-step">
+                    <div class="svc-step-num">02</div>
+                    <h3>Free In-Home Estimate</h3>
+                    <p>We visit your home, assess your belongings, and give you a written all-in estimate with zero surprises.</p>
+                </div>
+                <div class="svc-step">
+                    <div class="svc-step-num">03</div>
+                    <h3>Confirm Your Date</h3>
+                    <p>Approve the estimate, reserve your moving date with a small deposit, and we handle the rest.</p>
+                </div>
+                <div class="svc-step">
+                    <div class="svc-step-num">04</div>
+                    <h3>Moving Day — Done Right</h3>
+                    <p>Our crew arrives on time, packs and loads with care, and delivers everything exactly where you want it.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="svc-cta">
+        <div class="container">
+            <p class="svc-cta-eyebrow">Port Coquitlam · Open 7 Days</p>
             <h2>Ready to book your move?</h2>
-            <p>One short form is all it takes. We'll call within 24 hours, schedule a free in-home walkthrough, and hand you a written all-in estimate with zero pressure and zero obligation. Most customers are booked and confirmed within 48 hours.</p>
-            <a href="booknow.html" class="cta-button">Request My Free Estimate</a>
-            <a href="tel:6045050026" class="cta-secondary">Call (604) 505-0026</a>
+            <p>One short form is all it takes. We'll call within 24 hours, schedule a free in-home walkthrough, and hand you a written all-in estimate with zero pressure and zero obligation.</p>
+            <div class="svc-cta-btns">
+                <a href="booknow.html" class="svc-cta-white">Request My Free Estimate</a>
+                <a href="tel:6045050026" class="svc-cta-ghost">Call (604) 505-0026</a>
+            </div>
         </div>
     </section>
 
@@ -436,12 +535,12 @@
                 </div>
                 <div class="footer-section">
                     <h4>Contact</h4>
-                    <p><a href="tel:6045050026" >Call (604) 505-0026</a></p>
+                    <p><a href="tel:6045050026">Call (604) 505-0026</a></p>
                     <p><a href="mailto:info@ontime-moving.com">info@ontime-moving.com</a></p>
                     <p>104-1525 Broadway St., Port Coquitlam, BC V3C 6P6</p>
                     <p>Mon – Sun: 8:00 AM – 8:00 PM</p>
                 </div>
-                                <div class="footer-section">
+                <div class="footer-section">
                     <h4>Quick Links</h4>
                     <p><a href="services.html">Our Services</a></p>
                     <p><a href="about.html">About Us</a></p>
@@ -459,6 +558,7 @@
             </div>
         </div>
     </footer>
+
     <button id="chatLauncher" class="chat-launcher" type="button" aria-label="Open chat support" aria-expanded="false">
         <svg class="chat-launcher-icon" viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
         <span class="chat-launcher-label">Chat with us</span>
@@ -488,6 +588,3 @@
     <script src="chatbot.js"></script>
 </body>
 </html>
-
-
-

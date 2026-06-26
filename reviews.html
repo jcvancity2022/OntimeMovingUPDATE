@@ -7,80 +7,104 @@
     <title>Customer Reviews — OnTime Moving & Storage | 4.2★ on Google</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="consistency.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* ── Hero ── */
+        body { overflow-x: hidden; }
+
+        /* ── Dark Hero ── */
         .reviews-page-hero {
-            background: linear-gradient(135deg, #b71c1c 0%, #d32f2f 60%, #e53935 100%);
-            padding: 6rem 0 4rem;
+            background: #0a0f1a;
+            position: relative;
+            overflow: hidden;
+            padding: clamp(5rem, 10vh, 7.5rem) clamp(1.25rem, 4vw, 3rem) clamp(3.5rem, 7vh, 5rem);
             text-align: center;
-            color: #fff;
         }
+        .reviews-page-hero::before {
+            content: '';
+            position: absolute;
+            width: 700px;
+            height: 700px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(211,47,47,0.13) 0%, transparent 65%);
+            top: -250px;
+            left: 50%;
+            transform: translateX(-50%);
+            pointer-events: none;
+        }
+        .reviews-page-hero .container { position: relative; z-index: 2; }
         .reviews-page-hero h1 {
-            font-family: var(--font-family-display, 'Inter', sans-serif);
-            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: clamp(2.2rem, 4.5vw, 3.6rem);
             font-weight: 800;
             letter-spacing: -0.03em;
             color: #fff;
-            margin-bottom: 0.75rem;
+            margin-bottom: 1rem;
+            line-height: 1.08;
         }
         .reviews-page-hero p {
-            font-size: clamp(1rem, 1.8vw, 1.2rem);
-            color: rgba(255,255,255,0.88);
-            max-width: 52ch;
-            margin: 0 auto 1.5rem;
-            line-height: 1.65;
+            font-size: 1.05rem;
+            color: rgba(255,255,255,0.62);
+            max-width: 56ch;
+            margin: 0 auto 1.75rem;
+            line-height: 1.78;
         }
         .reviews-hero-badge {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            background: rgba(255,255,255,0.15);
-            border: 1px solid rgba(255,255,255,0.35);
+            background: rgba(211,47,47,0.14);
+            border: 1px solid rgba(211,47,47,0.28);
             border-radius: 9999px;
-            padding: 0.4rem 1rem;
-            color: #fff;
-            font-size: 0.85rem;
-            font-weight: 600;
-            backdrop-filter: blur(4px);
+            padding: 0.42rem 1.1rem;
+            color: #ff8a80;
+            font-size: 0.74rem;
+            font-weight: 700;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            margin-bottom: 1.75rem;
         }
 
-        /* ── Stats bar ── */
+        /* ── Stats bar (dark glass) ── */
         .reviews-page-stats {
-            background: #fff;
-            border-bottom: 1px solid #e8e8e8;
-            padding: 2rem 0;
+            background: #0d1321;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            padding: 0;
         }
         .reviews-page-stats-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 0;
+            max-width: 700px;
+            margin: 0 auto;
         }
         .reviews-page-stat {
             text-align: center;
-            padding: 1.25rem 1rem;
-            border-right: 1px solid #e8e8e8;
+            padding: 2rem 1.5rem;
+            border-right: 1px solid rgba(255,255,255,0.07);
         }
         .reviews-page-stat:last-child { border-right: none; }
         .reviews-page-stat .stars {
             display: block;
             color: #f59e0b;
-            font-size: 1.1rem;
-            letter-spacing: 2px;
-            margin-bottom: 0.3rem;
+            font-size: 1rem;
+            letter-spacing: 3px;
+            margin-bottom: 0.5rem;
         }
         .reviews-page-stat .stat-number {
-            font-size: 2.4rem;
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: 2.6rem;
             font-weight: 800;
-            color: #182133;
+            color: #fff;
             line-height: 1;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.4rem;
         }
         .reviews-page-stat .stat-label {
-            font-size: 0.8rem;
-            color: #4b5563;
+            font-size: 0.73rem;
+            color: rgba(255,255,255,0.42);
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.08em;
         }
 
         /* ── Filter pills ── */
@@ -92,7 +116,7 @@
         }
         .reviews-page-filter-btn {
             font: inherit;
-            font-size: 0.85rem;
+            font-size: 0.84rem;
             font-weight: 600;
             color: #5f6b82;
             background: #fff;
@@ -102,20 +126,17 @@
             cursor: pointer;
             transition: all 0.2s ease;
         }
-        .reviews-page-filter-btn:hover {
-            border-color: #d32f2f;
-            color: #d32f2f;
-        }
+        .reviews-page-filter-btn:hover { border-color: #d32f2f; color: #d32f2f; }
         .reviews-page-filter-btn.active {
-            background: #182133;
+            background: #0a0f1a;
             color: #fff;
-            border-color: #182133;
+            border-color: #0a0f1a;
         }
 
         /* ── Reviews grid ── */
         .reviews-section-wrap {
             padding: 3rem 0 0;
-            background: #f8f8f8;
+            background: #f8f9fb;
         }
         #reviewsContainer.loading {
             text-align: center;
@@ -126,23 +147,24 @@
         .reviews-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 1.25rem;
+            gap: 16px;
         }
 
         /* ── Review card ── */
         .review-card {
             background: #fff;
-            border: 1px solid #e8e8e8;
-            border-radius: 16px;
+            border: 1px solid #eaeef4;
+            border-radius: 18px;
             padding: 1.5rem;
             display: flex;
             flex-direction: column;
-            gap: 0.75rem;
-            transition: box-shadow 0.2s ease, transform 0.2s ease;
+            gap: 0.85rem;
+            transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
         }
         .review-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 28px rgba(24,33,51,0.10);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 40px rgba(24,33,51,0.1);
+            border-color: rgba(211,47,47,0.15);
         }
         .review-header {
             display: flex;
@@ -150,97 +172,109 @@
             gap: 0.85rem;
         }
         .avatar {
-            width: 44px;
-            height: 44px;
+            width: 46px;
+            height: 46px;
             border-radius: 50%;
             flex-shrink: 0;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: 1.05rem;
             font-weight: 800;
             color: #fff;
         }
         .reviewer-info h3 {
-            margin: 0 0 0.1rem;
+            margin: 0 0 0.15rem;
+            font-family: 'Outfit', Arial, sans-serif;
             font-size: 0.95rem;
             font-weight: 700;
-            color: #182133;
+            color: #0a0f1a;
+            letter-spacing: -0.01em;
         }
-        .review-date {
-            font-size: 0.78rem;
-            color: #4b5563;
-        }
-        .review-source {
-            margin-left: auto;
-            flex-shrink: 0;
-        }
+        .review-date { font-size: 0.76rem; color: #9ca3af; }
+        .review-source { margin-left: auto; flex-shrink: 0; }
         .review-source svg { display: block; }
-        .rating {
-            color: #f59e0b;
-            font-size: 1rem;
-            letter-spacing: 1px;
-        }
+        .rating { color: #f59e0b; font-size: 1rem; letter-spacing: 1.5px; }
         .review-text {
-            font-size: 0.92rem;
-            color: #374151;
-            line-height: 1.7;
+            font-size: 0.91rem;
+            color: #4b5563;
+            line-height: 1.74;
             flex: 1;
         }
         .verified-badge {
             display: inline-flex;
             align-items: center;
             gap: 0.3rem;
-            padding: 0.28rem 0.6rem;
+            padding: 0.28rem 0.65rem;
             border-radius: 9999px;
             background: #f0fdf4;
             color: #15803d;
             border: 1px solid #bbf7d0;
-            font-size: 0.75rem;
+            font-size: 0.73rem;
             font-weight: 700;
             width: fit-content;
         }
         .review-response {
             font-size: 0.82rem;
             color: #374151;
-            background: #f8f8f8;
+            background: #f8f9fb;
             border-left: 3px solid #d32f2f;
-            border-radius: 0 8px 8px 0;
-            padding: 0.6rem 0.85rem;
-            line-height: 1.6;
+            border-radius: 0 10px 10px 0;
+            padding: 0.65rem 0.9rem;
+            line-height: 1.65;
         }
-        .review-response strong { color: #182133; }
+        .review-response strong { color: #0a0f1a; }
 
         /* ── CTA banner ── */
         .reviews-page-cta {
             margin-top: 3rem;
-            background: linear-gradient(135deg, #182133 0%, #2a3550 100%);
-            border-radius: 16px;
+            background: #0a0f1a;
+            border-radius: 20px;
             color: #fff;
             text-align: center;
-            padding: 3rem 2rem;
+            padding: 3.5rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .reviews-page-cta::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 70% 70% at 50% 130%, rgba(211,47,47,0.15), transparent);
+            pointer-events: none;
         }
         .reviews-page-cta h2 {
-            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
             font-weight: 800;
-            margin-bottom: 0.6rem;
-            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.025em;
+            position: relative;
         }
         .reviews-page-cta p {
-            color: rgba(255,255,255,0.78);
-            margin-bottom: 1.4rem;
-            font-size: 1rem;
+            color: rgba(255,255,255,0.62);
+            margin-bottom: 1.75rem;
+            font-size: 0.97rem;
+            max-width: 52ch;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.72;
+            position: relative;
         }
         .reviews-page-cta .btn {
-            background: #d32f2f;
+            background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
             color: #fff;
             border-radius: 9999px;
-            padding: 0.85rem 2rem;
+            padding: 13px 32px;
             font-weight: 700;
-            font-size: 0.95rem;
+            font-size: 0.92rem;
+            box-shadow: 0 6px 20px rgba(211,47,47,0.35);
+            position: relative;
         }
         .reviews-page-cta .btn:hover {
-            background: #b71c1c;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(211,47,47,0.45);
         }
         .error-message {
             color: #b91c1c;
@@ -253,7 +287,7 @@
 
         @media (max-width: 600px) {
             .reviews-page-stats-grid { grid-template-columns: 1fr; }
-            .reviews-page-stat { border-right: none; border-bottom: 1px solid #e8e8e8; }
+            .reviews-page-stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
             .reviews-page-stat:last-child { border-bottom: none; }
             .reviews-grid { grid-template-columns: 1fr; }
         }
