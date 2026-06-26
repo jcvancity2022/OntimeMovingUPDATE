@@ -94,30 +94,42 @@
             margin-bottom: 56px;
         }
         .hp-btn-red {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
             color: #fff;
-            padding: 17px 38px;
+            padding: 16px 38px;
             border-radius: 999px;
             text-decoration: none;
+            font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
             font-weight: 700;
-            font-size: 0.95rem;
-            box-shadow: 0 8px 28px rgba(211,47,47,0.42);
-            transition: transform 0.2s, box-shadow 0.2s;
+            font-size: 0.92rem;
+            line-height: 1;
+            box-shadow: 0 6px 20px rgba(211,47,47,0.38);
+            transition: transform 0.22s ease, box-shadow 0.22s ease;
+            white-space: nowrap;
         }
-        .hp-btn-red:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(211,47,47,0.52); }
+        .hp-btn-red:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(211,47,47,0.48); }
         .hp-btn-outline-w {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             background: rgba(255,255,255,0.07);
             color: #fff;
-            padding: 17px 38px;
+            padding: 16px 38px;
             border-radius: 999px;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            border: 1px solid rgba(255,255,255,0.16);
+            font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+            font-weight: 700;
+            font-size: 0.92rem;
+            line-height: 1;
+            border: 1.5px solid rgba(255,255,255,0.55);
             backdrop-filter: blur(8px);
-            transition: background 0.2s;
+            transition: background 0.22s, border-color 0.22s, transform 0.22s;
+            white-space: nowrap;
         }
-        .hp-btn-outline-w:hover { background: rgba(255,255,255,0.13); }
+        .hp-btn-outline-w:hover { background: rgba(255,255,255,0.14); border-color: #fff; transform: translateY(-2px); }
         /* Stats glass bar */
         .hp-stats-bar {
             display: grid;

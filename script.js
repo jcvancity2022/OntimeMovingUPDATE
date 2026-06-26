@@ -570,11 +570,12 @@ if (typeof module !== 'undefined' && module.exports) {
 
 // ── Sticky CTA + Back-to-top ──
 (function () {
+    const isHome = ['/', '/index.html', ''].some(p => location.pathname.endsWith(p));
     const cta = document.createElement('a');
     cta.className = 'sticky-cta-bar hidden';
     cta.href = 'booknow.html';
     cta.innerHTML = '📋 Get a Free Quote';
-    document.body.appendChild(cta);
+    if (!isHome) document.body.appendChild(cta);
 
     const btt = document.createElement('button');
     btt.className = 'back-to-top hidden';
