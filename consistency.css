@@ -123,10 +123,11 @@ body {
 }
 
 .nav-links a.nav-highlight.active {
-    background: linear-gradient(135deg, #b71c1c 0%, #8e0000 100%) !important;
+    background: linear-gradient(135deg, #ff3d3d 0%, #d32f2f 60%, #c62828 100%) !important;
     color: #fff !important;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.28), inset 0 2px 4px rgba(0,0,0,0.2) !important;
+    box-shadow: 0 0 0 2px rgba(255,100,100,0.35), 0 4px 14px rgba(211,47,47,0.5), inset 0 1px 0 rgba(255,255,255,0.22) !important;
     transform: translateY(1px);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.18);
 }
 
 .nav-highlight,
