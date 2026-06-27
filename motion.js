@@ -24,12 +24,11 @@
     // Elements to reveal on scroll — auto-targeted by selector
     const REVEAL_SELECTORS = [
       // Section headings
-      'h2.section-title, h2.how-it-works-title, h2.svc-process-title, h2.svc-section-header h2',
+      'h2.section-title, h2.how-it-works-title, h2.svc-process-title',
       '.svc-section-header h2',
       '.how-it-works-title, .how-it-works-sub',
       '.section-label, .reviews-section-label',
-      // Cards & grids
-      '.svc-card, .value-card, .step, .svc-step, .review-card',
+      // Individual cards NOT handled by stagger grids
       '.ctc-contact-card, .ctc-hours-card',
       // Trust bars
       '.svc-trust-item, .book-trust-item, .ctc-trust-item',
@@ -57,7 +56,7 @@
           observer.unobserve(el.target);
         }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0.05, rootMargin: '0px 0px 0px 0px' });
 
     // Apply reveal to individual elements
     REVEAL_SELECTORS.forEach(sel => {
@@ -85,6 +84,13 @@
       row.classList.add(i % 2 === 0 ? 'reveal-left' : 'reveal-right');
       observer.observe(row);
     });
+
+    // Fallback: reveal anything still hidden after 700ms (catches above-fold elements)
+    setTimeout(() => {
+      document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => {
+        el.classList.add('revealed');
+      });
+    }, 700);
   }
 
 
