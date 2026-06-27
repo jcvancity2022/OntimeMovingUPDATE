@@ -73,6 +73,18 @@
 #chatbot-header .info { flex: 1; }
 #chatbot-header .name { font-weight: 700; font-size: 15px; }
 #chatbot-header .status { font-size: 12px; opacity: 0.85; }
+#chatbot-close {
+  background: rgba(255,255,255,0.15);
+  border: none;
+  border-radius: 50%;
+  width: 30px; height: 30px;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+#chatbot-close:hover { background: rgba(255,255,255,0.3); }
 
 #chatbot-messages {
   flex: 1;
