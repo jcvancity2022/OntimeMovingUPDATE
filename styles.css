@@ -228,7 +228,20 @@ p, li, label, input, select, textarea, button, a {
     height: 3px;
     background: var(--color-dark);
     border-radius: 2px;
-    transition: var(--transition);
+    transition: transform 0.28s ease, opacity 0.2s ease;
+    transform-origin: center;
+}
+
+/* Bars → X when menu is open */
+.mobile-menu-toggle[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+.mobile-menu-toggle[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+.mobile-menu-toggle[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
 }
 
 /* Hero Section */
@@ -808,13 +821,16 @@ p, li, label, input, select, textarea, button, a {
         position: absolute;
         top: calc(100% + 0.6rem);
         right: 1rem;
-        background: var(--color-white);
-        border-radius: 12px;
-        box-shadow: 0 18px 40px rgba(11, 20, 40, 0.18);
+        background: rgba(240, 242, 247, 0.98);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255,255,255,0.82);
+        border-radius: 16px;
+        box-shadow: 0 18px 40px rgba(11, 20, 40, 0.14);
         padding: 1rem;
         flex-direction: column;
         gap: 0.5rem;
-        width: min(92vw, 340px);
+        width: min(92vw, 300px);
         z-index: 1200;
     }
 
