@@ -1104,29 +1104,51 @@
         .hp-gallery-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
+            gap: 16px;
             max-width: 1280px;
             margin: 0 auto;
             padding: 0 1.5rem;
         }
-        .hp-gallery-grid img {
+        .hp-gallery-card {
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.06);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hp-gallery-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.13);
+        }
+        .hp-gallery-card img {
             width: 100%;
             aspect-ratio: 4/3;
             object-fit: cover;
-            border-radius: 14px;
             display: block;
-            transition: transform 0.35s ease, box-shadow 0.35s ease;
         }
-        .hp-gallery-grid img:hover {
-            transform: scale(1.03);
-            box-shadow: 0 16px 40px rgba(0,0,0,0.18);
+        .hp-gallery-card-body {
+            padding: 14px 16px 16px;
         }
-        /* last row: 4 items but only 4 in row 2 — keep grid balanced */
+        .hp-gallery-card-title {
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #0a0f1a;
+            margin-bottom: 4px;
+            letter-spacing: -0.01em;
+        }
+        .hp-gallery-card-desc {
+            font-size: 0.78rem;
+            color: #6b7280;
+            line-height: 1.55;
+            margin: 0;
+        }
         @media (max-width: 900px) {
             .hp-gallery-grid { grid-template-columns: repeat(2, 1fr); }
         }
-        @media (max-width: 540px) {
-            .hp-gallery-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+        @media (max-width: 480px) {
+            .hp-gallery-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
         }
         </style>
         <div class="container">
@@ -1134,14 +1156,62 @@
             <h2 class="hp-gallery-title">Everything We Do, Shown Clearly</h2>
         </div>
         <div class="hp-gallery-grid">
-            <img src="images/homepage/ontimemovingtrucks.png"   alt="OnTime Moving fleet trucks">
-            <img src="images/homepage/ontimetruck.png"           alt="OnTime Moving truck">
-            <img src="images/homepage/ontimemovingservices.png" alt="OnTime Moving services">
-            <img src="images/homepage/containerizedstorage.png" alt="Containerized storage at your door">
-            <img src="images/homepage/onTimeWarehouse.png"      alt="OnTime warehouse">
-            <img src="images/homepage/onTimeWarehouseinside.png" alt="OnTime warehouse interior">
-            <img src="images/homepage/onTimeSupplyStore.png"    alt="OnTime supply store">
-            <img src="images/homepage/redcarpetservice.png"     alt="Red-carpet service">
+            <div class="hp-gallery-card">
+                <img src="images/homepage/ontimemovingtrucks.png" alt="OnTime Moving fleet trucks">
+                <div class="hp-gallery-card-body">
+                    <div class="hp-gallery-card-title">OnTime Moving Trucks</div>
+                    <p class="hp-gallery-card-desc">OnTime provides local and long-distance moving services.</p>
+                </div>
+            </div>
+            <div class="hp-gallery-card">
+                <img src="images/homepage/ontimetruck.png" alt="OnTime moving truck">
+                <div class="hp-gallery-card-body">
+                    <div class="hp-gallery-card-title">OnTime Truck</div>
+                    <p class="hp-gallery-card-desc">OnTime moving truck prepared for service.</p>
+                </div>
+            </div>
+            <div class="hp-gallery-card">
+                <img src="images/homepage/ontimemovingservices.png" alt="OnTime Moving services">
+                <div class="hp-gallery-card-body">
+                    <div class="hp-gallery-card-title">OnTime Moving Services</div>
+                    <p class="hp-gallery-card-desc">Our professional team prepares your house and furniture for a safe move.</p>
+                </div>
+            </div>
+            <div class="hp-gallery-card">
+                <img src="images/homepage/containerizedstorage.png" alt="Containerized storage">
+                <div class="hp-gallery-card-body">
+                    <div class="hp-gallery-card-title">Containerized Storage at your Door</div>
+                    <p class="hp-gallery-card-desc">OnTime's containerized storage transports your furniture safely from your door to your new home or our storage facility.</p>
+                </div>
+            </div>
+            <div class="hp-gallery-card">
+                <img src="images/homepage/onTimeWarehouse.png" alt="OnTime warehouse">
+                <div class="hp-gallery-card-body">
+                    <div class="hp-gallery-card-title">OnTime Warehouse</div>
+                    <p class="hp-gallery-card-desc">OnTime's storage warehouse is located in Port Coquitlam.</p>
+                </div>
+            </div>
+            <div class="hp-gallery-card">
+                <img src="images/homepage/onTimeWarehouseinside.png" alt="OnTime warehouse interior">
+                <div class="hp-gallery-card-body">
+                    <div class="hp-gallery-card-title">OnTime Warehouse Interior</div>
+                    <p class="hp-gallery-card-desc">OnTime's containerized storage is organized inside our secure warehouse facility.</p>
+                </div>
+            </div>
+            <div class="hp-gallery-card">
+                <img src="images/homepage/onTimeSupplyStore.png" alt="OnTime supply store">
+                <div class="hp-gallery-card-body">
+                    <div class="hp-gallery-card-title">OnTime Supply Store</div>
+                    <p class="hp-gallery-card-desc">OnTime provides moving boxes, packing materials, and supplies to make your move smooth and secure.</p>
+                </div>
+            </div>
+            <div class="hp-gallery-card">
+                <img src="images/homepage/redcarpetservice.png" alt="Red-carpet service">
+                <div class="hp-gallery-card-body">
+                    <div class="hp-gallery-card-title">Red-Carpet Service</div>
+                    <p class="hp-gallery-card-desc">OnTime's Red (Neoprene) Carpet Service protects your home and furniture during a move.</p>
+                </div>
+            </div>
         </div>
     </section>
 
