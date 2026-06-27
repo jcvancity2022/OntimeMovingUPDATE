@@ -43,10 +43,12 @@ body {
     max-width: var(--nav-shell-max-width) !important;
     margin-left: auto !important;
     margin-right: auto !important;
-    background: linear-gradient(130deg, rgba(255, 255, 255, 0.92), rgba(255, 245, 245, 0.9));
-    border: 1px solid rgba(211, 47, 47, 0.12);
+    background: linear-gradient(130deg, rgba(240, 242, 247, 0.96), rgba(232, 236, 245, 0.93)) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.82) !important;
     border-radius: var(--shared-radius-pill);
-    box-shadow: 0 8px 24px rgba(24, 33, 51, 0.09);
+    box-shadow: 0 4px 20px rgba(24, 33, 51, 0.08), 0 1px 0 rgba(255,255,255,0.6) inset !important;
 }
 
 .navbar .container,
