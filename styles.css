@@ -92,12 +92,12 @@ p, li, label, input, select, textarea, button, a {
 
 /* Navigation */
 .navbar {
-    background: linear-gradient(130deg, rgba(255, 255, 255, 0.84), rgba(243, 248, 255, 0.8));
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.72);
+    background: linear-gradient(130deg, rgba(240, 242, 247, 0.95), rgba(232, 236, 245, 0.92));
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.82);
     border-radius: var(--border-radius-full);
-    box-shadow: 0 8px 24px rgba(24, 33, 51, 0.09);
+    box-shadow: 0 4px 20px rgba(24, 33, 51, 0.08), 0 1px 0 rgba(255,255,255,0.6) inset;
     position: sticky;
     top: 0.75rem;
     z-index: 1000;
