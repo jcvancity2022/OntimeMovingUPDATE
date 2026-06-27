@@ -1075,6 +1075,76 @@
 
     </main>
 
+    <!-- Gallery: Everything We Do -->
+    <section class="hp-gallery">
+        <style>
+        .hp-gallery {
+            background: #f0f2f7;
+            padding: 72px 0 80px;
+        }
+        .hp-gallery-label {
+            display: block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #d32f2f;
+            text-align: center;
+            margin-bottom: 0.6rem;
+        }
+        .hp-gallery-title {
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: clamp(1.8rem, 3vw, 2.6rem);
+            font-weight: 800;
+            color: #0a0f1a;
+            text-align: center;
+            letter-spacing: -0.03em;
+            margin-bottom: 48px;
+        }
+        .hp-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .hp-gallery-grid img {
+            width: 100%;
+            aspect-ratio: 4/3;
+            object-fit: cover;
+            border-radius: 14px;
+            display: block;
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+        .hp-gallery-grid img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.18);
+        }
+        /* last row: 4 items but only 4 in row 2 — keep grid balanced */
+        @media (max-width: 900px) {
+            .hp-gallery-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 540px) {
+            .hp-gallery-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+        }
+        </style>
+        <div class="container">
+            <span class="hp-gallery-label">Our Work</span>
+            <h2 class="hp-gallery-title">Everything We Do, Shown Clearly</h2>
+        </div>
+        <div class="hp-gallery-grid">
+            <img src="images/homepage/ontimemovingtrucks.png"   alt="OnTime Moving fleet trucks">
+            <img src="images/homepage/ontimetruck.png"           alt="OnTime Moving truck">
+            <img src="images/homepage/ontimemovingservices.png" alt="OnTime Moving services">
+            <img src="images/homepage/containerizedstorage.png" alt="Containerized storage at your door">
+            <img src="images/homepage/onTimeWarehouse.png"      alt="OnTime warehouse">
+            <img src="images/homepage/onTimeWarehouseinside.png" alt="OnTime warehouse interior">
+            <img src="images/homepage/onTimeSupplyStore.png"    alt="OnTime supply store">
+            <img src="images/homepage/redcarpetservice.png"     alt="Red-carpet service">
+        </div>
+    </section>
+
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
