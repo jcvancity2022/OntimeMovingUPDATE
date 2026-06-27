@@ -41,6 +41,21 @@
             margin-bottom: 1rem;
             line-height: 1.08;
         }
+        .reviews-page-hero h1 .grad {
+            background: linear-gradient(135deg, #ff8a80 0%, #ef5350 50%, #d32f2f 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .reviews-section-label {
+            display: block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #d32f2f;
+            margin-bottom: 0.5rem;
+        }
         .reviews-page-hero p {
             font-size: 1.05rem;
             color: rgba(255,255,255,0.62);
@@ -317,7 +332,7 @@
     <section class="reviews-page-hero">
         <div class="container">
             <div class="reviews-hero-badge">⭐ Verified Google Reviews · Lower Mainland, BC</div>
-            <h1>Real People. Real Moves. Real Reviews.</h1>
+            <h1>Real People. Real Moves. <span class="grad">Real Reviews.</span></h1>
             <p>We don't cherry-pick testimonials — these are unedited reviews pulled directly from Google. 52 families across the Lower Mainland shared their experience, and we're proud of every one. Read what they said about their move, then let us earn yours.</p>
         </div>
     </section>
@@ -344,6 +359,7 @@
 
     <section class="reviews-section-wrap">
         <div class="container">
+            <span class="reviews-section-label">What our customers say</span>
             <div class="reviews-page-filters">
                 <button class="reviews-page-filter-btn active" data-filter="all">All Reviews</button>
                 <button class="reviews-page-filter-btn" data-filter="5">⭐ 5 Stars</button>
