@@ -134,10 +134,10 @@
 
 /* delete button — appears on hover */
 .msg-delete {
-  display: none;
+  display: block;
   background: none;
   border: none;
-  color: #bbb;
+  color: #ccc;
   cursor: pointer;
   font-size: 17px;
   line-height: 1;
@@ -147,7 +147,6 @@
   margin-top: 5px;
   transition: color 0.15s, background 0.15s;
 }
-.msg-wrap:hover .msg-delete { display: block; }
 .msg-delete:hover { color: #d32f2f; background: #fff0f0; }
 
 /* ── Footer / input ───────────────────────────────────────────────────────── */
