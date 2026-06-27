@@ -755,23 +755,35 @@
             .hp-bento { grid-template-columns: 1fr; }
             .hp-bento-big { grid-row: auto; }
             .hp-bcard-big { min-height: 340px; }
-            .hp-feat-grid { grid-template-columns: 1fr; }
+            .hp-feat-grid { grid-template-columns: repeat(2, 1fr); }
             .hp-review-grid { grid-template-columns: repeat(2, 1fr); }
             .hp-faq-layout { grid-template-columns: 1fr; gap: 36px; }
             .hp-faq-sticky { position: static; }
             .hp-split-inner { grid-template-columns: 1fr; gap: 36px; }
             .hp-split-float { right: 0; }
+            .hp-svc-grid { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 680px) {
-            .hp-hero-title { font-size: 2.6rem; }
+            .hp-hero-title { font-size: 2.2rem; }
+            .hp-hero-desc { font-size: 0.95rem; }
+            .hp-hero-cta { flex-direction: column; gap: 10px; }
+            .hp-btn-primary, .hp-btn-ghost { width: 100%; justify-content: center; }
             .hp-stats-bar { grid-template-columns: repeat(2, 1fr); }
             .hp-stat:nth-child(2) { border-right: none; }
             .hp-stat:nth-child(3) { border-right: 1px solid rgba(255,255,255,0.09); }
+            .hp-feat-grid { grid-template-columns: 1fr; }
             .hp-bento-row2,
             .hp-review-grid { grid-template-columns: 1fr; }
             .hp-bcard-med { min-height: 200px; }
             .hp-reviews-head { flex-direction: column; align-items: flex-start; }
-            .hp-services, .hp-features, .hp-split, .hp-reviews, .hp-faq { padding: 72px 0; }
+            .hp-services, .hp-features, .hp-split, .hp-reviews, .hp-faq { padding: 56px 0; }
+            .hp-title { font-size: 1.7rem; }
+            .hp-sub { font-size: 0.92rem; margin-bottom: 36px; }
+        }
+        @media (max-width: 420px) {
+            .hp-svc-grid { grid-template-columns: 1fr; }
+            .hp-svc-card img { aspect-ratio: 16/9; }
+            .hp-hero-title { font-size: 1.9rem; }
         }
     </style>
 </head>

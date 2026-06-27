@@ -375,12 +375,21 @@
         .svc-cta-ghost:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.85); }
 
         /* ── Responsive ── */
-        @media (max-width: 768px) {
-            .svc-grid { grid-template-columns: 1fr; }
+        @media (max-width: 900px) {
+            .svc-grid { grid-template-columns: repeat(2, 1fr); }
             .svc-process-grid { grid-template-columns: repeat(2, 1fr); }
+            .svc-section { padding: 64px 0; }
+        }
+        @media (max-width: 600px) {
+            .svc-grid { grid-template-columns: 1fr; }
+            .svc-section-header h2 { font-size: 1.7rem; }
+            .svc-section-header p { font-size: 0.93rem; }
+            .svc-hero { padding: 80px 0 60px; }
+            .svc-cta { padding: 64px 20px; }
         }
         @media (max-width: 480px) {
             .svc-process-grid { grid-template-columns: 1fr; }
+            .svc-section { padding: 48px 0; }
         }
     </style>
     <link rel="stylesheet" href="consistency.css">

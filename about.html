@@ -405,10 +405,18 @@
             .story-row { grid-template-columns: 1fr; gap: 2rem; }
             .story-row-reverse { direction: ltr; }
             .values-grid { grid-template-columns: 1fr; }
+            .abt-hero { padding: 0; }
+            .story-section { padding: 64px 0; }
+            .values-section { padding: 64px 0; }
         }
         @media (max-width: 560px) {
+            .abt-headline { font-size: clamp(1.9rem, 7vw, 2.6rem); }
             .abt-stats { grid-template-columns: repeat(2, 1fr); }
-            .cta-btn-white, .cta-btn-ghost { width: 100%; text-align: center; justify-content: center; display: block; }
+            .abt-stat-num { font-size: 2rem; }
+            .cta-btn-row { flex-direction: column; gap: 10px; }
+            .cta-btn-white, .cta-btn-ghost { width: 100%; text-align: center; justify-content: center; display: flex; }
+            .values-section { padding: 48px 0; }
+            .story-section { padding: 48px 0; }
         }
     </style>
     <link rel="stylesheet" href="consistency.css">

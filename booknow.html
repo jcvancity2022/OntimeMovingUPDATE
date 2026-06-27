@@ -271,9 +271,18 @@
             .steps { grid-template-columns: repeat(2, 1fr); }
             .form-row { grid-template-columns: 1fr; gap: 0; }
             .book-form, .book-header { padding: 1.25rem; }
+            .book-hero { padding: 80px 0 60px; }
+            .book-hero h1 { font-size: clamp(1.8rem, 6vw, 2.8rem); }
+            .how-it-works { padding: 56px 0 48px; }
+            .book-trust-inner { gap: 8px 20px; }
         }
         @media (max-width: 480px) {
             .steps { grid-template-columns: 1fr; }
+            .book-hero h1 { font-size: 1.8rem; }
+            .book-hero p { font-size: 0.92rem; }
+            .book-shell { border-radius: 16px; }
+            .book-section { padding: 0 10px 56px; }
+            .how-it-works-title { font-size: 1.6rem; }
         }
     </style>
 </head>

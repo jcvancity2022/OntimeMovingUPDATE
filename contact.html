@@ -341,10 +341,17 @@
         /* ── Responsive ── */
         @media (max-width: 860px) {
             .ctc-grid { grid-template-columns: 1fr; }
+            .ctc-main { padding: 64px 0; }
         }
         @media (max-width: 560px) {
             .form-row { grid-template-columns: 1fr; gap: 0; }
             .ctc-form-header, .ctc-form-body { padding: 1.25rem; }
+            .ctc-hero { padding: 80px 0 60px; }
+            .ctc-hero h1 { font-size: clamp(1.8rem, 7vw, 2.8rem); }
+            .ctc-info-heading { font-size: 1.3rem; }
+            .ctc-main { padding: 48px 0; }
+            .ctc-cta { padding: 56px 20px; }
+            .ctc-cta h2 { font-size: 1.5rem; }
         }
     </style>
     <link rel="stylesheet" href="consistency.css">
