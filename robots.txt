@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jcvancity2022.github.io/OntimeMovingUPDATE/sitemap.xml
