@@ -506,11 +506,19 @@ def get_statistics():
 
 @app.route('/api/health', methods=['GET'])
 def health_check():
-    """Health check endpoint"""
     return jsonify({
         'success': True,
         'status': 'healthy',
         'message': 'OnTime Moving API is running'
+    }), 200
+
+@app.route('/api/debug-chat', methods=['GET'])
+def debug_chat():
+    key = os.getenv('GROQ_API_KEY', '')
+    return jsonify({
+        'groq_client_loaded': _groq_client is not None,
+        'key_present': bool(key),
+        'key_preview': key[:12] + '...' if key else 'MISSING'
     }), 200
 
 
