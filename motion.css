@@ -1,0 +1,185 @@
+/* ═══════════════════════════════════════════════════════════════
+   OnTime Moving — Motion & Micro-Interaction System
+   Linked on every page. JS in motion.js drives class toggling.
+═══════════════════════════════════════════════════════════════ */
+
+/* ── Scroll progress bar ─────────────────────────────────────── */
+#scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, #d32f2f, #ef5350, #ff6b6b);
+  z-index: 9999;
+  transition: width 0.1s linear;
+  pointer-events: none;
+}
+
+/* ── Scroll reveal base states ───────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1),
+              transform 0.65s cubic-bezier(0.22,1,0.36,1);
+}
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-32px);
+  transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1),
+              transform 0.65s cubic-bezier(0.22,1,0.36,1);
+}
+.reveal-right {
+  opacity: 0;
+  transform: translateX(32px);
+  transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1),
+              transform 0.65s cubic-bezier(0.22,1,0.36,1);
+}
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 0.55s cubic-bezier(0.22,1,0.36,1),
+              transform 0.55s cubic-bezier(0.22,1,0.36,1);
+}
+.revealed {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* ── Stagger delays for grid children ───────────────────────── */
+.stagger-child:nth-child(1) { transition-delay: 0.05s; }
+.stagger-child:nth-child(2) { transition-delay: 0.13s; }
+.stagger-child:nth-child(3) { transition-delay: 0.21s; }
+.stagger-child:nth-child(4) { transition-delay: 0.29s; }
+.stagger-child:nth-child(5) { transition-delay: 0.37s; }
+.stagger-child:nth-child(6) { transition-delay: 0.45s; }
+
+/* ── Button shimmer on hover ─────────────────────────────────── */
+@keyframes btn-shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+.btn-primary,
+.submit-btn,
+.nav-highlight,
+.cta-btn-white,
+.svc-cta-white,
+.hp-btn-primary {
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary::after,
+.submit-btn::after,
+.nav-highlight::after,
+.cta-btn-white::after,
+.svc-cta-white::after,
+.hp-btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg,
+    transparent 35%,
+    rgba(255,255,255,0.28) 50%,
+    transparent 65%);
+  background-size: 200% 100%;
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+  border-radius: inherit;
+}
+.btn-primary:hover::after,
+.submit-btn:hover::after,
+.nav-highlight:hover::after,
+.cta-btn-white:hover::after,
+.svc-cta-white:hover::after,
+.hp-btn-primary:hover::after {
+  opacity: 1;
+  animation: btn-shimmer 0.6s ease forwards;
+}
+
+/* ── Ripple on click ─────────────────────────────────────────── */
+@keyframes ripple {
+  to { transform: scale(4); opacity: 0; }
+}
+.ripple-effect {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.35);
+  transform: scale(0);
+  animation: ripple 0.55s linear;
+  pointer-events: none;
+  width: 80px; height: 80px;
+  margin-left: -40px; margin-top: -40px;
+}
+
+/* ── Card lift pulse on hover ────────────────────────────────── */
+.svc-card,
+.value-card,
+.step,
+.ctc-contact-card,
+.review-card,
+.book-shell {
+  transition: transform 0.28s cubic-bezier(0.22,1,0.36,1),
+              box-shadow 0.28s cubic-bezier(0.22,1,0.36,1),
+              border-color 0.28s ease !important;
+}
+
+/* ── Trust-check icon bounce on scroll-in ────────────────────── */
+@keyframes check-pop {
+  0%   { transform: scale(0.5); opacity: 0; }
+  70%  { transform: scale(1.2); }
+  100% { transform: scale(1);   opacity: 1; }
+}
+.trust-check-pop {
+  animation: check-pop 0.45s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+/* ── Stat counter fade-up ────────────────────────────────────── */
+.stat-count-wrap {
+  display: inline-block;
+}
+
+/* ── Floating label on form focus ────────────────────────────── */
+.form-group {
+  position: relative;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  transition: border-color 0.22s ease,
+              box-shadow 0.22s ease,
+              background 0.22s ease,
+              transform 0.18s ease !important;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  transform: translateY(-1px);
+}
+
+/* ── Eyebrow badge entrance ──────────────────────────────────── */
+@keyframes badge-in {
+  from { opacity: 0; transform: translateY(-10px) scale(0.94); }
+  to   { opacity: 1; transform: none; }
+}
+.motion-badge-in {
+  animation: badge-in 0.5s cubic-bezier(0.22,1,0.36,1) 0.1s both;
+}
+
+/* ── Hero headline word-by-word stagger ─────────────────────── */
+@keyframes word-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: none; }
+}
+.hero-word {
+  display: inline-block;
+  animation: word-up 0.55s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+/* ── Reduce motion for accessibility ─────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal, .reveal-left, .reveal-right, .reveal-scale { opacity: 1; transform: none; }
+}
