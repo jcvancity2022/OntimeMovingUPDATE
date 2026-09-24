@@ -25,18 +25,26 @@ OnTime Moving and Storage provides moving and storage services across Metro Vanc
 
 ## About This Project
 
-This is a front-end portfolio project built to demonstrate web development, SEO, and UX skills using a real local business as the subject.
+A full-stack portfolio project demonstrating web development, on-page SEO, local SEO, and UX design skills — built around a real moving company serving the Lower Mainland of British Columbia.
+
+The site is designed to rank for non-branded local and service queries such as:
+- *moving company Port Coquitlam*
+- *residential movers Lower Mainland BC*
+- *commercial moving Vancouver*
+- *storage containers Port Coquitlam*
+- *how to hire a moving company in BC*
+- *free moving estimate Lower Mainland*
 
 ### Pages
 
-| Page | Description |
-|---|---|
-| [index.html](index.html) | Homepage — hero, services grid, moving checklist, service areas, FAQ |
-| [services.html](services.html) | Moving & storage services detail — residential, commercial, packing, storage |
-| [about.html](about.html) | Company history, team, and commitments |
-| [reviews.html](reviews.html) | Google reviews loaded dynamically via Flask API |
-| [contact.html](contact.html) | Contact form with booking request |
-| [booknow.html](booknow.html) | Free in-home estimate request form |
+| Page | URL | Target Queries |
+|---|---|---|
+| [index.html](index.html) | `/` | "movers Lower Mainland", "moving company BC", "moving checklist" |
+| [services.html](services.html) | `/services.html` | "residential moving BC", "commercial moving Vancouver", "packing services Lower Mainland" |
+| [about.html](about.html) | `/about.html` | "moving company Port Coquitlam", "BBB accredited movers BC" |
+| [reviews.html](reviews.html) | `/reviews.html` | "moving company reviews Lower Mainland", "best movers BC" |
+| [contact.html](contact.html) | `/contact.html` | "contact moving company Port Coquitlam", "movers quote BC" |
+| [booknow.html](booknow.html) | `/booknow.html` | "free moving estimate Lower Mainland", "book movers BC" |
 
 ### Tech Stack
 
