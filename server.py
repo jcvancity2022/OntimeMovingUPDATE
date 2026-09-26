@@ -538,6 +538,7 @@ def chat():
         ]
     }
     """
+    print(f"[chat] _groq_client={_groq_client}, key_present={bool(os.getenv('GROQ_API_KEY','').strip())}")
     if not _groq_client:
         return jsonify({
             'success': False,

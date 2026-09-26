@@ -1,0 +1,47 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "OnTime Moving Website (server.py)",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["server.py"],
+      "port": 5000
+    },
+    {
+      "name": "OnTime Moving Booking API (booking_api.py)",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["booking_api.py"],
+      "port": 5000
+    },
+    {
+      "name": "OnTime Moving Review API (api_server.py)",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["api_server.py"],
+      "port": 5000
+    },
+    {
+      "name": "Forge Templates Platform (multi-tenant SaaS)",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["template-store/platform/app.py"],
+      "port": 5050
+    },
+    {
+      "name": "Pro Max Business Template Backend",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["template-store/products/promax-business/backend/app.py"],
+      "port": 5000
+    },
+    {
+      "name": "Premier Realty Group (server.js)",
+      "runtimeExecutable": "C:\\Program Files\\nodejs\\node.exe",
+      "runtimeArgs": ["C:\\ClaudePremierRealtyUPDATE\\cloud-run\\server.js"],
+      "port": 8080
+    },
+    {
+      "name": "Book a Trip (app.py)",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["C:\\BookATrip\\backend\\app.py"],
+      "port": 5090
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+platform.db
+.secret_key
+.env
+logs/
+backups/
+.git/

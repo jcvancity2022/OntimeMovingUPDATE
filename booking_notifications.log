@@ -5,3 +5,6 @@
 {"timestamp": "2026-06-16T18:37:31.493772", "booking_id": 123, "customer_name": "Direct Test", "email": "directtest@example.com", "phone": "(604) 555-0001", "move_date": "2026-04-10", "status": "logged_only"}
 {"timestamp": "2026-06-16T18:38:32.586745", "booking_id": 123, "customer_name": "Direct Test", "email": "directtest@example.com", "phone": "(604) 555-0001", "move_date": "2026-04-10", "status": "logged_only"}
 {"timestamp": "2026-06-16T18:40:36.843484", "booking_id": 123, "customer_name": "Direct Test", "email": "directtest@example.com", "phone": "(604) 555-0001", "move_date": "2026-04-10", "status": "logged_only"}
+{"timestamp": "2026-06-27T01:45:07.746830", "booking_id": 28, "customer_name": "Jeffrey Cheng", "email": "jca509@sfu.ca", "phone": "6048183906", "move_date": "2026-06-30", "status": "logged_only"}
+{"timestamp": "2026-06-27T01:45:11.510471", "booking_id": 29, "customer_name": "Jeffrey Cheng", "email": "jca509@sfu.ca", "phone": "6048183906", "move_date": "2026-06-30", "status": "logged_only"}
+{"timestamp": "2026-06-27T01:45:14.990309", "booking_id": 30, "customer_name": "Jeffrey Cheng", "email": "jca509@sfu.ca", "phone": "6048183906", "move_date": "2026-06-30", "status": "logged_only"}

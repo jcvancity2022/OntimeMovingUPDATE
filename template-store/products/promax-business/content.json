@@ -1,0 +1,87 @@
+{
+  "theme": "default",
+  "brand": { "name": "Nova", "accent": "& Co." },
+  "nav": { "signIn": "Sign In", "cta": "Get Started" },
+  "hero": {
+    "badge": "✨ Trusted by 2,000+ small businesses",
+    "title": "Grow your business with a website that works as hard as you do.",
+    "subtitle": "Everything a local business needs — booking, services, testimonials and a contact funnel — in one fast, mobile-ready site.",
+    "primaryCta": "Buy This Template",
+    "secondaryCta": "See Features",
+    "image": "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=700&q=80",
+    "stats": [
+      { "value": "2,000+", "label": "Businesses launched" },
+      { "value": "4.9/5", "label": "Average rating" },
+      { "value": "10 min", "label": "Avg. setup time" }
+    ]
+  },
+  "logoStrip": {
+    "label": "Built for every kind of local business",
+    "items": ["Salons", "Contractors", "Studios", "Clinics", "Cafés"]
+  },
+  "features": {
+    "label": "Why This Template",
+    "title": "Built to convert visitors into customers",
+    "subtitle": "Every section is designed around one goal: turning traffic into booked jobs and paying clients.",
+    "items": [
+      { "icon": "⚡", "title": "Fast by Default", "text": "No bloated builders. Clean HTML/CSS that loads instantly on any connection or device." },
+      { "icon": "🎨", "title": "Fully Customizable", "text": "Every color, font and spacing value lives in one CSS variable block — restyle the whole site in minutes." },
+      { "icon": "📱", "title": "Mobile-First", "text": "Looks sharp from a 5\" phone to a 27\" monitor, with no extra work required." },
+      { "icon": "🔍", "title": "SEO Ready", "text": "Semantic markup and meta tags out of the box, so local search rankings start on day one." },
+      { "icon": "🧩", "title": "Content Driven", "text": "Edit content.json to change every headline, stat and price — no HTML editing required." },
+      { "icon": "💾", "title": "Leads Get Saved", "text": "The contact form writes straight to a local database, so you never lose an inquiry." }
+    ]
+  },
+  "about": {
+    "label": "About the Template",
+    "title": "One template, endless brands",
+    "text": "Nova & Co. was designed so non-developers can reskin an entire premium website by changing a handful of values — no design experience required.",
+    "image": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=650&q=80",
+    "badgeValue": "98%",
+    "badgeLabel": "Client satisfaction",
+    "bullets": [
+      "4 ready-made color themes, or define your own in seconds",
+      "Swap fonts, radius and spacing sitewide from one place",
+      "Edit content.json to update text, images and pricing instantly",
+      "Contact form saves every lead to a built-in database"
+    ]
+  },
+  "pricing": {
+    "label": "Pricing",
+    "title": "Own it once. Use it forever.",
+    "subtitle": "A single purchase includes the full source, all theme presets and future updates.",
+    "plans": [
+      { "name": "Personal", "price": "$39", "period": "/one-time", "featured": false,
+        "items": ["Full template source", "1 site / 1 domain", "4 color presets", "Email support"] },
+      { "name": "Business", "price": "$79", "period": "/one-time", "featured": true,
+        "items": ["Everything in Personal", "Up to 5 domains", "Priority support", "Lifetime updates"] },
+      { "name": "Agency", "price": "$199", "period": "/one-time", "featured": false,
+        "items": ["Everything in Business", "Unlimited client sites", "White-label rights", "1:1 onboarding call"] }
+    ]
+  },
+  "testimonials": {
+    "label": "Testimonials",
+    "title": "Loved by small business owners",
+    "subtitle": "A few words from people who launched with this template.",
+    "items": [
+      { "quote": "I had a real website live before lunch. Changed three colors and it looked exactly like my brand.", "name": "Maria Chen", "role": "Salon Owner" },
+      { "quote": "We use this for every client project now. Saves us at least a day of build time, every time.", "name": "Jordan Pierce", "role": "Freelance Designer" },
+      { "quote": "No page builder, no plugins, no monthly fee. Exactly what a small shop like ours needed.", "name": "Sam Osei", "role": "Contractor" }
+    ]
+  },
+  "cta": {
+    "title": "Ready to launch your site this week?",
+    "text": "Get the full source, every theme preset, and lifetime updates in one purchase.",
+    "email": "hello@example.com"
+  },
+  "contactForm": {
+    "title": "Get in touch",
+    "text": "Send us a message and we'll get back to you shortly.",
+    "successMessage": "Thanks! Your message has been received.",
+    "errorMessage": "Something went wrong. Please try again or email us directly."
+  },
+  "footer": {
+    "tagline": "A premium, fully customizable website template built for local businesses.",
+    "copyright": "© 2026 Nova & Co. Demo template — placeholder content."
+  }
+}

@@ -1,0 +1,8 @@
+platform.db
+platform.db.before-restore
+.secret_key
+.env
+logs/
+backups/
+__pycache__/
+**/__pycache__/
