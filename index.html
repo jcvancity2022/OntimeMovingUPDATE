@@ -346,6 +346,8 @@
             border: 1px solid rgba(0,0,0,0.06);
             box-shadow: 0 4px 16px rgba(0,0,0,0.05);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
         }
         .hp-svc-card:hover {
             transform: translateY(-5px);
@@ -353,12 +355,16 @@
         }
         .hp-svc-card img {
             width: 100%;
-            aspect-ratio: 4/3;
+            height: 200px;
             object-fit: cover;
             display: block;
+            flex-shrink: 0;
         }
         .hp-svc-body {
             padding: 14px 16px 18px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
         .hp-svc-title {
             font-family: 'Outfit', Arial, sans-serif;
@@ -855,7 +861,7 @@
         }
         @media (max-width: 420px) {
             .hp-svc-grid { grid-template-columns: 1fr; }
-            .hp-svc-card img { aspect-ratio: 16/9; }
+            .hp-svc-card img { height: 180px; }
             .hp-hero-title { font-size: 1.9rem; }
         }
     </style>
