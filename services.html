@@ -297,8 +297,16 @@
         }
         .svc-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 20px;
+        }
+        .svc-card-category {
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: #d32f2f;
+            margin-bottom: 6px;
         }
         .svc-card {
             background: #fff;
@@ -525,6 +533,9 @@
         .svc-cta-ghost:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.85); }
 
         /* ── Responsive ── */
+        @media (max-width: 1100px) {
+            .svc-grid { grid-template-columns: repeat(2, 1fr); }
+        }
         @media (max-width: 900px) {
             .svc-grid { grid-template-columns: repeat(2, 1fr); }
             .svc-process-grid { grid-template-columns: repeat(2, 1fr); }
@@ -596,64 +607,47 @@
                 <p>Every service you book includes a written estimate, red-carpet floor protection, and a crew that shows up on time — or we make it right.</p>
             </div>
             <div class="svc-grid">
-                <div class="svc-card" style="grid-column: 1 / -1;">
-                    <div class="svc-card-icon">📦</div>
-                    <h3>Storage Containers in Port Coquitlam &amp; Coquitlam, BC</h3>
-                    <p>Looking for storage containers in Coquitlam or Port Coquitlam? OnTime Moving and Storage delivers a portable storage container directly to your driveway — you load it at your own pace, then we transport it to our secure Port Coquitlam storage facility. No rushing, no truck rentals, no hauling across town.</p>
-                    <p style="margin-top:12px;">Our containerized storage facility on Broadway St in Port Coquitlam holds 100 individual containers, each individually locked and assigned to a single customer. The site is fully fenced and monitored by camera 24 hours a day. We serve Coquitlam, Port Coquitlam, Burnaby, Vancouver, Surrey, and the entire Lower Mainland.</p>
-                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:18px 0 6px;">
-                        <div style="background:#f8f9fb;border-radius:10px;padding:16px 18px;">
-                            <div style="font-weight:700;font-size:0.9rem;color:#1a1a2e;margin-bottom:6px;">📐 Container Size</div>
-                            <div style="font-size:0.85rem;color:#444;">8 ft wide × 7 ft tall × 16 ft long — fits contents of a 1–2 bedroom home</div>
-                        </div>
-                        <div style="background:#f8f9fb;border-radius:10px;padding:16px 18px;">
-                            <div style="font-weight:700;font-size:0.9rem;color:#1a1a2e;margin-bottom:6px;">📍 Facility Location</div>
-                            <div style="font-size:0.85rem;color:#444;">104-1525 Broadway St, Port Coquitlam, BC — fully fenced, camera-monitored</div>
-                        </div>
-                        <div style="background:#f8f9fb;border-radius:10px;padding:16px 18px;">
-                            <div style="font-weight:700;font-size:0.9rem;color:#1a1a2e;margin-bottom:6px;">📅 Rental Length</div>
-                            <div style="font-size:0.85rem;color:#444;">Month-to-month or long-term — no forced minimum, flex to your timeline</div>
-                        </div>
-                        <div style="background:#f8f9fb;border-radius:10px;padding:16px 18px;">
-                            <div style="font-weight:700;font-size:0.9rem;color:#1a1a2e;margin-bottom:6px;">🔒 Security</div>
-                            <div style="font-size:0.85rem;color:#444;">Individual padlock per container — your belongings never mixed with others</div>
-                        </div>
-                    </div>
-                    <ul class="svc-features">
-                        <li>Container delivered to your Coquitlam or Lower Mainland address</li>
-                        <li>100 individual locked containers at our Port Coquitlam facility</li>
-                        <li>24/7 camera-monitored, fully fenced property</li>
-                        <li>Short-term storage (renovations, between homes) or long-term</li>
-                        <li>Access your belongings on your schedule</li>
-                    </ul>
-                </div>
-
                 <div class="svc-card">
                     <div class="svc-card-icon">🏠</div>
+                    <div class="svc-card-category">Home</div>
                     <h3>Residential Moving</h3>
-                    <p>Studio apartment, condo, townhouse, or a 5-bedroom family home in Vancouver, Burnaby, Coquitlam, or anywhere in the Lower Mainland — our residential moving crews handle every scale with the same meticulous care. We pack, wrap, load, transport, unload, and place every item exactly where you want it.</p>
+                    <p>Full-service residential moves across the Lower Mainland — apartment, condo, or family home. We pack, load, transport, and place every item.</p>
                     <ul class="svc-features">
-                        <li>Full packing & unpacking</li>
-                        <li>Furniture disassembly & reassembly</li>
-                        <li>Fragile & high-value item care</li>
+                        <li>Full packing &amp; unpacking</li>
+                        <li>Furniture disassembly &amp; reassembly</li>
+                        <li>Fragile &amp; high-value item care</li>
                     </ul>
                 </div>
 
                 <div class="svc-card">
                     <div class="svc-card-icon">🏢</div>
+                    <div class="svc-card-category">Office</div>
                     <h3>Commercial Relocation</h3>
-                    <p>Business downtime costs money. Our commercial moving team serves Metro Vancouver, Surrey, and the Tri-Cities — scheduling after hours, weekends, or overnight. A dedicated project manager coordinates your entire office move from first walkthrough to final setup.</p>
+                    <p>Office and business moves with minimal downtime. We serve Metro Vancouver, Surrey, and the Tri-Cities — after hours and weekends available.</p>
                     <ul class="svc-features">
-                        <li>After-hours & weekend scheduling</li>
-                        <li>IT & server equipment handling</li>
+                        <li>After-hours &amp; weekend scheduling</li>
+                        <li>IT &amp; server equipment handling</li>
                         <li>Dedicated project manager</li>
                     </ul>
                 </div>
 
                 <div class="svc-card">
+                    <div class="svc-card-icon">📦</div>
+                    <div class="svc-card-category">Storage</div>
+                    <h3>Storage Containers — Coquitlam</h3>
+                    <p>Container delivered to your door, loaded at your pace, secured at our Port Coquitlam facility. 100 individual locked units, 24/7 camera-monitored.</p>
+                    <ul class="svc-features">
+                        <li>8×7×16 ft containers — fits 1–2 bedroom home</li>
+                        <li>Month-to-month or long-term rental</li>
+                        <li>Delivery across the Lower Mainland</li>
+                    </ul>
+                </div>
+
+                <div class="svc-card">
                     <div class="svc-card-icon">🚛</div>
+                    <div class="svc-card-category">Long Distance</div>
                     <h3>Long-Distance Moving</h3>
-                    <p>Moving to Kelowna, Calgary, Victoria, or beyond? Our long-distance crews are experienced on BC's mountain routes and inter-provincial highways. Your shipment travels with real-time GPS tracking, comprehensive cargo insurance, and a firm delivery window — not a vague estimate.</p>
+                    <p>Moving to Kelowna, Calgary, Victoria, or beyond? Real-time GPS tracking, full cargo insurance, and a guaranteed delivery window — not a guess.</p>
                     <ul class="svc-features">
                         <li>Real-time GPS tracking</li>
                         <li>Full cargo insurance</li>
