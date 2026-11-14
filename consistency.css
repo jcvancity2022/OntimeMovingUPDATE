@@ -277,5 +277,5 @@ body .footer-bottom {
         margin-top: 0.25rem;
         width: 100%;
     }
-    .nav-links a.nav-staff-link { justify-content: flex-start; }
+    .nav-links li.nav-staff { display: flex; justify-content: center; }
 }
