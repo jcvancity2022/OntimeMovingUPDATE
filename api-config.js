@@ -245,3 +245,22 @@ const PRODUCTION_API = '';      // e.g. 'https://ontime-api.onrender.com/api'
     return nativeFetch(input, init);
   };
 })();
+
+/* Staff entry in the nav: "Staff" → login page, or "Dashboard" → admin when already signed in. */
+(function () {
+  function update() {
+    let signedIn = false;
+    try { signedIn = !!(localStorage.getItem('sessionToken') || sessionStorage.getItem('sessionToken')); } catch {}
+    if (!signedIn) return;
+    document.querySelectorAll('a.nav-staff-link').forEach(a => {
+      a.href = 'admin.html';
+      a.title = 'Open the admin dashboard';
+      a.setAttribute('aria-label', 'Admin dashboard');
+      a.classList.add('is-signed-in');
+      const t = a.querySelector('.nav-staff-text');
+      if (t) t.textContent = 'Dashboard';
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', update);
+  else update();
+})();

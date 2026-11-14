@@ -255,3 +255,27 @@ body .footer-bottom {
         gap: var(--spacing-sm, 1rem);
     }
 }
+
+/* ── Staff entry in the top nav (links to login.html → admin dashboard) ── */
+.nav-links a.nav-staff-link {
+    gap: 0.35rem;
+    color: #6b7280;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+.nav-links a.nav-staff-link:hover,
+.nav-links a.nav-staff-link:focus-visible {
+    color: var(--brand-primary-dark, #b71c1c);
+    background: rgba(211, 47, 47, 0.08);
+}
+.nav-links a.nav-staff-link .nav-staff-icon { flex-shrink: 0; }
+.nav-links a.nav-staff-link.is-signed-in { color: #15803d; }
+@media (max-width: 980px) {
+    .nav-links li.nav-staff {
+        border-top: 1px solid rgba(17, 24, 39, 0.08);
+        padding-top: 0.5rem;
+        margin-top: 0.25rem;
+        width: 100%;
+    }
+    .nav-links a.nav-staff-link { justify-content: flex-start; }
+}
