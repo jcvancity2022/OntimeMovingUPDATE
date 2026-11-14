@@ -719,7 +719,10 @@
 
             function fmtTime(ts) {
                 if (!ts) return '';
-                const d = new Date(ts.replace(' ', 'T') + 'Z');   // SQLite CURRENT_TIMESTAMP is UTC
+                // SQLite gives 'YYYY-MM-DD HH:MM:SS' (UTC, no zone); Postgres gives ISO with an offset
+                const iso = ts.includes('T') ? ts : ts.replace(' ', 'T') + 'Z';
+                const d = new Date(iso);
+                if (isNaN(d)) return '';
                 return d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
             }
 
@@ -1104,8 +1107,11 @@
 
         function formatDate(dateString) {
             if (!dateString) return 'N/A';
-            const date = new Date(dateString);
-            return date.toLocaleString();
+            // A plain move date ('2027-01-03') is a calendar day, not a UTC instant
+            const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateString);
+            if (m) return new Date(+m[1], m[2] - 1, +m[3]).toLocaleDateString();
+            const date = new Date(dateString.includes('T') ? dateString : dateString.replace(' ', 'T') + 'Z');
+            return isNaN(date) ? dateString : date.toLocaleString();
         }
 
         // Close modal when clicking outside

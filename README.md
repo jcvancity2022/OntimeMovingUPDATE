@@ -50,7 +50,8 @@ The site is designed to rank for non-branded local and service queries such as:
 
 - **HTML5 / CSS3 / Vanilla JS** — no framework dependencies
 - **Python / Flask** — backend API for reviews and booking requests (`server.py`)
-- **SQLite** — booking and notification database
+- **Supabase (PostgreSQL)** — live-site bookings, crew time slots and live chat, with the logic in SQL functions + Row Level Security (`supabase/schema.sql`, setup: [SUPABASE_SETUP.md](SUPABASE_SETUP.md))
+- **SQLite** — local development database used by `server.py`
 - **Groq API (llama-3.3-70b)** — AI chat assistant (`chatbot.js`)
 - **GitHub Pages** — static hosting for the front end
 - **Google Analytics 4** — traffic analytics via `traffic.js`
