@@ -362,6 +362,21 @@
             color: #721c24;
         }
 
+        .status-test {
+            background: #ede9fe;
+            color: #5b21b6;
+        }
+
+        tr.is-test-booking td { background: #faf8ff; }
+
+        .test-run-bar {
+            display: flex; align-items: center; justify-content: space-between; gap: 16px;
+            margin: 20px 30px 4px; padding: 14px 18px; border-radius: 12px;
+            background: #f5f3ff; border: 1px solid #ddd6fe; color: #4c1d95; font-size: 1rem;
+        }
+        .test-run-bar[hidden] { display: none; }
+        .test-run-bar small { display: block; color: #6d28d9; opacity: .85; margin-top: 2px; }
+
         .action-buttons {
             display: flex;
             gap: 5px;
@@ -512,6 +527,7 @@
                         <option value="confirmed">Confirmed</option>
                         <option value="completed">Completed</option>
                         <option value="cancelled">Cancelled</option>
+                        <option value="test">Test runs</option>
                     </select>
                 </div>
                 <div class="filter-group">
@@ -559,6 +575,13 @@
             <div class="table-header">
                 <div class="table-title">All Bookings</div>
                 <button class="btn btn-primary btn-sm" onclick="refreshData()">Reload</button>
+            </div>
+            <div class="test-run-bar" id="testRunBar" hidden>
+                <div>
+                    🧪 <strong id="testRunCount">0</strong> test bookings from the latest automated test run
+                    <small>Marked “test” — they don't use any crews, and the next test run replaces them.</small>
+                </div>
+                <button class="btn btn-secondary btn-sm" type="button" onclick="removeTestBookings()">Remove test bookings</button>
             </div>
             <div class="table-responsive">
                 <div id="loadingIndicator" class="loading">Loading bookings...</div>
@@ -615,7 +638,7 @@
             const icons = { success: '✓', error: '✕', info: 'i' };
             const toast = document.createElement('div');
             toast.style.cssText = 'background:#1e293b;color:#f8fafc;padding:14px 18px;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,0.25);display:flex;gap:12px;align-items:flex-start;min-width:280px;max-width:360px;animation:toastIn .3s ease;';
-            toast.innerHTML = `<span style="background:${colors[type]||colors.info};color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;">${icons[type]||icons.info}</span><div style="flex:1"><div style="font-weight:700;font-size:0.9rem;margin-bottom:2px;">${title}</div><div style="font-size:0.82rem;opacity:0.8;">${msg}</div></div><button onclick="this.closest('div[style]').remove()" style="background:none;border:none;color:#94a3b8;cursor:pointer;font-size:18px;line-height:1;padding:0;margin-left:4px;">&times;</button>`;
+            toast.innerHTML = `<span style="background:${colors[type]||colors.info};color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;">${icons[type]||icons.info}</span><div style="flex:1"><div style="font-weight:700;font-size:0.9rem;margin-bottom:2px;">${esc(title)}</div><div style="font-size:0.82rem;opacity:0.8;">${esc(msg)}</div></div><button onclick="this.closest('div[style]').remove()" style="background:none;border:none;color:#94a3b8;cursor:pointer;font-size:18px;line-height:1;padding:0;margin-left:4px;">&times;</button>`;
             container.appendChild(toast);
             setTimeout(() => toast.remove(), duration);
         }
@@ -850,6 +873,29 @@
             }
         }
 
+        // Everything a customer typed is escaped before it touches the page, so a
+        // booking can never inject HTML or script into the dashboard.
+        function esc(v) {
+            return String(v ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+        }
+        function safeStatus(s) { return String(s || '').replace(/[^a-z]/g, ''); }
+
+        let testBookingIds = [];
+        function updateTestBar(bookings) {
+            testBookingIds = bookings.filter(b => b.status === 'test').map(b => b.id);
+            document.getElementById('testRunCount').textContent = testBookingIds.length;
+            document.getElementById('testRunBar').hidden = testBookingIds.length === 0;
+        }
+
+        async function removeTestBookings() {
+            if (!testBookingIds.length || !confirm(`Remove ${testBookingIds.length} test booking(s)? Real bookings are not affected.`)) return;
+            for (const id of testBookingIds) {
+                await fetch(`${API_BASE_URL}/booking/${id}`, { method: 'DELETE', headers: setAuthHeader() });
+            }
+            showToast('Test bookings removed', `${testBookingIds.length} removed`, 'success');
+            loadBookings();
+        }
+
         function displayBookings(bookings) {
             const tbody = document.getElementById('bookingsTableBody');
             const table = document.getElementById('bookingsTable');
@@ -867,36 +913,38 @@
             table.style.display = 'table';
             noData.style.display = 'none';
             
-            tbody.innerHTML = bookings.map(booking => `
-                <tr>
-                    <td>${booking.id}</td>
+            tbody.innerHTML = bookings.map(booking => { const id = Number(booking.id); return `
+                <tr class="${booking.status === 'test' ? 'is-test-booking' : ''}">
+                    <td>${id}</td>
                     <td>
-                        <strong>${booking.customer_name}</strong><br>
-                        <small>${booking.email}</small>
+                        <strong>${esc(booking.customer_name)}</strong><br>
+                        <small>${esc(booking.email)}</small>
                     </td>
-                    <td>${booking.phone}</td>
+                    <td>${esc(booking.phone)}</td>
                     <td>
                         <small>
-                            <strong>From:</strong> ${booking.moving_from}<br>
-                            <strong>To:</strong> ${booking.moving_to}
+                            <strong>From:</strong> ${esc(booking.moving_from)}<br>
+                            <strong>To:</strong> ${esc(booking.moving_to)}
                         </small>
                     </td>
-                    <td>${booking.move_date}${booking.preferred_time ? '<br><small>' + booking.preferred_time + '</small>' : ''}</td>
-                    <td>${booking.move_size || 'N/A'}</td>
-                    <td><span class="status-badge status-${booking.status}">${booking.status}</span></td>
-                    <td><small>${formatDate(booking.created_at)}</small></td>
+                    <td>${esc(booking.move_date)}${booking.preferred_time ? '<br><small>' + esc(booking.preferred_time) + '</small>' : ''}</td>
+                    <td>${esc(booking.move_size || 'N/A')}</td>
+                    <td><span class="status-badge status-${safeStatus(booking.status)}">${esc(booking.status)}</span></td>
+                    <td><small>${esc(formatDate(booking.created_at))}</small></td>
                     <td>
                         <div class="action-buttons">
-                            <button class="btn btn-sm btn-primary" onclick="viewBooking(${booking.id})">View</button>
-                            <button class="btn btn-sm btn-success" onclick="updateStatus(${booking.id}, 'confirmed')">Confirm</button>
-                            <button class="btn btn-sm btn-danger" onclick="deleteBooking(${booking.id})">Delete</button>
+                            <button class="btn btn-sm btn-primary" onclick="viewBooking(${id})">View</button>
+                            <button class="btn btn-sm btn-success" onclick="updateStatus(${id}, 'confirmed')">Confirm</button>
+                            <button class="btn btn-sm btn-danger" onclick="deleteBooking(${id})">Delete</button>
                         </div>
                     </td>
                 </tr>
-            `).join('');
+            `; }).join('');
         }
 
         function updateStats(bookings) {
+            updateTestBar(bookings);
+            bookings = bookings.filter(b => b.status !== 'test');   // test runs don't count as business
             const total = bookings.length;
             const pending = bookings.filter(b => b.status === 'pending').length;
             const confirmed = bookings.filter(b => b.status === 'confirmed').length;
@@ -970,62 +1018,62 @@
             modalBody.innerHTML = `
                 <div class="detail-row">
                     <div class="detail-label">Booking ID</div>
-                    <div class="detail-value">#${booking.id}</div>
+                    <div class="detail-value">#${Number(booking.id)}</div>
                 </div>
                 <div class="detail-row">
                     <div class="detail-label">Customer Name</div>
-                    <div class="detail-value">${booking.customer_name}</div>
+                    <div class="detail-value">${esc(booking.customer_name)}</div>
                 </div>
                 <div class="detail-row">
                     <div class="detail-label">Phone</div>
-                    <div class="detail-value"><a href="tel:${booking.phone}">${booking.phone}</a></div>
+                    <div class="detail-value"><a href="tel:${esc(String(booking.phone).replace(/[^0-9+]/g, ''))}">${esc(booking.phone)}</a></div>
                 </div>
                 <div class="detail-row">
                     <div class="detail-label">Email</div>
-                    <div class="detail-value"><a href="mailto:${booking.email}">${booking.email}</a></div>
+                    <div class="detail-value"><a href="mailto:${esc(booking.email)}">${esc(booking.email)}</a></div>
                 </div>
                 <div class="detail-row">
                     <div class="detail-label">Moving From</div>
-                    <div class="detail-value">${booking.moving_from}</div>
+                    <div class="detail-value">${esc(booking.moving_from)}</div>
                 </div>
                 <div class="detail-row">
                     <div class="detail-label">Moving To</div>
-                    <div class="detail-value">${booking.moving_to}</div>
+                    <div class="detail-value">${esc(booking.moving_to)}</div>
                 </div>
                 <div class="detail-row">
                     <div class="detail-label">Move Date</div>
-                    <div class="detail-value">${booking.move_date}</div>
+                    <div class="detail-value">${esc(booking.move_date)}</div>
                 </div>
                 <div class="detail-row">
                     <div class="detail-label">Move Size</div>
-                    <div class="detail-value">${booking.move_size || 'Not specified'}</div>
+                    <div class="detail-value">${esc(booking.move_size || 'Not specified')}</div>
                 </div>
                 <div class="detail-row">
                     <div class="detail-label">Preferred Time</div>
-                    <div class="detail-value">${booking.preferred_time || 'Not specified'}</div>
+                    <div class="detail-value">${esc(booking.preferred_time || 'Not specified')}</div>
                 </div>
                 <div class="detail-row">
                     <div class="detail-label">Special Instructions</div>
-                    <div class="detail-value">${booking.special_instructions || 'None'}</div>
+                    <div class="detail-value">${esc(booking.special_instructions || 'None')}</div>
                 </div>
                 <div class="detail-row">
                     <div class="detail-label">Notes</div>
-                    <div class="detail-value">${booking.notes || 'None'}</div>
+                    <div class="detail-value">${esc(booking.notes || 'None')}</div>
                 </div>
                 <div class="detail-row">
                     <div class="detail-label">Status</div>
                     <div class="detail-value">
-                        <span class="status-badge status-${booking.status}">${booking.status}</span>
+                        <span class="status-badge status-${safeStatus(booking.status)}">${esc(booking.status)}</span>
                     </div>
                 </div>
                 <div class="detail-row">
                     <div class="detail-label">Created</div>
-                    <div class="detail-value">${formatDate(booking.created_at)}</div>
+                    <div class="detail-value">${esc(formatDate(booking.created_at))}</div>
                 </div>
                 <div style="margin-top: 20px; display: flex; gap: 10px;">
-                    <button class="btn btn-success" onclick="updateStatus(${booking.id}, 'confirmed'); closeModal();">Confirm</button>
-                    <button class="btn btn-warning" onclick="updateStatus(${booking.id}, 'completed'); closeModal();">Complete</button>
-                    <button class="btn btn-danger" onclick="updateStatus(${booking.id}, 'cancelled'); closeModal();">Cancel</button>
+                    <button class="btn btn-success" onclick="updateStatus(${Number(booking.id)}, 'confirmed'); closeModal();">Confirm</button>
+                    <button class="btn btn-warning" onclick="updateStatus(${Number(booking.id)}, 'completed'); closeModal();">Complete</button>
+                    <button class="btn btn-danger" onclick="updateStatus(${Number(booking.id)}, 'cancelled'); closeModal();">Cancel</button>
                     <button class="btn btn-secondary" onclick="closeModal()">Close</button>
                 </div>
             `;

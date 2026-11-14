@@ -13,8 +13,14 @@ record in the Supabase SQL database — and delete every test booking afterwards
 | `test_new_booking_shows_in_admin_dashboard` | After signing in, a new booking appears in the admin table |
 
 Test bookings are named `AUTOTEST …`, use `@example.com` emails, and go on dates about 10 months
-ahead, so real customers are never affected. Each one is deleted when its test finishes — even
-if the test fails — and a final sweep removes any leftovers.
+ahead, so real customers are never affected.
+
+**You can see them in the dashboard.** When a test finishes (pass or fail), its bookings are switched
+to status **test**: they appear in the admin table with a purple *test* badge and a
+"🧪 test bookings from the latest automated test run" bar, but they **don't use any crews** and
+aren't counted in the booking stats. Each new run first removes the previous run's test bookings,
+so only the latest run is ever shown. Click **Remove test bookings** in that bar to clear them
+yourself, or set `ONTIME_DELETE_TEST_DATA=1` to have the tests delete them instead.
 
 ## Run on your computer (Windows)
 Double-click **`run_booking_tests.bat`** in the project folder. The first run sets everything up
@@ -44,3 +50,4 @@ run page has screenshots of what the browser saw.
 | `ONTIME_BASE_URL` | live GitHub Pages site | test a local copy, e.g. `http://localhost:8080` |
 | `SUPABASE_URL` / `SUPABASE_ANON_KEY` | read from `api-config.js` | test against a different Supabase project |
 | `ONTIME_HEADED=1` | off | show the browser while testing |
+| `ONTIME_DELETE_TEST_DATA=1` | off | delete test bookings instead of keeping the latest run visible |

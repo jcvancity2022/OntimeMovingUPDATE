@@ -10,6 +10,12 @@ Configuration (environment variables — all optional except the staff login):
   SUPABASE_URL            Supabase project. Default: read from api-config.js
   SUPABASE_ANON_KEY       public key.       Default: read from api-config.js
   ONTIME_HEADED=1         show the browser while the tests run
+  ONTIME_DELETE_TEST_DATA=1  delete test bookings instead of keeping them
+
+Test bookings are kept automatically: when a test finishes, its bookings are
+switched to status 'test' so they show in the admin dashboard (marked Test)
+without holding a crew. Each new run first removes the previous run's ones,
+so the dashboard only ever shows the latest run.
 """
 import os
 import re
@@ -27,6 +33,7 @@ ARTIFACTS = Path(__file__).resolve().parent / "artifacts"
 BC = ZoneInfo("America/Vancouver")
 TEST_EMAIL_DOMAIN = "example.com"          # reserved domain — never a real customer
 TEST_NAME_PREFIX = "AUTOTEST"
+KEEP_TEST_DATA = os.getenv("ONTIME_DELETE_TEST_DATA") != "1"
 
 
 def _from_api_config(name: str) -> str:
@@ -98,6 +105,13 @@ class Supabase:
     def delete_booking(self, booking_id: int) -> None:
         self.rpc("staff_delete_booking", staff=True, p_id=booking_id)
 
+    def mark_as_test(self, booking_id: int) -> None:
+        self.rpc("staff_update_booking_status", staff=True, p_id=booking_id, p_status="test")
+
+    def finish(self, booking_id: int) -> None:
+        """Keep the booking visible as a 'test' booking (no crew held), or delete it."""
+        (self.mark_as_test if KEEP_TEST_DATA else self.delete_booking)(booking_id)
+
     def leftover_test_bookings(self) -> list:
         r = self.rpc("staff_list_bookings", staff=True, p_search=TEST_NAME_PREFIX)
         return [b for b in (r.json() if r.ok else [])
@@ -113,19 +127,24 @@ def sb() -> Supabase:
                     "to verify each booking and delete it afterwards.", returncode=2)
     client = Supabase(SUPABASE_URL, SUPABASE_KEY)
     client.sign_in(email, password)
-    yield client
-    # Safety net: remove anything a crashed test left behind
+    # Start clean: remove the previous run's test bookings
     for b in client.leftover_test_bookings():
         client.delete_booking(b["id"])
+    yield client
+    # Safety net: anything a crashed test left active is released (or deleted)
+    for b in client.leftover_test_bookings():
+        if b["status"] != "test":
+            client.finish(b["id"])
 
 
 @pytest.fixture
 def created(sb):
-    """Collects booking IDs a test creates; deletes them when the test ends (pass or fail)."""
+    """Collects booking IDs a test creates; when the test ends (pass or fail) they are
+    switched to status 'test' (or deleted with ONTIME_DELETE_TEST_DATA=1)."""
     ids = []
     yield ids
     for i in ids:
-        sb.delete_booking(i)
+        sb.finish(i)
 
 
 def find_date(sb: Supabase, slot: str, need_empty: bool = True, start_days: int = 300) -> dt.date:

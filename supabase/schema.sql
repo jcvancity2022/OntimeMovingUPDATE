@@ -50,6 +50,11 @@ create table if not exists public.bookings (
                          check (status in ('pending', 'confirmed', 'completed', 'cancelled')),
     created_at           timestamptz not null default now()
 );
+-- 'test' = a booking left by the automated tests: visible to staff, but it
+-- holds no crew (availability only counts 'pending' and 'confirmed').
+alter table public.bookings drop constraint if exists bookings_status_check;
+alter table public.bookings add constraint bookings_status_check
+    check (status in ('pending', 'confirmed', 'completed', 'cancelled', 'test'));
 create index if not exists bookings_date_time_idx on public.bookings (move_date, preferred_time);
 create index if not exists bookings_status_idx    on public.bookings (status);
 
