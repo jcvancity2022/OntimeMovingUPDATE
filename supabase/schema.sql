@@ -125,8 +125,8 @@ begin
 end $$;
 
 create or replace function public._today_bc()
-returns date language sql stable as $$
-    select (now() at time zone 'America/Vancouver')::date;
+returns date language sql stable set search_path = '' as $$
+    select (pg_catalog.now() at time zone 'America/Vancouver')::date;
 $$;
 
 -- Staff-only policies (direct table access for signed-in staff)
@@ -444,7 +444,21 @@ end $$;
 -- -----------------------------------------------------------------------------
 --  Who may call what
 -- -----------------------------------------------------------------------------
-revoke execute on all functions in schema public from public, anon;
+-- Revoke the default PUBLIC grant on OnTime's own functions only (other
+-- projects sharing this database are left untouched), then grant precisely.
+do $$
+declare f regprocedure;
+begin
+    for f in select p.oid::regprocedure from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+              where n.nspname = 'public' and p.proname in (
+                'is_staff','_require_staff','_today_bc','_visitor_chat','get_availability','book_slot',
+                'staff_online','live_chat_start','live_chat_send','live_chat_poll','live_chat_close',
+                'staff_me','staff_list_bookings','staff_get_booking','staff_update_booking_status',
+                'staff_delete_booking','staff_list_chats','staff_chat_messages','staff_chat_send','staff_chat_close')
+    loop
+        execute format('revoke execute on function %s from public, anon, authenticated', f);
+    end loop;
+end $$;
 
 grant execute on function public.get_availability(date)                                   to anon, authenticated;
 grant execute on function public.book_slot(text, text, text, text, text, date, text, text, text, text) to anon, authenticated;
@@ -465,5 +479,3 @@ grant execute on function public.staff_chat_messages(bigint, bigint)            
 grant execute on function public.staff_chat_send(bigint, text)                             to authenticated;
 grant execute on function public.staff_chat_close(bigint)                                  to authenticated;
 
--- Supabase also exposes new functions to anon by default; keep helpers private.
-alter default privileges in schema public revoke execute on functions from anon, public;

@@ -9,8 +9,8 @@
  * │  what it may do. NEVER paste the service_role / secret key here.     │
  * └───────────────────────────────────────────────────────────────────────┘
  */
-const SUPABASE_URL = '';        // e.g. 'https://abcdefghijkl.supabase.co'
-const SUPABASE_ANON_KEY = '';   // e.g. 'eyJhbGciOi…'  or  'sb_publishable_…'
+const SUPABASE_URL = 'https://gqqvtahnokdtcreijoiq.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_o_GOxusoh9T30v9lAM-UcQ_FnqoxsV1';   // public key — safe in the browser
 
 /* Optional: a hosted copy of server.py, only needed for the AI assistant
    (Groq). Booking and live chat don't need it once Supabase is set. */
