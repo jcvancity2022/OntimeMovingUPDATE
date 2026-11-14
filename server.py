@@ -7,6 +7,8 @@ from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from booking_database import BookingDatabase
 from email_notifier import EmailNotifier
+from scheduling import SlotScheduler, SlotFullError, DateClosedError, create_scheduling_blueprint
+from live_chat import LiveChatStore, create_live_chat_blueprint
 from functools import wraps
 from datetime import datetime
 import os
@@ -63,6 +65,12 @@ try:
 except Exception as e:
     print(f"✗ Failed to initialize email notifier: {e}")
     notifier = None
+
+# Time-slot scheduling + live chat (tables are created on first run)
+scheduler = SlotScheduler(db.db_path)
+scheduler.initialize()
+live_chat = LiveChatStore(db.db_path)
+live_chat.initialize()
 
 
 # ==================== AUTHENTICATION MIDDLEWARE ====================
@@ -135,7 +143,7 @@ def login():
         
         # Create session
         duration_days = 30 if remember else 1
-        token = db.create_session(user['id'], duration_days=duration_days)
+        token = db.create_session(user['id'], remember=bool(remember))
         
         return jsonify({
             'success': True,
@@ -287,17 +295,35 @@ def create_booking():
                 'error': 'Invalid date format. Use YYYY-MM-DD'
             }), 400
         
-        # Insert booking
-        booking_id = db.insert_booking(
-            customer_name=data['customer_name'],
-            phone=data['phone'],
-            email=data['email'],
-            moving_from=data['moving_from'],
-            moving_to=data['moving_to'],
-            move_date=data['move_date'],
-            move_size=data['move_size'],
-            notes=data.get('notes', '')
-        )
+        # Insert booking — checks the arrival window's capacity and inserts
+        # in one locked transaction so the same slot can't be double-booked
+        try:
+            booking_id = scheduler.book(
+                customer_name=data['customer_name'],
+                phone=data['phone'],
+                email=data['email'],
+                moving_from=data['moving_from'],
+                moving_to=data['moving_to'],
+                move_date=data['move_date'],
+                move_size=data['move_size'],
+                preferred_time=data.get('preferred_time', ''),
+                special_instructions=data.get('special_instructions', ''),
+                notes=data.get('notes', '')
+            )
+        except SlotFullError:
+            return jsonify({
+                'success': False,
+                'error': 'That arrival window was just booked. Please pick another time.',
+                'code': 'slot_full'
+            }), 409
+        except DateClosedError:
+            return jsonify({
+                'success': False,
+                'error': 'We are not booking moves on that date. Please choose another day.',
+                'code': 'date_closed'
+            }), 409
+        except ValueError as e:
+            return jsonify({'success': False, 'error': str(e)}), 400
         
         # Send email notifications
         try:
@@ -310,6 +336,7 @@ def create_booking():
                 'moving_to': data['moving_to'],
                 'move_date': data['move_date'],
                 'move_size': data['move_size'],
+                'preferred_time': data.get('preferred_time', ''),
                 'notes': data.get('notes', '')
             }
             print(f"📧 Sending notification for booking #{booking_id}...")
@@ -582,6 +609,11 @@ def chat():
             'success': False,
             'error': 'Chat service temporarily unavailable. Please call us at (604) 505-0026.'
         }), 500
+
+
+# ==================== SCHEDULING + LIVE CHAT ROUTES ====================
+app.register_blueprint(create_scheduling_blueprint(scheduler, require_auth))
+app.register_blueprint(create_live_chat_blueprint(live_chat, require_auth, notifier))
 
 
 # Error handlers

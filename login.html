@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="robots" content="noindex, nofollow">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login - OnTime Moving</title>
     <link rel="stylesheet" href="styles.css">
@@ -349,8 +350,9 @@
         </div>
     </div>
 
+    <script src="api-config.js"></script>
     <script>
-        const API_BASE_URL = 'http://localhost:5000/api';
+        const API_BASE_URL = window.ONTIME_API_BASE || 'http://localhost:5000/api';
 
         function togglePassword() {
             const passwordInput = document.getElementById('password');

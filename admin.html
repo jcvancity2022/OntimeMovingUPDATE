@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="robots" content="noindex, nofollow">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking Admin - OnTime Moving</title>
     <style>
@@ -255,6 +256,42 @@
             font-size: 1.1rem;
         }
 
+        /* ── Live chat inbox ── */
+        .live-chat-panel { background: var(--white); border-radius: 16px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 30px; overflow: hidden; }
+        .live-chat-panel .table-header { padding: 20px 30px; }
+        .lc-online { display: inline-flex; align-items: center; gap: 8px; font-size: .95rem; color: var(--medium-gray); }
+        .lc-online::before { content: ''; width: 10px; height: 10px; border-radius: 50%; background: var(--success); box-shadow: 0 0 0 3px rgba(76,175,80,.2); }
+        .lc-count { background: var(--primary); color: #fff; border-radius: 12px; padding: 2px 10px; font-size: .9rem; margin-left: 10px; vertical-align: middle; }
+        .lc-body { display: grid; grid-template-columns: 300px 1fr; height: 460px; }
+        .lc-list { border-right: 1px solid #eee; overflow-y: auto; }
+        .lc-empty { padding: 30px; color: var(--medium-gray); text-align: center; }
+        .lc-item { display: block; width: 100%; text-align: left; background: none; border: 0; border-bottom: 1px solid #f1f1f1; padding: 14px 18px; cursor: pointer; font: inherit; }
+        .lc-item:hover { background: var(--light-gray); }
+        .lc-item.selected { background: var(--primary-light); }
+        .lc-item-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+        .lc-name { font-weight: 700; }
+        .lc-tag { font-size: .72rem; font-weight: 700; text-transform: uppercase; border-radius: 8px; padding: 2px 8px; }
+        .lc-tag.waiting { background: #fef3c7; color: #92400e; }
+        .lc-tag.active { background: #dcfce7; color: #166534; }
+        .lc-tag.closed { background: #f3f4f6; color: #6b7280; }
+        .lc-preview { color: var(--medium-gray); font-size: .88rem; margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .lc-conv { display: flex; flex-direction: column; min-width: 0; }
+        .lc-conv-head { padding: 14px 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+        .lc-conv-head small { color: var(--medium-gray); display: block; }
+        .lc-msgs { flex: 1; overflow-y: auto; padding: 16px 20px; background: var(--light-gray); display: flex; flex-direction: column; gap: 8px; }
+        .lc-msg { max-width: 75%; padding: 9px 13px; border-radius: 14px; font-size: .95rem; line-height: 1.45; word-break: break-word; }
+        .lc-msg.visitor { align-self: flex-start; background: #fff; border: 1px solid #e5e7eb; }
+        .lc-msg.bot { align-self: flex-start; background: #f3f4f6; color: #4b5563; font-size: .88rem; }
+        .lc-msg.bot::before { content: 'AI assistant · '; font-weight: 700; }
+        .lc-msg.staff { align-self: flex-end; background: var(--primary); color: #fff; }
+        .lc-msg.system { align-self: center; background: none; color: var(--medium-gray); font-size: .82rem; }
+        .lc-msg time { display: block; font-size: .72rem; opacity: .7; margin-top: 3px; }
+        .lc-reply { display: flex; gap: 10px; padding: 12px 16px; border-top: 1px solid #eee; }
+        .lc-reply input { flex: 1; border: 1.5px solid #e5e7eb; border-radius: 10px; padding: 10px 14px; font-size: 1rem; font-family: inherit; }
+        .lc-reply input:focus { outline: none; border-color: var(--primary); }
+        .lc-placeholder { margin: auto; color: var(--medium-gray); }
+        @media (max-width: 800px) { .lc-body { grid-template-columns: 1fr; height: auto; } .lc-list { max-height: 220px; border-right: 0; border-bottom: 1px solid #eee; } .lc-conv { height: 420px; } }
+
         .bookings-table {
             background: var(--white);
             border-radius: 16px;
@@ -492,6 +529,31 @@
             </div>
         </div>
 
+        <!-- Live Chat Inbox -->
+        <section class="live-chat-panel" aria-labelledby="lcTitle">
+            <div class="table-header">
+                <div class="table-title" id="lcTitle">Live Chat <span class="lc-count" id="lcWaiting" hidden>0</span></div>
+                <div style="display:flex;align-items:center;gap:16px;">
+                    <span class="lc-online">You appear online to visitors</span>
+                    <label style="font-size:.95rem;color:var(--medium-gray);"><input type="checkbox" id="lcShowClosed"> Show ended</label>
+                </div>
+            </div>
+            <div class="lc-body">
+                <div class="lc-list" id="lcList"><div class="lc-empty">No chats yet. New requests appear here automatically.</div></div>
+                <div class="lc-conv">
+                    <div class="lc-conv-head" id="lcHead" hidden>
+                        <div><strong id="lcHeadName"></strong><small id="lcHeadMeta"></small></div>
+                        <button class="btn btn-secondary btn-sm" id="lcEndBtn" type="button">End chat</button>
+                    </div>
+                    <div class="lc-msgs" id="lcMsgs" role="log" aria-live="polite"><p class="lc-placeholder">Select a conversation to reply.</p></div>
+                    <form class="lc-reply" id="lcReply" hidden>
+                        <input id="lcInput" type="text" maxlength="1000" placeholder="Type your reply…" autocomplete="off" aria-label="Reply">
+                        <button class="btn btn-primary btn-sm" type="submit">Send</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
         <!-- Bookings Table -->
         <div class="bookings-table">
             <div class="table-header">
@@ -535,8 +597,9 @@
         </div>
     </div>
 
+    <script src="api-config.js"></script>
     <script>
-        const API_BASE_URL = 'http://localhost:5000/api';
+        const API_BASE_URL = window.ONTIME_API_BASE || 'http://localhost:5000/api';
         let allBookings = [];
         let currentUser = null;
 
@@ -644,8 +707,126 @@
             const isAuthenticated = await checkAuthentication();
             if (isAuthenticated) {
                 loadBookings();
+                LiveChat.start();
             }
         });
+
+        // ==================== LIVE CHAT INBOX ====================
+        const LiveChat = (() => {
+            let selected = null, lastId = 0, listTimer = null, msgTimer = null, lastWaiting = 0;
+            const baseTitle = document.title;
+            const $ = id => document.getElementById(id);
+
+            function fmtTime(ts) {
+                if (!ts) return '';
+                const d = new Date(ts.replace(' ', 'T') + 'Z');   // SQLite CURRENT_TIMESTAMP is UTC
+                return d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+            }
+
+            async function api(path, opts = {}) {
+                const res = await fetch(`${API_BASE_URL}${path}`, { ...opts, headers: setAuthHeader() });
+                if (res.status === 401) { redirectToLogin(); throw new Error('auth'); }
+                return res.json();
+            }
+
+            async function loadList() {
+                clearTimeout(listTimer);
+                try {
+                    const data = await api(`/admin/live-chats${$('lcShowClosed').checked ? '?all=1' : ''}`);
+                    if (data.success) renderList(data.chats, data.waiting);
+                } catch (e) { if (e.message === 'auth') return; }
+                listTimer = setTimeout(loadList, 5000);
+            }
+
+            function renderList(chats, waiting) {
+                const list = $('lcList');
+                $('lcWaiting').hidden = !waiting;
+                $('lcWaiting').textContent = `${waiting} waiting`;
+                document.title = waiting ? `(${waiting}) New chat · ${baseTitle}` : baseTitle;
+                if (waiting > lastWaiting) showToast('New live chat', 'A visitor is waiting to talk to someone.', 'success');
+                lastWaiting = waiting;
+
+                if (!chats.length) { list.innerHTML = '<div class="lc-empty">No chats yet. New requests appear here automatically.</div>'; return; }
+                list.innerHTML = '';
+                chats.forEach(c => {
+                    const b = document.createElement('button');
+                    b.type = 'button';
+                    b.className = 'lc-item' + (c.id === selected ? ' selected' : '');
+                    b.innerHTML = '<div class="lc-item-top"><span class="lc-name"></span><span class="lc-tag"></span></div><div class="lc-preview"></div>';
+                    b.querySelector('.lc-name').textContent = c.visitor_name || 'Website visitor';
+                    const tag = b.querySelector('.lc-tag');
+                    tag.textContent = c.status; tag.classList.add(c.status);
+                    b.querySelector('.lc-preview').textContent = (c.last_sender === 'staff' ? 'You: ' : '') + (c.last_message || '');
+                    b.addEventListener('click', () => select(c.id));
+                    list.appendChild(b);
+                });
+            }
+
+            function select(id) {
+                selected = id; lastId = 0;
+                $('lcMsgs').innerHTML = '';
+                $('lcHead').hidden = false;
+                $('lcReply').hidden = false;
+                document.querySelectorAll('.lc-item').forEach(el => el.classList.remove('selected'));
+                loadMessages();
+                loadList();
+                $('lcInput').focus();
+            }
+
+            async function loadMessages() {
+                clearTimeout(msgTimer);
+                if (!selected) return;
+                const id = selected;
+                try {
+                    const data = await api(`/admin/live-chats/${id}/messages?after=${lastId}`);
+                    if (!data.success || id !== selected) return;
+                    const c = data.chat;
+                    $('lcHeadName').textContent = c.visitor_name || 'Website visitor';
+                    $('lcHeadMeta').textContent = [c.visitor_contact, c.page_url, `started ${fmtTime(c.created_at)}`].filter(Boolean).join(' · ');
+                    $('lcEndBtn').hidden = c.status === 'closed';
+                    $('lcReply').hidden = c.status === 'closed';
+                    const box = $('lcMsgs');
+                    data.messages.forEach(m => {
+                        const div = document.createElement('div');
+                        div.className = `lc-msg ${m.sender}`;
+                        div.textContent = m.body;
+                        const t = document.createElement('time');
+                        t.textContent = (m.sender === 'staff' && m.sender_name ? m.sender_name + ' · ' : '') + fmtTime(m.created_at);
+                        div.appendChild(t);
+                        box.appendChild(div);
+                        lastId = Math.max(lastId, m.id);
+                    });
+                    if (data.messages.length) box.scrollTop = box.scrollHeight;
+                } catch (e) { if (e.message === 'auth') return; }
+                msgTimer = setTimeout(loadMessages, 3000);
+            }
+
+            async function reply(e) {
+                e.preventDefault();
+                const body = $('lcInput').value.trim();
+                if (!body || !selected) return;
+                $('lcInput').value = '';
+                try {
+                    const data = await api(`/admin/live-chats/${selected}/messages`, { method: 'POST', body: JSON.stringify({ body }) });
+                    if (!data.success) showToast('Not sent', data.error || 'Could not send message', 'error');
+                } catch { showToast('Not sent', 'Check the server connection', 'error'); }
+                loadMessages(); loadList();
+            }
+
+            async function end() {
+                if (!selected || !confirm('End this chat for the visitor?')) return;
+                await api(`/admin/live-chats/${selected}/close`, { method: 'POST' });
+                loadMessages(); loadList();
+            }
+
+            function start() {
+                $('lcReply').addEventListener('submit', reply);
+                $('lcEndBtn').addEventListener('click', end);
+                $('lcShowClosed').addEventListener('change', loadList);
+                loadList();
+            }
+            return { start };
+        })();
 
         async function loadBookings() {
             try {

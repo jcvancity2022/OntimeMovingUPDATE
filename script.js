@@ -1,9 +1,11 @@
 // Modern OnTime Moving - JavaScript
 
 // API Configuration
-const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-    ? 'http://localhost:5000/api'
-    : null;
+// Shared setting from api-config.js when present (named SITE_API_BASE so it
+// never clashes with page scripts that declare their own API_BASE_URL)
+const SITE_API_BASE = window.ONTIME_API_BASE !== undefined ? window.ONTIME_API_BASE
+    : (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+        ? 'http://localhost:5000/api' : null);
 
 // DOM Elements
 const bookingForm = document.getElementById('bookingForm');
@@ -135,14 +137,14 @@ function removeChatTyping(typingNode) {
 }
 
 async function getChatReply(userMessage) {
-    if (!API_BASE_URL) {
+    if (!SITE_API_BASE) {
         return buildLocalChatReply(userMessage);
     }
 
     const typingNode = appendChatTyping();
 
     try {
-        const response = await fetch(`${API_BASE_URL}/chat`, {
+        const response = await fetch(`${SITE_API_BASE}/chat`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -347,7 +349,8 @@ function createSlug(text) {
 
 // Booking Form Handling
 function initBookingForm() {
-    if (bookingForm) {
+    // booknow.html handles its own submit (onsubmit=...) — don't submit twice
+    if (bookingForm && !bookingForm.hasAttribute('onsubmit')) {
         bookingForm.addEventListener('submit', handleBookingSubmit);
     }
 }
@@ -433,7 +436,7 @@ async function submitBooking(bookingData) {
         submitBtn.textContent = 'Submitting';
 
         // Send booking to server
-        const response = await fetch(`${API_BASE_URL}/booking`, {
+        const response = await fetch(`${SITE_API_BASE}/booking`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

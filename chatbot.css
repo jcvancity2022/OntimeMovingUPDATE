@@ -194,3 +194,75 @@
   transition: background 0.15s;
 }
 .qr-chip:hover { background: #d32f2f; color: #fff; }
+
+/* ── Live chat additions ─────────────────────────────────────────────────── */
+#chatbot-header .status { display: flex; align-items: center; gap: 6px; }
+.status-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.55); flex-shrink: 0; }
+.status-dot.live { background: #4ade80; box-shadow: 0 0 0 3px rgba(74,222,128,.25); }
+.status-dot.wait { background: #facc15; animation: chatbot-pulse 1.4s ease-in-out infinite; }
+.status-dot.off  { background: rgba(255,255,255,.4); }
+@keyframes chatbot-pulse { 50% { opacity: .35; } }
+@media (prefers-reduced-motion: reduce) { .status-dot.wait { animation: none; } }
+
+#chatbot-end {
+  background: rgba(255,255,255,.15); color: #fff; border: 1px solid rgba(255,255,255,.35);
+  border-radius: 14px; padding: 5px 10px; font-size: 12px; font-weight: 600; cursor: pointer; flex-shrink: 0;
+}
+#chatbot-end:hover { background: rgba(255,255,255,.3); }
+
+.chat-msg.staff { border-color: #fecaca; background: #fff; }
+.msg-author { font-size: 11px; font-weight: 700; color: #d32f2f; margin-bottom: 2px; }
+.chat-msg.pending { opacity: .6; }
+.chat-msg.failed  { background: #fca5a5; }
+
+.chat-system {
+  align-self: center; max-width: 92%; text-align: center;
+  font-size: 12px; color: #6b7280; background: #f1f5f9; border-radius: 10px; padding: 6px 10px;
+}
+
+.qr-chip.qr-human { background: #d32f2f; color: #fff; font-weight: 600; }
+.qr-chip.qr-human:hover { background: #b71c1c; }
+
+.chat-contact-card {
+  background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 10px 12px;
+  font-size: 13px; color: #374151; max-width: 92%;
+}
+.chat-contact-card p { margin: 0 0 8px; line-height: 1.4; }
+.chat-contact-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+.chat-contact-actions a {
+  flex: 1; text-align: center; text-decoration: none; white-space: nowrap;
+  background: #fff0f0; color: #b71c1c; border: 1px solid #fecaca; border-radius: 10px;
+  padding: 6px 8px; font-size: 12.5px; font-weight: 600;
+}
+.chat-contact-actions a:hover { background: #d32f2f; color: #fff; border-color: #d32f2f; }
+
+.chat-handoff-form {
+  background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 10px 12px;
+  display: flex; flex-direction: column; gap: 8px; max-width: 92%;
+}
+.chat-handoff-form label { font-size: 12px; font-weight: 600; color: #374151; display: flex; flex-direction: column; gap: 4px; }
+.chat-handoff-form input {
+  border: 1px solid #ddd; border-radius: 8px; padding: 7px 10px; font-size: 14px; font-family: inherit;
+}
+.chat-handoff-form input:focus { outline: none; border-color: #d32f2f; }
+.handoff-actions { display: flex; gap: 6px; }
+.handoff-actions button {
+  flex: 1; border-radius: 10px; padding: 7px; font-size: 13px; font-weight: 600; cursor: pointer;
+  background: #d32f2f; color: #fff; border: 1px solid #d32f2f;
+}
+.handoff-actions .handoff-cancel { background: #fff; color: #374151; border-color: #ddd; }
+.handoff-actions button:disabled { opacity: .6; cursor: wait; }
+
+/* Unread badge on the launcher / bubble */
+#chatbot-toggle, .chat-launcher { position: relative; }
+.chatbot-badge {
+  position: absolute; top: -4px; right: -4px; min-width: 18px; height: 18px; padding: 0 5px;
+  border-radius: 9px; background: #111827; color: #fff; font-size: 11px; font-weight: 700;
+  line-height: 18px; text-align: center; box-shadow: 0 0 0 2px #fff;
+}
+.chatbot-badge[hidden] { display: none; }
+
+@media (max-width: 420px) {
+  #chatbot-window { width: calc(100vw - 24px); height: min(560px, calc(100vh - 110px)); }
+  #chatbot-window.launcher-mode { right: 12px; }
+}

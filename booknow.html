@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Get a free in-home estimate from a local moving company based in Port Coquitlam, serving Metro Vancouver and the Lower Mainland. Written price, no commitment, response within 24 hours.">
+    <meta name="description" content="Book a free moving estimate with Port Coquitlam movers. Pick your date and crew arrival window online — written price, no commitment, reply within 24 hours.">
     <meta name="keywords" content="book movers Lower Mainland, free moving estimate BC, in-home moving quote Vancouver, schedule movers Port Coquitlam">
     <meta name="robots" content="index, follow">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,9 +18,11 @@
     <meta name="twitter:description" content="No hidden fees. No commitment. Free in-home estimate — we call within 24 hours.">
     <meta name="twitter:image" content="https://jcvancity2022.github.io/OntimeMovingUPDATE/images/homepage/ontimemovingtrucks.webp">
     <link rel="canonical" href="https://jcvancity2022.github.io/OntimeMovingUPDATE/booknow.html">
-    <title>Free Moving Estimate — Port Coquitlam &amp; Metro Vancouver | Local Movers BC</title>
+    <title>Free Moving Estimate — Port Coquitlam &amp; Metro Vancouver</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="consistency.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body { background: #f0f2f7; overflow-x: hidden; }
@@ -255,6 +257,29 @@
             border-color: #d32f2f;
             box-shadow: 0 0 0 3.5px rgba(211,47,47,0.12);
         }
+        /* Arrival-window picker */
+        .slot-picker { border: 0; padding: 0; margin: 0 0 16px; min-width: 0; }
+        .slot-picker legend {
+            font-size: 0.78rem; font-weight: 700; color: #374151;
+            margin-bottom: 7px; letter-spacing: 0.025em; text-transform: uppercase; padding: 0;
+        }
+        .slot-hint { font-size: 0.82rem; color: #6b7280; margin: 0 0 10px; min-height: 1.2em; }
+        .slot-hint.is-error { color: #b91c1c; }
+        .slot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+        .slot-option { position: relative; }
+        .slot-option input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+        .slot-option span {
+            display: flex; flex-direction: column; gap: 3px;
+            border: 1.5px solid #e5e7eb; border-radius: 12px; background: #fafbfc;
+            padding: 0.7rem 0.85rem; font-size: 0.9rem; font-weight: 600; color: #111827;
+            transition: border-color .2s, box-shadow .2s, background .2s;
+        }
+        .slot-option small { font-size: 0.75rem; font-weight: 500; color: #6b7280; }
+        .slot-option small.few { color: #b45309; }
+        .slot-option input:checked + span { border-color: #d32f2f; background: #fff5f5; box-shadow: 0 0 0 3.5px rgba(211,47,47,0.12); }
+        .slot-option input:focus-visible + span { outline: 2px solid #d32f2f; outline-offset: 2px; }
+        .slot-option input:disabled + span { opacity: .5; cursor: not-allowed; text-decoration: line-through; }
+        .slot-option input:disabled { cursor: not-allowed; }
         .form-divider {
             height: 1px; background: #f1f5f9;
             margin: 6px 0 20px;
@@ -299,6 +324,42 @@
             .how-it-works-title { font-size: 1.6rem; }
         }
     </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": "https://jcvancity2022.github.io/OntimeMovingUPDATE/booknow.html#webpage",
+      "url": "https://jcvancity2022.github.io/OntimeMovingUPDATE/booknow.html",
+      "name": "Book a free moving estimate",
+      "description": "Request a free moving estimate and choose a crew arrival window.",
+      "isPartOf": {
+        "@id": "https://jcvancity2022.github.io/OntimeMovingUPDATE/#website"
+      },
+      "about": {
+        "@id": "https://jcvancity2022.github.io/OntimeMovingUPDATE/#business"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://jcvancity2022.github.io/OntimeMovingUPDATE/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Book Now",
+          "item": "https://jcvancity2022.github.io/OntimeMovingUPDATE/booknow.html"
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
     <nav class="navbar">
@@ -431,15 +492,11 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="preferredTime">Preferred Time</label>
-                    <select id="preferredTime" name="preferredTime">
-                        <option value="">Select preferred time</option>
-                        <option value="morning">Morning (8AM - 12PM)</option>
-                        <option value="afternoon">Afternoon (12PM - 5PM)</option>
-                        <option value="flexible">Flexible</option>
-                    </select>
-                </div>
+                <fieldset class="slot-picker" id="slotPicker">
+                    <legend>Crew Arrival Window</legend>
+                    <p class="slot-hint" id="slotHint" aria-live="polite">Pick a move date to see which arrival windows are open.</p>
+                    <div class="slot-grid" id="slotGrid"></div>
+                </fieldset>
 
                 <div class="form-group">
                     <label for="moveDetails">Move Details</label>
@@ -503,8 +560,107 @@
         </div>
     </footer>
 
+    <script src="api-config.js"></script>
     <script>
-        const API_BASE_URL = 'http://localhost:5000/api';
+        const API_BASE_URL = window.ONTIME_API_BASE;
+
+        function showToast(title, msg, type = 'info', duration = 6000) {
+            let box = document.querySelector('.toast-container');
+            if (!box) {
+                box = document.createElement('div');
+                box.className = 'toast-container';
+                box.setAttribute('role', 'status');
+                box.setAttribute('aria-live', 'polite');
+                document.body.appendChild(box);
+            }
+            const t = document.createElement('div');
+            t.className = `toast ${type}`;
+            t.innerHTML = '<span class="toast-icon" aria-hidden="true"></span><div class="toast-body"><div class="toast-title"></div><div class="toast-msg"></div></div><button class="toast-close" type="button" aria-label="Dismiss">&times;</button>';
+            t.querySelector('.toast-icon').textContent = type === 'success' ? '✅' : type === 'error' ? '⚠️' : 'ℹ️';
+            t.querySelector('.toast-title').textContent = title;
+            t.querySelector('.toast-msg').textContent = msg;
+            const remove = () => { t.classList.add('removing'); setTimeout(() => t.remove(), 300); };
+            t.querySelector('.toast-close').addEventListener('click', remove);
+            box.appendChild(t);
+            setTimeout(remove, duration);
+        }
+
+        // Shown when the API can't be reached (e.g. the static GitHub Pages site)
+        const FALLBACK_SLOTS = [
+            { code: '08:00-10:00', label: 'Early morning (8 – 10 AM)' },
+            { code: '10:00-12:00', label: 'Late morning (10 AM – 12 PM)' },
+            { code: '12:00-14:00', label: 'Early afternoon (12 – 2 PM)' },
+            { code: '14:00-16:00', label: 'Late afternoon (2 – 4 PM)' }
+        ];
+
+        function slotOption(value, title, note, opts = {}) {
+            const label = document.createElement('label');
+            label.className = 'slot-option';
+            const input = document.createElement('input');
+            input.type = 'radio';
+            input.name = 'preferredTime';
+            input.value = value;
+            input.disabled = !!opts.disabled;
+            input.checked = !!opts.checked;
+            const card = document.createElement('span');
+            card.textContent = title;
+            if (note) {
+                const small = document.createElement('small');
+                small.textContent = note;
+                if (opts.few) small.className = 'few';
+                card.appendChild(small);
+            }
+            label.append(input, card);
+            return label;
+        }
+
+        function renderSlots(slots, withCounts, keep) {
+            const grid = document.getElementById('slotGrid');
+            grid.innerHTML = '';
+            slots.forEach(s => {
+                let note = '', disabled = false, few = false;
+                if (withCounts) {
+                    disabled = !s.available;
+                    few = s.available && s.remaining === 1;
+                    note = disabled ? 'Fully booked' : (few ? 'Last crew available' : `${s.remaining} crews available`);
+                }
+                grid.appendChild(slotOption(s.code, s.label, note, { disabled, few, checked: keep === s.code && !disabled }));
+            });
+            grid.appendChild(slotOption('flexible', 'Flexible', 'Any time works', { checked: keep === 'flexible' }));
+        }
+
+        async function loadAvailability() {
+            const date = document.getElementById('moveDate').value;
+            const hint = document.getElementById('slotHint');
+            const keep = (document.querySelector('input[name="preferredTime"]:checked') || {}).value;
+            hint.classList.remove('is-error');
+            if (!date) return;
+            if (!API_BASE_URL) {
+                renderSlots(FALLBACK_SLOTS, false, keep);
+                hint.textContent = 'Choose a preferred window — we\'ll confirm availability when we call you.';
+                return;
+            }
+            hint.textContent = 'Checking crew availability…';
+            try {
+                const res = await fetch(`${API_BASE_URL}/availability?date=${encodeURIComponent(date)}`);
+                const data = await res.json();
+                if (!data.success) throw new Error(data.error);
+                if (data.closed) {
+                    renderSlots([], false, null);
+                    document.getElementById('slotGrid').innerHTML = '';
+                    hint.textContent = `We're not booking moves on this date${data.closed_reason ? ' (' + data.closed_reason + ')' : ''}. Please pick another day.`;
+                    hint.classList.add('is-error');
+                    return;
+                }
+                renderSlots(data.slots, true, keep);
+                const open = data.slots.filter(s => s.available).length;
+                hint.textContent = open ? `${open} of ${data.slots.length} arrival windows open on this day.`
+                                        : 'Every window is booked on this day — choose Flexible or try another date.';
+            } catch (err) {
+                renderSlots(FALLBACK_SLOTS, false, keep);
+                hint.textContent = 'Live availability is unavailable right now — pick a preferred window and we\'ll confirm by phone.';
+            }
+        }
 
         async function handleSubmit(event) {
             event.preventDefault();
@@ -530,6 +686,7 @@
             submitBtn.textContent = 'Submitting...';
 
             try {
+                if (!API_BASE_URL) throw new Error('No booking server configured');
                 const response = await fetch(`${API_BASE_URL}/booking`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -541,6 +698,11 @@
                 if (result.success) {
                     showToast('Booking Submitted!', 'We\'ll call you within 24 hours to confirm. Booking ID: ' + result.booking_id, 'success');
                     event.target.reset();
+                    document.getElementById('slotGrid').innerHTML = '';
+                    document.getElementById('slotHint').textContent = 'Pick a move date to see which arrival windows are open.';
+                } else if (response.status === 409) {
+                    showToast('Time No Longer Available', result.error, 'error');
+                    loadAvailability();
                 } else {
                     showToast('Submission Error', result.error || 'Failed to submit booking request. Please try again.', 'error');
                 }
@@ -560,6 +722,8 @@
             if (dateInput) {
                 const today = new Date().toISOString().split('T')[0];
                 dateInput.setAttribute('min', today);
+                dateInput.addEventListener('change', loadAvailability);
+                if (dateInput.value) loadAvailability();
             }
         });
     </script>
