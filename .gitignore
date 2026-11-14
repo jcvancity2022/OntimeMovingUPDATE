@@ -6,3 +6,10 @@
 __pycache__/
 *.pyc
 chatbot-live.css
+
+# Test run screenshots
+tests/e2e/artifacts/
+.pytest_cache/
+
+# Test virtualenv
+tests/e2e/.venv/

@@ -1,0 +1,45 @@
+name: Booking tests
+
+# Runs the end-to-end booking tests against the live site + Supabase:
+#  • after every GitHub Pages deploy (so a broken change is caught right away)
+#  • every morning (catches a paused/broken database)
+#  • on demand (Actions tab → Booking tests → Run workflow)
+on:
+  workflow_run:
+    workflows: ["pages-build-deployment"]
+    types: [completed]
+  schedule:
+    - cron: "17 14 * * *"     # 07:17 Vancouver (PDT) / 06:17 (PST)
+  workflow_dispatch:
+
+concurrency:
+  group: booking-tests
+  cancel-in-progress: false
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install test tools
+        run: |
+          pip install -r tests/e2e/requirements.txt
+          python -m playwright install --with-deps chromium
+      - name: Run booking tests
+        env:
+          ONTIME_STAFF_EMAIL: ${{ secrets.ONTIME_STAFF_EMAIL }}
+          ONTIME_STAFF_PASSWORD: ${{ secrets.ONTIME_STAFF_PASSWORD }}
+        working-directory: tests/e2e
+        run: python -m pytest
+      - name: Save failure screenshots
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: failure-screenshots
+          path: tests/e2e/artifacts/
+          if-no-files-found: ignore
