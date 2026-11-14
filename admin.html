@@ -290,6 +290,7 @@
         .lc-reply input { flex: 1; border: 1.5px solid #e5e7eb; border-radius: 10px; padding: 10px 14px; font-size: 1rem; font-family: inherit; }
         .lc-reply input:focus { outline: none; border-color: var(--primary); }
         .lc-placeholder { margin: auto; color: var(--medium-gray); }
+        .lc-conv-head[hidden], .lc-reply[hidden] { display: none; }   /* hidden until a chat is picked */
         @media (max-width: 800px) { .lc-body { grid-template-columns: 1fr; height: auto; } .lc-list { max-height: 220px; border-right: 0; border-bottom: 1px solid #eee; } .lc-conv { height: 420px; } }
 
         .bookings-table {
