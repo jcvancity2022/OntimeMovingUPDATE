@@ -145,3 +145,39 @@ def test_new_booking_shows_in_admin_dashboard(page, sb, created):
     expect(row).to_be_visible(timeout=15_000)
     expect(row).to_contain_text(c["name"])
     expect(row).to_contain_text("pending")
+
+
+def test_tracking_ignores_automated_test_bookings(sb, created):
+    """The admin tracking numbers come from SQL and only count real business:
+    an automated test booking never moves them, before or after it is marked 'test'."""
+    def kpis():
+        r = sb.rpc("staff_booking_insights", staff=True, p_days=30)
+        assert r.ok, r.text
+        return r.json()["kpis"]
+
+    keys = ("new_today", "new_period", "pending_now", "upcoming_30")
+    before = kpis()
+    r = sb.book(unique_customer(), find_date(sb, SLOT_MORNING), SLOT_MORNING)
+    assert r.ok, r.text
+    created.append(r.json())
+
+    during = kpis()
+    assert {k: during[k] for k in keys} == {k: before[k] for k in keys}
+
+    sb.mark_as_test(r.json())
+    after = kpis()
+    assert {k: after[k] for k in keys} == {k: before[k] for k in keys}
+
+
+def test_tracking_panel_loads_in_dashboard(page, sb):
+    """The Booking Tracking panel renders its numbers, chart and crew schedule."""
+    import os
+    page.goto(f"{BASE_URL}/login.html")
+    page.fill("#username", os.environ["ONTIME_STAFF_EMAIL"])
+    page.fill("#password", os.environ["ONTIME_STAFF_PASSWORD"])
+    tap(page, "button[type=submit]")
+    page.wait_for_url("**/admin.html", timeout=15_000)
+    expect(page.locator("#insKpis .ins-kpi")).to_have_count(4, timeout=15_000)
+    expect(page.locator("#insTrend svg")).to_be_visible()
+    expect(page.locator("#insSchedule .ins-cell")).to_have_count(4 * 14)   # 4 windows × 14 days
+    expect(page.locator("#insStatus")).to_contain_text("Updated")

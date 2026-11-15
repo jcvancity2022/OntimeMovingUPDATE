@@ -484,3 +484,144 @@ grant execute on function public.staff_chat_messages(bigint, bigint)            
 grant execute on function public.staff_chat_send(bigint, text)                             to authenticated;
 grant execute on function public.staff_chat_close(bigint)                                  to authenticated;
 
+-- =============================================================================
+--  Booking tracking: activity log (trigger) + insights for the admin dashboard
+--  Test bookings (status 'test', or AUTOTEST…@example.com) are left out.
+-- =============================================================================
+
+create table if not exists public.booking_events (
+    id             bigint generated always as identity primary key,
+    booking_id     bigint not null,
+    event          text not null check (event in ('created', 'status_changed', 'deleted')),
+    old_status     text,
+    new_status     text,
+    actor          text not null,
+    customer_name  text,
+    move_date      date,
+    preferred_time text,
+    at             timestamptz not null default now()
+);
+create index if not exists booking_events_at_idx on public.booking_events (at desc);
+create index if not exists booking_events_booking_idx on public.booking_events (booking_id);
+
+alter table public.booking_events enable row level security;
+revoke all on public.booking_events from anon;
+drop policy if exists staff_read on public.booking_events;
+create policy staff_read on public.booking_events for select to authenticated using (public.is_staff());
+
+create or replace function public._is_test_booking(p_name text, p_email text)
+returns boolean language sql immutable set search_path = '' as $$
+    select coalesce(p_name, '') like 'AUTOTEST%' and coalesce(p_email, '') like '%@example.com';
+$$;
+
+-- Every insert, status change and delete on bookings is written to booking_events.
+create or replace function public._log_booking_event()
+returns trigger language plpgsql security definer set search_path = public as $$
+declare
+    v_row   public.bookings := case when tg_op = 'DELETE' then old else new end;
+    v_actor text;
+begin
+    if public._is_test_booking(v_row.customer_name, v_row.email) then
+        return null;                               -- automated tests don't clutter the log
+    end if;
+    if tg_op = 'UPDATE' and old.status is not distinct from new.status then
+        return null;                               -- only status changes are tracked
+    end if;
+
+    select display_name into v_actor from public.staff where user_id = auth.uid();
+    v_actor := coalesce(v_actor, case when auth.uid() is null then 'Website' else 'Signed-in user' end);
+
+    insert into public.booking_events (booking_id, event, old_status, new_status, actor,
+                                       customer_name, move_date, preferred_time)
+    values (v_row.id,
+            case tg_op when 'INSERT' then 'created' when 'UPDATE' then 'status_changed' else 'deleted' end,
+            case when tg_op = 'INSERT' then null else old.status end,
+            case when tg_op = 'DELETE' then null else new.status end,
+            v_actor, v_row.customer_name, v_row.move_date, v_row.preferred_time);
+    return null;
+end $$;
+
+drop trigger if exists bookings_activity_log on public.bookings;
+create trigger bookings_activity_log
+    after insert or update of status or delete on public.bookings
+    for each row execute function public._log_booking_event();
+
+-- One call returns everything the dashboard's tracking panel shows.
+create or replace function public.staff_booking_insights(p_days integer default 30)
+returns json language plpgsql volatile security definer set search_path = public as $$
+declare
+    v_days  integer := least(greatest(coalesce(p_days, 30), 7), 365);
+    v_today date := public._today_bc();
+    v_from  date := public._today_bc() - (least(greatest(coalesce(p_days, 30), 7), 365) - 1);
+    v_kpis  json;
+begin
+    perform public._require_staff();
+
+    -- real bookings only, with the BC calendar day they were made
+    drop table if exists _b;
+    create temp table _b on commit drop as
+        select b.*, (b.created_at at time zone 'America/Vancouver')::date as created_day
+          from public.bookings b
+         where b.status <> 'test' and not public._is_test_booking(b.customer_name, b.email);
+
+    select json_build_object(
+        'new_period',      count(*) filter (where created_day >= v_from),
+        'new_prev_period', count(*) filter (where created_day >= v_from - v_days and created_day < v_from),
+        'new_today',       count(*) filter (where created_day = v_today),
+        'pending_now',     count(*) filter (where status = 'pending'),
+        'upcoming_7',      count(*) filter (where status in ('pending','confirmed') and move_date between v_today and v_today + 6),
+        'upcoming_30',     count(*) filter (where status in ('pending','confirmed') and move_date between v_today and v_today + 29),
+        'cancelled_period',count(*) filter (where status = 'cancelled' and created_day >= v_from),
+        'cancel_rate_period', round(100.0 * count(*) filter (where status = 'cancelled' and created_day >= v_from)
+                                    / nullif(count(*) filter (where created_day >= v_from), 0), 1),
+        'crews_booked_14', count(*) filter (where status in ('pending','confirmed')
+                                              and move_date between v_today and v_today + 13
+                                              and preferred_time in (select code from public.time_slots where active)),
+        'crews_total_14',  (select coalesce(sum(capacity), 0) * 14 from public.time_slots where active)
+                           - (select coalesce(sum(t.capacity), 0) from public.time_slots t, public.blocked_dates d
+                               where t.active and d.block_date between v_today and v_today + 13)
+    ) into v_kpis from _b;
+
+    return json_build_object(
+        'period_days', v_days,
+        'today', v_today,
+        'kpis', v_kpis,
+        'daily', (select json_agg(json_build_object('date', d::date,
+                         'count', (select count(*) from _b where created_day = d::date)) order by d)
+                    from generate_series(v_from, v_today, interval '1 day') d),
+        'by_status', (select coalesce(json_agg(json_build_object('status', s, 'count', n) order by ord), '[]')
+                        from (select s, ord, (select count(*) from _b where status = s) n
+                                from unnest(array['pending','confirmed','completed','cancelled']) with ordinality u(s, ord)) x),
+        'by_size', (select coalesce(json_agg(json_build_object('size', sz, 'count', n) order by n desc, sz), '[]')
+                      from (select coalesce(nullif(move_size, ''), 'not given') sz, count(*) n from _b group by 1) x),
+        'by_window', (select coalesce(json_agg(json_build_object('code', code, 'label', label, 'count', n) order by ord), '[]')
+                        from (select t.code, t.label, t.sort_order ord,
+                                     (select count(*) from _b where preferred_time = t.code
+                                        and status in ('pending','confirmed') and move_date >= v_today) n
+                                from public.time_slots t where t.active
+                              union all
+                              select 'flexible', 'Flexible / no window', 99,
+                                     (select count(*) from _b where coalesce(preferred_time, 'flexible')
+                                              not in (select code from public.time_slots)
+                                        and status in ('pending','confirmed') and move_date >= v_today)) x),
+        'schedule', json_build_object(
+            'dates', (select json_agg(d::date order by d) from generate_series(v_today, v_today + 13, interval '1 day') d),
+            'windows', (select json_agg(json_build_object('code', code, 'label', label, 'capacity', capacity) order by sort_order)
+                          from public.time_slots where active),
+            'closed', (select coalesce(json_agg(json_build_object('date', block_date, 'reason', reason)), '[]')
+                         from public.blocked_dates where block_date between v_today and v_today + 13),
+            'booked', (select coalesce(json_agg(json_build_object('date', move_date, 'code', preferred_time, 'count', n)), '[]')
+                         from (select move_date, preferred_time, count(*) n from _b
+                                where status in ('pending','confirmed') and move_date between v_today and v_today + 13
+                                group by 1, 2) x)),
+        'activity', (select coalesce(json_agg(e order by e.at desc), '[]')
+                       from (select id, booking_id, event, old_status, new_status, actor, customer_name,
+                                    move_date, preferred_time, at
+                               from public.booking_events order by at desc limit 30) e)
+    );
+end $$;
+
+revoke execute on function public.staff_booking_insights(integer) from public, anon, authenticated;
+revoke execute on function public._log_booking_event() from public, anon, authenticated;
+revoke execute on function public._is_test_booking(text, text) from public, anon, authenticated;
+grant  execute on function public.staff_booking_insights(integer) to authenticated;

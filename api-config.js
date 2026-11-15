@@ -213,6 +213,12 @@ const PRODUCTION_API = '';      // e.g. 'https://ontime-api.onrender.com/api'
       return r.data ? reply({ success: true, booking: r.data }) : reply({ success: false, error: 'Booking not found' }, 404);
     }
 
+    // staff: booking tracking (SQL insights)
+    if (p === '/admin/insights') {
+      r = await rpc('staff_booking_insights', { p_days: +(q.get('days') || 30) }, true);
+      return r.ok ? reply({ success: true, ...r.data }) : fail(r);
+    }
+
     // staff: live chat inbox
     if (p === '/admin/live-chats') {
       r = await rpc('staff_list_chats', { p_include_closed: q.get('all') === '1' }, true);

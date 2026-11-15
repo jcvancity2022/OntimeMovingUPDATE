@@ -469,6 +469,7 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="admin-insights.css">
     <link rel="stylesheet" href="consistency.css">
 </head>
 <body>
@@ -512,6 +513,33 @@
                 <div class="stat-label">Completed</div>
             </div>
         </div>
+
+        <!-- Booking tracking (SQL insights) -->
+        <section class="insights" aria-labelledby="insTitle">
+            <div class="ins-header">
+                <div>
+                    <h2 id="insTitle">Booking Tracking</h2>
+                    <p class="ins-muted">Live from the bookings database · test bookings excluded · <span id="insStatus">Loading…</span></p>
+                </div>
+                <div class="ins-period" id="insPeriod" role="group" aria-label="Time period">
+                    <button type="button" data-days="7" aria-pressed="false">7 days</button>
+                    <button type="button" data-days="30" aria-pressed="true">30 days</button>
+                    <button type="button" data-days="90" aria-pressed="false">90 days</button>
+                </div>
+            </div>
+            <div id="insUnavailable" class="ins-card" hidden>
+                <p class="ins-muted">Booking tracking needs the Supabase database (it isn't available when running <code>server.py</code> locally).</p>
+            </div>
+            <div id="insBody">
+                <div class="ins-kpis" id="insKpis"></div>
+                <div class="ins-grid-2">
+                    <div class="ins-card" id="insTrend"></div>
+                    <div class="ins-card" id="insActivity"></div>
+                </div>
+                <div class="ins-card" id="insSchedule"></div>
+                <div class="ins-card ins-breakdowns" id="insBreakdowns"></div>
+            </div>
+        </section>
 
         <!-- Filters -->
         <div class="filters">
@@ -575,7 +603,10 @@
         <div class="bookings-table">
             <div class="table-header">
                 <div class="table-title">All Bookings</div>
-                <button class="btn btn-primary btn-sm" onclick="refreshData()">Reload</button>
+                <div style="display:flex;gap:8px;">
+                    <button class="btn btn-secondary btn-sm" type="button" onclick="exportBookingsCsv(shownBookings)" title="Download the bookings shown below as a spreadsheet (CSV)">Export CSV</button>
+                    <button class="btn btn-primary btn-sm" onclick="refreshData()">Reload</button>
+                </div>
             </div>
             <div class="test-run-bar" id="testRunBar" hidden>
                 <div>
@@ -622,9 +653,11 @@
     </div>
 
     <script src="api-config.js"></script>
+    <script src="admin-insights.js" defer></script>
     <script>
         const API_BASE_URL = window.ONTIME_API_BASE || 'http://localhost:5000/api';
         let allBookings = [];
+        let shownBookings = [];   // what the table currently shows (used by Export CSV)
         let currentUser = null;
 
         function showToast(title, msg, type = 'success', duration = 4000) {
@@ -732,6 +765,7 @@
             if (isAuthenticated) {
                 loadBookings();
                 LiveChat.start();
+                Insights.start();
             }
         });
 
@@ -898,6 +932,7 @@
         }
 
         function displayBookings(bookings) {
+            shownBookings = bookings;
             const tbody = document.getElementById('bookingsTableBody');
             const table = document.getElementById('bookingsTable');
             const noData = document.getElementById('noDataIndicator');
@@ -935,7 +970,7 @@
                     <td>
                         <div class="action-buttons">
                             <button class="btn btn-sm btn-primary" onclick="viewBooking(${id})">View</button>
-                            <button class="btn btn-sm btn-success" onclick="updateStatus(${id}, 'confirmed')">Confirm</button>
+                            ${booking.status === 'test' ? '' : `<button class="btn btn-sm btn-success" onclick="updateStatus(${id}, 'confirmed')">Confirm</button>`}
                             <button class="btn btn-sm btn-danger" onclick="deleteBooking(${id})">Delete</button>
                         </div>
                     </td>
@@ -945,6 +980,7 @@
 
         function updateStats(bookings) {
             updateTestBar(bookings);
+            if (window.Insights && Insights.data()) Insights.refresh();   // keep tracking in step with changes
             bookings = bookings.filter(b => b.status !== 'test');   // test runs don't count as business
             const total = bookings.length;
             const pending = bookings.filter(b => b.status === 'pending').length;
@@ -1072,9 +1108,10 @@
                     <div class="detail-value">${esc(formatDate(booking.created_at))}</div>
                 </div>
                 <div style="margin-top: 20px; display: flex; gap: 10px;">
+                    ${booking.status === 'test' ? '<span style="color:#5b21b6;align-self:center;">Automated test booking — remove it with “Remove test bookings”.</span>' : `
                     <button class="btn btn-success" onclick="updateStatus(${Number(booking.id)}, 'confirmed'); closeModal();">Confirm</button>
                     <button class="btn btn-warning" onclick="updateStatus(${Number(booking.id)}, 'completed'); closeModal();">Complete</button>
-                    <button class="btn btn-danger" onclick="updateStatus(${Number(booking.id)}, 'cancelled'); closeModal();">Cancel</button>
+                    <button class="btn btn-danger" onclick="updateStatus(${Number(booking.id)}, 'cancelled'); closeModal();">Cancel</button>`}
                     <button class="btn btn-secondary" onclick="closeModal()">Close</button>
                 </div>
             `;
